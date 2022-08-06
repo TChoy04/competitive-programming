@@ -4,6 +4,9 @@
 #comparing them. We do this by reversing the end until it is greater than the original number. Then we compare it to whatevers left of the other half, however, if there 
 #is an odd number of digits, we can ignore the middle digit by dividing the part we split by 10 to make it the same length.
 
+#Time Complexity: O(LogN);
+#Space Complexity: O(1);
+
 class Solution {
 public:
     bool isPalindrome(int x) {
