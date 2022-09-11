@@ -1,4 +1,7 @@
-#Breakdown of problem coming soon.
+Time Complexity: O(2^N)
+Space Complexity: O(N)
+#Check every possible path, backtrack when you get to the end (When i is equal to the size of graph)
+
 class Solution {
 public:
     void helper(vector<vector<int>>& ans, vector<vector<int>>& graph, int i, vector<int> temp){
