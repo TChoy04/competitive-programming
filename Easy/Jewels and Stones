@@ -1,3 +1,7 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+// Add all jewels into a set, use set to check all the stones in an o(1) operation.
+
 class Solution {
 public:
     int numJewelsInStones(string jewels, string stones) {
