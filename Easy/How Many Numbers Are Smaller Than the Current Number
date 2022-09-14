@@ -1,0 +1,26 @@
+Time Complexity: O(NLogN)
+Space Complexity: O(N)
+//Not the most elegant solution, probably could've cut off a vector but basically,
+// sort the array then use that to count how many elements are less than it (elements it has already passed) if it is the same as it's neighboring element, replace 
+// with it's value.
+class Solution {
+public:
+    vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
+        vector<int>temp = nums;
+        sort(temp.begin(),temp.end());
+        vector<int>comp = temp;
+        temp[0] = 0;
+        unordered_map<int,int>m;
+        for(int x = 1; x<temp.size(); x++){
+            if(comp[x]==comp[x-1]){ 
+                temp[x] = temp[x-1];
+                }
+            else temp[x] = x;
+            m[comp[x]] = temp[x];
+        }
+        for(int x = 0; x<nums.size(); x++){
+            nums[x] = m[nums[x]];
+        }
+        return nums;
+    }
+};
