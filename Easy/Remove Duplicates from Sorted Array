@@ -2,7 +2,7 @@ Time Complexity: O(N)
 Space Complexity: O(1)
 #Use two pointers, when the slower pointer sees a value that isn't equal to it, 
 //change the element in front of it to equal the new number then move itself to that element 
-//this way we can guarantee unique numbers as it is sorted.
+//this way we can guarantee unique numbers as it is sorted. return L+1 because arrays are 0 indexed.
 
 class Solution {
 public:
