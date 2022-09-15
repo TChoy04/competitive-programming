@@ -1,6 +1,7 @@
 #Time Complexity:O(N)
 #Space Complexity: O(1)
 // Use two pointers, if letter is present in both strings, iterate both forward by one. Else, only iterate the longer string. Keep count and return compare size to count.
+
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
