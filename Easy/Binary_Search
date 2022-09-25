@@ -16,3 +16,19 @@ public:
         return -1;
     }
 };
+
+#Recursive Binary Search
+
+class Solution {
+public:
+    int helper(vector<int>&nums, int target, int L, int R ){
+        int mid = L + (R-L)/2;
+        if(nums[mid]==target) return mid;
+        if(L>=R) return -1;
+        if(nums[mid]>target) return helper(nums,target,L,mid-1);
+        return helper(nums,target,mid+1,R);
+    }
+    int search(vector<int>& nums, int target) {
+        return helper(nums,target,0,nums.size()-1);
+    }
+}; 
