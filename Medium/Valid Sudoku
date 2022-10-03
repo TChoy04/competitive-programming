@@ -1,0 +1,49 @@
+Time Complexity: O(1)
+Space Complexity: O(1)
+//Constant space and time, always the same amount of inputs, board is always 9x9.
+//Simple solution, use set to check for duplicate values. First iterate left to right, check for top and bottom then check the 3x3 squares.
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        unordered_set<int>s;
+        //Left to right
+        for(int x = 0; x<board.size(); x++){
+            for(int y = 0; y<board[0].size(); y++){
+               if(board[x][y]!='.')
+               {
+                   if(s.find(board[x][y])!=s.end()) return false;
+                   s.insert(board[x][y]);
+               }
+            }
+            s.clear();
+        }
+        //Top to bottom
+        for(int x = 0; x<board.size(); x++){
+            for(int y = 0; y<board[0].size(); y++){
+               if(board[y][x]!='.')
+               {
+                   if(s.find(board[y][x])!=s.end()) return false;
+                   s.insert(board[y][x]);
+               }
+            }
+            s.clear();
+        }
+        //3x3 subbox
+         for(int x = 0; x<board.size(); x+=3){
+             for(int y = 0; y<board[0].size(); y+=3){
+                 for(int i = x; i<x+3; i++){
+                     for(int j = y; j<y+3; j++){
+                    if(board[i][j]!='.')
+               {
+                   if(s.find(board[i][j])!=s.end()){ 
+                       return false;}
+                   s.insert(board[i][j]);
+               }
+                     }
+                 }
+                 s.clear();
+             }
+         }
+        return true;
+    }
+};
