@@ -1,0 +1,22 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+// Calculate prefix product, product of every value except last value, then suffix product, product of every value every last. Multiple pre and suff to populate answer.
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int>pre = nums;
+        vector<int>suff = nums;
+        pre[0] = 1;
+        suff[suff.size()-1] = 1;
+        for(int x = 1; x<nums.size(); x++){
+            pre[x] = pre[x-1] * nums[x-1];
+        }
+        for(int x = nums.size()-2; x>=0; x--){
+            suff[x] = suff[x+1] * nums[x+1];
+        }
+        for(int x = 0; x<nums.size(); x++){
+            nums[x] = pre[x] * suff[x];
+        }
+        return nums;
+    }
+};
