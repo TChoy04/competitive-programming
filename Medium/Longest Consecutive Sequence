@@ -1,0 +1,27 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+// Insert all nums into a set O(N)
+// Iterate through all numbers O(N)
+// if there is a number 1 less than current number, skip. (Results in algorithm being O(N) as opposed to O(N^2) as it won't go through elements N^2 times.
+// If not, continue. Check if the letter in front of it exists. Count current number as the first count as it is part of the count. 
+// res is maximum value resulted, reset count back to 0 afterwards. Return result at end.
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int>s;
+        for(int x : nums) s.insert(x);
+        int res = 0;
+        for(int x : nums){
+            int count = 0;
+            if(s.find(x-1)==s.end()){
+                while(s.find(x++)!=s.end()){
+                    count+=1;
+                }
+                 res = max(res,count);
+                count = 0;
+            }
+        }
+        return res;
+    }
+};
