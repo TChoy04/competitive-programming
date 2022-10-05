@@ -1,0 +1,44 @@
+Time Complexity: O(N^2)
+Space Complexity: O(N)
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        //set to ensure there are no duplicate values.
+        set<vector<int>>s;
+        //Result vector
+        vector<vector<int>>res;
+        //Sort numbers to utilize 2 pointers.
+        sort(nums.begin(),nums.end());
+        //Iterate through every value of nums.
+        for(int x = 0; x<nums.size(); x++){
+            //Initialize 2 pointers
+            int L = 0;
+            int R = nums.size()-1;
+            //Iterate through right and left
+            while(R>L){
+                // If None of them are the same and they add up to zero, continue.
+                if(nums[L]+nums[R]+nums[x] == 0 && L!=R && L!=x && R!=x){
+                    //Temporary vector
+                    vector<int>temp = {nums[L],nums[R],nums[x]};
+                    //Sort vector to avoid potential duplicates
+                    sort(temp.begin(),temp.end());
+                    //Insert into set
+                    s.insert(temp);
+                }
+                //If sum is too big, decrement right pointer
+                if(nums[L]+nums[R]+nums[x]>0) R--;
+                //If sum is too low, increment left pointer
+                else L++;
+            }
+            // 2 pointer approach would have already gotten every possible combination for current x value.
+            // There is no point of checking the same element more than once, skip all adjacent values that are equal to current value.
+            while(x<nums.size()-1 && nums[x]==nums[x+1]) x+=1;
+        }
+        // Iterate through set and push vectors to result.
+        for(auto it : s){
+            res.push_back((it));
+        }
+        //Return result!
+        return res;
+    }
+};
