@@ -1,6 +1,7 @@
 Time Complexity: O(N)
 Space Complexity: O(N)
 //Keep track of max from left and right with an array.
+
 class Solution {
 public:
     int trap(vector<int>& height) {
