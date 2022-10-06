@@ -30,3 +30,32 @@ public:
         return res;
     }
 };
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int L = 0;
+        int R = height.size()-1;
+        int res = 0;
+        int lmax = 0, rmax = 0;
+        //Until L == R
+        while(R>L){
+            //If height is greater on the right, the value will always be dependent on the left
+            if(height[L]<height[R]){
+                //See if current left height increases result
+                res = max(res+lmax-height[L],res);
+                //See if current height is higher than current left max and iterate
+                lmax = max(lmax,height[L++]);
+            }
+            else{
+                //See if current right height increases result
+                res = max(res+rmax-height[R],res);
+                //See if current right height is greater than current right max and iterate
+                rmax = max(rmax,height[R--]);
+            }
+        }
+        return res;
+    }
+};
