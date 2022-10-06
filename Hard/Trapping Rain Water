@@ -14,8 +14,9 @@ public:
             lmax[x] = max(maxi,lmax[x]);
             maxi = lmax[x];
         }
-        //Store right max for current position
+        //Set maximum value to last value in array.
         maxi = rmax[rmax.size()-1];
+        //Store right max for current position
         for(int x = rmax.size()-2; x>=0; x-- ){
             rmax[x] = max(maxi,rmax[x]);
             maxi  = rmax[x];
