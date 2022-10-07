@@ -44,21 +44,22 @@ public:
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_set<char>ans;
-        int p1 = 0;
-        int p2 = 0;
+        //set to keep count of current letters
+        unordered_set<char>letters;
         int res = 0;
-        while(p2!=s.size()){
-            if(ans.find(s[p2])!=ans.end()){
-                ans.erase(s[p1]);
-                p1++;
+        int L = 0;
+        int R = 0;
+        //While right pointer isn't at the end
+        while(R<s.size()){
+            //If current value is found, iterate left pointer until window goes previous iteration of current value
+            while(letters.find(s[R])!=letters.end()){
+                //Remove value from set and iterate left pointer.
+                letters.erase(s[L++]);
             }
-            else{
-                ans.insert(s[p2]);
-                p2++;
-            }
-            int g = ans.size();
-            res = max(g,res);
+            //expand window by incrementing right side of window and insert value into set.
+            letters.insert(s[R++]);
+            //Result is the maxmimum size of window.
+            res = max(res,R-L);
         }
         return res;
     }
