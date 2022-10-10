@@ -1,0 +1,26 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Sliding window problem
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        //Array to keep count of 0s and 1s
+        vector<int>counts(2,0);
+        int L = 0;
+        int res = 0;
+        //Iterate through array as right pointer
+        for(int R = 0; R<nums.size(); R++){
+            //Add values to window
+            counts[nums[R]]++;
+            //If count of zeros exceeds k, continue
+            while(counts[0]>k){
+            //Shrink window and decrement count array respectively
+            counts[nums[L++]]--;
+            }
+            //Keep track of new max result.
+            res = max(res,R-L+1);
+        }
+        //Return result
+        return res;
+    }
+};
