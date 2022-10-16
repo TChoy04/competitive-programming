@@ -1,0 +1,28 @@
+//315th LeetCode Weekly Contest 1/4 
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Create hashmap to store values, if inverse is found then set result to current max.
+
+class Solution {
+public:
+    int findMaxK(vector<int>& nums) {
+        //Init map
+        unordered_map<int,int>m;
+        //Init res, base case -1 if none is found.
+        int res = -1;
+        //Iterate through entire array
+        for(int x = 0 ; x<nums.size(); x++){
+            //Insert current value into array
+            m[nums[x]]++;
+            //Inverse current value
+            int inverse = nums[x]*-1;
+            //Search for inverse in map
+            if(m.find(inverse)!=m.end()){
+                //If inverse is found, set result to maxmimum possible value between result and absolute value of inverse (in case of negatives)
+                res = max(res,abs(inverse));
+            }
+        }
+        //Return result
+        return res;
+    }
+};
