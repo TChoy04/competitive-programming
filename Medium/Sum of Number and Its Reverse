@@ -1,5 +1,5 @@
 //315th LeetCode Weekly Contest 3/4
-Time Complexity: O(20000) (Technically O(1))
+Time Complexity: O(N)
 Space Complexity: O(1)
 //same space and time every time, generate all possible sums of numbers and their inverses.
 //Brute Force
@@ -7,8 +7,8 @@ Space Complexity: O(1)
 class Solution {
 public:
     bool sumOfNumberAndReverse(int num) {
-        //Generate it for every number from 0 to 20000
-        for(int x= 0; x<=20000; x++){
+        //Generate it for every number from 0 to n
+        for(int x= 0; x<=num; x++){
             //Temporary int and int to hold reversed string.
             int temp = x;
             int rev = 0;
