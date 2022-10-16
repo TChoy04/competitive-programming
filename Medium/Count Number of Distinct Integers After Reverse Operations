@@ -1,0 +1,28 @@
+//315th LeetCode Weekly Contest 2/4 
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Populate set with current values then insert all values reversed into set to get rid of duplicates.
+
+class Solution {
+public:
+    int countDistinctIntegers(vector<int>& nums) {
+        //Init set
+        unordered_set<int>s;
+        int n = nums.size();
+        //Reverse every value in set.
+        for(int x = 0; x<n; x++){
+            //Populate set with current values
+            s.insert(nums[x]);
+            int reversed = 0;
+            //Reverse current number
+            while(nums[x]>0){
+                reversed*=10;
+                reversed+=nums[x]%10;
+                nums[x]/=10;
+            }
+            //Populate set with reversed values
+            s.insert(reversed);
+        }
+        return s.size();
+    }
+};
