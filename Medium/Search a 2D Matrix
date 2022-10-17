@@ -1,0 +1,44 @@
+Time Complexity: O(Log(M*N))
+Space Complexity: O(1)
+//Binary Search
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n = matrix.size();
+        //If array is empty return false
+        if(n==0) return false;
+        int m = matrix[0].size();
+        //Binary search pointers
+        int L = 0;
+        int R = m*n-1;
+        //Explanation below
+        while(R>=L){
+            int mid = L + (R-L)/2;
+            int val = matrix[mid/m][mid%m];
+            if(val==target) return true;
+            if(val>target) R = mid-1;
+            else L = mid+1;
+        }
+        
+        return false;
+    }
+};
+
+//Given this array the midpoint would be arr[5] if you imagine it as one array [0,1,2,3,4,5,6,7,8,9,10,11]
+//The equivalent in this array would be arr[1][1]
+//Find the row by dividing the calculated midpoint in extended array by segement length 5/4 = 1
+//Find the column by finding the remainder between the calculated midpoint and segment length 5%4 = 1
+(bad example they're both 1)
+
+[0,1,2,3]
+[0,1,2,3]
+[0,1,2,3]
+
+//Extended midpoint: 7
+//7/5 = 1
+//7%5 = 2
+// midpoint = arr[1][2]
+[0,1,2,3,4]
+[0,1,2,3,4]
+[0,1,2,3,4]
