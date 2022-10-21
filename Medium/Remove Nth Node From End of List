@@ -1,0 +1,36 @@
+//Time Complexity: O(N)
+//Space Complexity: O(1)
+//Use slow and fast pointer, move fast pointer n units in front.
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+ 
+ 
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        //Init 2 pointers
+        ListNode* slow = head;
+        ListNode* fast = head;
+        //Move fast pointer n places in front of slow.
+        for(int x = 0; x<n; x++) fast = fast->next;
+        //If n is the same as the list length, fast will become null. Thus, return head->next as you are skipping the first element in the list.
+        if(!fast) return head->next;
+        //Iterate until fast == last element. Once it is, slow will be n places behind.
+        while(fast->next){
+            fast = fast->next;
+            slow = slow->next;
+        }
+        //Remove next element and place pointer at the node after that.
+        slow ->next = slow->next->next;
+        //Return head.
+        return head;
+    }
+};
