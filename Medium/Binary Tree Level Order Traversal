@@ -1,0 +1,29 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//BAD SOLUTION, EXTRA SPACE IS USED FOR HASHMAP. SEARCH FOR IMPROVEMENTS CAN 100% BE DONE WITHOUT HASHMAP
+class Solution {
+public:
+    void helper(TreeNode* root, int depth, map<int,vector<int>>&m){
+        //base case
+        if(!root) return;
+        //Insert value into map of vectors
+        m[depth].push_back(root->val);
+        //Recurse
+        helper(root->left,depth+1,m);
+        helper(root->right,depth+1,m);
+        
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        //Use hashmap to store vectors for each depth
+        map<int,vector<int>>m;
+        //Call helper function
+        helper(root,0,m);
+        //Create res vector
+        vector<vector<int>>res;
+        //Iterate through map to populate result vector
+        for(auto it:m){
+            res.push_back(it.second);
+        }
+        return res;
+    }
+};
