@@ -1,8 +1,5 @@
-# Practice_DSA
-Practicing DSA!
+algorithms
 
-Documenting my solutions.
-
-Solving with C++
+C++
 
 Purely for entertainment. 
