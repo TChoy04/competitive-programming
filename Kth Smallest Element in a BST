@@ -1,0 +1,38 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    //Helper function
+    void helper(TreeNode* root, int& k, int& res){
+        //Base case, whenever root is invalid, return
+        if(!root) return;
+        //Recurse left first, inorder traversal
+        helper(root->left,k,res);  
+        //Decrement k by one, passed by reference. It will have gone all the way to the left once it gets to this point, therefore it'll be on the lowest number
+        k-=1;
+        //If k == 0, it means it has reached the ith lowest number
+        if(k==0){
+            //Set result to current value and then return.
+            res =  root->val;
+            return;
+        }
+        helper(root->right,k,res);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        int res = 0;
+        helper(root,k,res);
+        return res;
+    }
+};
