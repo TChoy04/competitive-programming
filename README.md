@@ -1,5 +1,5 @@
-algorithms
+#algorithms
 
-C++
+Using C++
 
-Purely for entertainment. 
+For entertainment + building logic
