@@ -1,0 +1,48 @@
+/* Appleman has n cards. Each card has an uppercase letter written on it. Toastman must choose k cards from Appleman's cards. Then Appleman should give Toastman some coins depending on the chosen cards. Formally, for each Toastman's card i you should calculate how much Toastman's cards have the letter equal to letter on ith, then sum up all these quantities, such a number of coins Appleman should give to Toastman.
+
+Given the description of Appleman's cards. What is the maximum number of coins Toastman can get?
+
+Input
+The first line contains two integers n and k (1 ≤ k ≤ n ≤ 105). The next line contains n uppercase letters without spaces — the i-th letter describes the i-th card of the Appleman.
+
+Output
+Print a single integer – the answer to the problem. */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void solver(){
+
+}
+
+int main(){ 
+	int n,k;
+	long long res = 0;
+	cin>>n>>k;
+	map<char,int>m;
+	for(int x = 0; x<n; x++){
+		char input;
+		cin>>input;
+		m[input]++;
+	}
+	vector<pair<int,int>>cards;
+	for(auto it : m) cards.push_back({it.second,it.second});
+	sort(cards.begin(),cards.end());
+
+	int index = cards.size()-1;
+	while(k){
+		if(cards[index].second==0){
+			index-=1;
+		}
+		if(cards[index].second>k){
+			cards[index].first = k;
+			cards[index].second = k;
+		}
+		res+=cards[index].first;
+		cards[index].second-=1;
+		k--;
+	}
+	cout<<res;
+}
