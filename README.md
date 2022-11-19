@@ -1,5 +1,3 @@
-# algorithms
+# competitive programming
 
 using C++
-
-For entertainment and to build logic
