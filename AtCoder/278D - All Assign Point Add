@@ -12,7 +12,7 @@ int main(){
 	vector<long long>arr(n,0);
 	for(int x = 0; x<n; x++){
 		int inp;
-		cin>>inp;
+		scanf("%i",&inp);
 		arr[x] = inp;
 	}
 	cin>>n;
@@ -21,17 +21,18 @@ int main(){
 		cin>>x;
 		if(x==1){
 			int swap;
-			cin>>swap;
+			scanf("%i",&swap);
 			for(int j = 0; j<arr.size(); j++) arr[j] = swap;
 		}
 		else if(x==2){
 			int add,index;
-			cin>>index>>add;
+			scanf("%i",&index);
+			scanf("%i",&add);
 			arr[index-1] +=add;
 		}
 		if(x==3){
 			int index;
-			cin>>index;
+			scanf("%i",&index);
 			cout<<arr[index-1]<<endl;
 		}
 	}
