@@ -1,0 +1,32 @@
+/*https://atcoder.jp/contests/abc278/tasks/abc278_c */
+//Problem statements are impossible to copy and paste from AtCoder
+//Was getting runtime error after 7 accepted, will need to check back for error when contest is over
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+
+int main(){ 
+	int n,q;
+	cin>>n>>q;
+	vector<set<int>>follows(n+1);
+	for(int x = 0; x<q; x++){
+		int cmd, user1, user2;
+		cin>>cmd>>user1>>user2;
+		if(cmd==1){
+			follows[user1].insert(user2);
+		}
+		else if(cmd==2){
+			follows[user1].erase(user2);
+		}
+		else{
+			if(follows[user1].find(user2)!= follows[user1].end() && follows[user2].find(user1)!= follows[user2].end()){
+				cout<<"Yes"<<endl;
+			}
+			else cout<<"No"<<endl;
+		}
+	}
+	
+	
+}
