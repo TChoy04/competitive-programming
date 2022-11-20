@@ -4,6 +4,7 @@
 //INCORRECT ANSWER BEWARE!!
 //INCORRECT ANSWER BEWARE!!
 //I did not account for the test cases where the singles could sit in every other seat.
+//Fixing later
 /*There is a row of L chairs. Now, N groups of people will come and take seats in order. Each group consists of one or two people, and the i-th group to come consists of a 
 i people. The total number of people equals L.
 
