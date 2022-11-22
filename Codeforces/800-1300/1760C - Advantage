@@ -1,0 +1,45 @@
+/*There are n participants in a competition, participant i having a strength of si.
+
+Every participant wonders how much of an advantage they have over the other best participant. In other words, each participant i wants to know the difference between si and sj, where j is the strongest participant in the competition, not counting i (a difference can be negative).
+
+So, they ask you for your help! For each i (1≤i≤n) output the difference between si and the maximum strength of any participant other than participant i.
+
+Input
+The input consists of multiple test cases. The first line contains an integer t (1≤t≤1000) — the number of test cases. The descriptions of the test cases follow.
+
+The first line of each test case contains an integer n (2≤n≤2⋅105) — the length of the array.
+
+The following line contains n space-separated positive integers s1, s2, ..., sn (1≤si≤109) — the strengths of the participants.
+
+It is guaranteed that the sum of n over all test cases does not exceed 2⋅105.
+
+Output
+For each test case, output n space-separated integers. For each i (1≤i≤n) output the difference between si and the maximum strength of any other participant.*/
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	int n;
+	scanf("%i",&n);
+	int m;
+	
+	for(int x = 0; x<n; x++){
+		scanf("%i",&m);
+		vector<int>temp(m,0);
+		for(int i =0; i<m; i++){
+			scanf("%i",&temp[i]);
+ 
+		}
+		vector<int>temp2 = temp;
+		sort(temp.begin(),temp.end());
+		for(int j = 0; j<temp.size();j++){
+			int maxi;
+			if(temp2[j]!=temp[temp.size()-1]) maxi = temp[temp.size()-1];
+			else maxi = temp[temp.size()-2];
+			cout<<temp2[j]-maxi<<" ";
+		}
+		cout<<endl;
+	}
+}
