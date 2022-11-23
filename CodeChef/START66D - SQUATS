@@ -1,0 +1,23 @@
+/*Problem
+Somu went to the gym today. He decided to do XX sets of squats. Each set consists of 1515 squats. Determine the total number of squats that he did today.
+
+Input Format
+The first line contains a single integer TT — the number of test cases. Then the test cases follow.
+The first and only line of each test case contains an integer XX — the total number of sets of squats that Somu did.
+Output Format
+For each test case, output the total number of squats done by Somu. */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+	    int sets;
+	    scanf("%i",&sets);
+	    cout<<sets*15<<endl;
+	}
+}
