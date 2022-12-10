@@ -1,0 +1,24 @@
+/*Chef has invested his money at an interest rate of X percent per annum while the current inflation rate is Y percent per annum.
+
+An investment is called good if and only if the interest rate of the investment is at least twice of the inflation rate.
+Determine whether the investment made by Chef is good or not.*/
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int rate, inflation;
+		scanf("%i %i", &rate, &inflation);
+		if(rate/2>=inflation) cout<<"YES";
+		else cout<<"NO";
+		cout<<endl;
+	}
+
+	return 0;
+}
