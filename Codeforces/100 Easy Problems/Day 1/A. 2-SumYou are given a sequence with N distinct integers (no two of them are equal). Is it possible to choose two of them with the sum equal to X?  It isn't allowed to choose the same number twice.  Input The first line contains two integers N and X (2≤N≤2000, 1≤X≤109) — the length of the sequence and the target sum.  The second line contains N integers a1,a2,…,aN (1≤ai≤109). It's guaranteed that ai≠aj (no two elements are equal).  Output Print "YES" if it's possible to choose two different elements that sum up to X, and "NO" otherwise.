@@ -1,0 +1,35 @@
+/*You are given a sequence with N distinct integers (no two of them are equal). Is it possible to choose two of them with the sum equal to X?
+
+It isn't allowed to choose the same number twice.
+
+Input
+The first line contains two integers N and X (2≤N≤2000, 1≤X≤109) — the length of the sequence and the target sum.
+
+The second line contains N integers a1,a2,…,aN (1≤ai≤109). It's guaranteed that ai≠aj (no two elements are equal).
+
+Output
+Print "YES" if it's possible to choose two different elements that sum up to X, and "NO" otherwise.*/
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc, num;
+	scanf("%i %i",&tc,&num);
+	unordered_set<int>s;
+	while(tc--){
+		int inp;
+		scanf("%i", &inp);
+		int diff = num-inp;
+		if(s.find(diff)!=s.end()){
+			cout<<"YES";
+			return 0;
+		}
+		s.insert(inp);
+	}
+	cout<<"NO";
+	return 0;
+}
