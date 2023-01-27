@@ -1,0 +1,50 @@
+//Initial attempt but didn't really account for the proper array size when solving the problem. Will edit after results are out.
+//Completely wrong, but not terrible for first contest back, always more to learn.
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+
+	while(tc--){
+	vector<vector<int>>arrays;
+	
+	vector<int>res;
+	int arraySize;
+	scanf("%i", &arraySize);
+	for(int x = 0; x<arraySize; x++){
+		vector<int>temp;
+		for(int i = 0; i<arraySize-1; i++){
+			int inp;
+			scanf("%i", &inp);
+			temp.push_back(inp);
+		}
+		arrays.push_back(temp);
+	}
+	for(int x = 0; x<arraySize-1; x++ ){
+		unordered_map<int,int>m;
+		int mc = 0;
+		int resc = 0;
+		for(int i = 0; i<arraySize-1; i++){
+			m[arrays[i][x]]++;
+			for(auto it : m){
+				if(it.second>mc){
+					mc = it.second;
+					resc = it.first;
+				}
+			}
+			
+		}
+		res.push_back(resc);
+		
+	}
+	for(int i : res) cout<<i<<" ";
+	cout<<endl;
+	}
+	return 0;
+}
