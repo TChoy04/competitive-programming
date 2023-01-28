@@ -1,0 +1,22 @@
+//Easiest question I've seen in awhile
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	int ac = 0, fc= 0 ;
+	while(tc--){
+	string input;
+	cin>>input;
+	if(input=="Against") ac++;
+	else fc++;
+	}
+	if(ac>fc) cout<<"No";
+	else cout<<"Yes";
+	return 0;
+}
