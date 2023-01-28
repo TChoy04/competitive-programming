@@ -1,4 +1,6 @@
 # competitive programming
 
-using C++ \n
+using C++ 
+
+
 hopefully back from hiatus
