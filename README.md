@@ -2,5 +2,4 @@
 
 using C++ 
 
-
-hopefully back from hiatus
+redoing some old questions to warm up
