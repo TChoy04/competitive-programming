@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+	    int n, num;
+	    scanf("%i %i",&n,&num);
+	    if(num-1>n || (num<0 && (abs(num)==n || abs(num)>n ) )){
+	        cout<<-1<<endl;
+	        continue;
+	    }
+	    int counter = 1;
+	    while(n--){
+	        if(counter==num){
+	            cout<<'*';
+	        }
+	        else if(counter>num){
+	            counter--;
+	            cout<<'-';
+	        }
+	        else if(counter<num){
+	            counter++;
+	            cout<<'+';
+	        }
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}
