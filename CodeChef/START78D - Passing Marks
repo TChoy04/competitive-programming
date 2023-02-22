@@ -1,0 +1,55 @@
+/* Pretty easy again
+
+Problem
+In a class of NN students, a class test was held. The i^{th}i 
+th
+  student scored A_iA 
+i
+​
+  marks. It is also known that the scores of all students were distinct.
+
+A student passes the test if their score is strictly greater than the passing mark. Given that exactly XX students pass in the test, find the maximum value of the passing mark of the test.
+
+Input Format
+The first line of input will contain a single integer TT, denoting the number of test cases.
+Each test case consists of multiple lines of input.
+The first line of each test case contains two space-separated integers NN and XX — the number of students in the class and the number of students that passed in the test.
+The next line contains NN space-separated integers A_1, A_2, \ldots, A_NA 
+1
+ ,A 
+2
+ ,…,A 
+N
+ , where the i^{th}i 
+th
+  integer denotes the marks of the i^{th}i 
+th
+  student.
+Output Format
+For each test case, output on a new line, the maximum value of the passing mark of the test.*/
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+	    int n, passed;
+	    scanf("%i %i",&n, &passed);
+	    vector<int>scores;
+	    for(int x = 0; x<n; x++){
+	        int score;
+	        scanf("%i",&score);
+            scores.push_back(score);
+	    }
+	    sort(scores.begin(),scores.end());
+	    int index = scores.size()-passed;
+	    
+
+	    cout<<scores[index]-1<<endl;
+	}
+	return 0;
+}
