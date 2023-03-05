@@ -1,0 +1,19 @@
+//Trivial problem
+//Time Complexity: O(N)
+//Space Complexity: O(1)
+//self explanatory trivial problem.
+
+class Solution {
+public:
+    int calculateTime(string keyboard, string word) {
+        int res = 0;
+        int lastPos = 0;
+        for(int x = 0; x<word.size(); x++){
+            int pos = 0;
+            while(keyboard[pos]!=word[x]) pos++;
+            res += abs(pos-lastPos);
+            lastPos = pos;
+        }
+        return res;
+    }
+};
