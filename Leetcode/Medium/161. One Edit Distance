@@ -3,6 +3,7 @@ Space Complexity: O(1)
 //Check to see if they are the same size. If they are the same size, ensure that there is only a one character difference.
 //Base cases include if the size is off by more than 1 and if there is an empty string and a string with one character (can be added to empty string)
 //If sizes aren't the same, iterate through both strings and if they are the same, iterate both. Else, iterate the longer string. 
+//Most likely not the most optimal solution possible.
 
 class Solution {
 public:
