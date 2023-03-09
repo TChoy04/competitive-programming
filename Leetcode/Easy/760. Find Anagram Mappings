@@ -1,6 +1,7 @@
 Time Complexity: O(N)
 Space Complexity: O(N)
-//Naive solution would be nested for loop with N^2 time complexity and O(1) space. More optimized solution would be to use a hashmap as I did in this solution and store all the values and their index for the array, nums2.
+//Naive solution would be nested for loop with N^2 time complexity and O(1) space. 
+//More optimized solution would be to use a hashmap as I did in this solution and store all the values and their index for the array, nums2.
 
 class Solution {
 public:
