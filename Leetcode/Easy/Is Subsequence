@@ -19,3 +19,26 @@ public:
         return s.size()==count;
     }
 };
+
+//Revisited problem later, arrived at slightly different answer
+//Same concept of keeping track of count & comparing it to the size though.
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int i = 0;
+        int count = 0;
+        for(int x = 0; x<s.size(); x++){
+            while(i<t.size()){
+                if(t[i]==s[x]){
+                    count++;
+                    i++;
+                    break;
+                }
+                i++;
+            }
+        }
+        cout<<count;
+        return count==s.size();
+    }
+};
