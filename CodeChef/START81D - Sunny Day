@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int tc;
+    scanf("%i", &tc);
+    while(tc--){
+        int temp;
+        scanf("%i", &temp);
+        if(temp>24) cout<<"YES";
+        else cout<<"NO";
+        cout<<endl;
+    }
+}
