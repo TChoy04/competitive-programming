@@ -1,0 +1,25 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//Keep track of seen ListNodes, if ListNode has already been seen, that means there is a loop so that will be the start of the cycle.
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* fast = head;
+        unordered_set<ListNode*> seen;
+        while(head){
+            if(seen.find(head)!=seen.end()) return head;
+            seen.insert(head);
+            head = head->next;
+        }
+        return NULL;
+    }
+};
