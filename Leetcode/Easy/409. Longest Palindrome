@@ -1,0 +1,23 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//For every pair, add 1. You can get this by subtracting the count by the count%2. For ex: if you have 7 a's, only 6 will be inserted at this stage since 7-7%2 = 6.
+//Afterwards, check to see if there is a single pair left. If there is, increment the result by one as you will still have a palindrome with one single in the center.
+
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int res = 0;
+        unordered_map<char,int>m;
+        for(char x : s) m[x]++;
+        for(auto it : m){
+            res+= it.second-it.second%2;
+        }
+        for(auto it : m){
+            if(it.second%2==1){
+                res++;
+                break;
+            }
+        }
+        return res;
+    }
+};
