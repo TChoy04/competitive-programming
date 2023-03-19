@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int arrLen, queries;
+		scanf("%i %i", &arrLen, &queries);
+		vector<int>nums;
+		while(arrLen--){
+			int num;
+			scanf("%i", &num);
+			nums.push_back(num);
+		}
+		vector<int>prefix = nums;
+		for(int x = 1; x<prefix.size(); x++) prefix[x] += prefix[x-1];
+		for(int x = prefix.size()-2; x>=0; x--) nums[x] += nums[x+1];
+		while(queries--){
+		int sum = 0;
+		int L, R, newNum;
+		scanf("%i %i %i", &L, &R, &newNum);
+		if(L >= 2) sum+= prefix[L-2];
+		if(R<nums.size()) sum+= nums[R];
+		sum += (R-L+1)*newNum;
+		if(sum%2==0) cout<<"NO";
+		else cout<<"YES";
+		cout<<"\n";
+		}
+
+		
+	}
+
+	return 0;
+}
