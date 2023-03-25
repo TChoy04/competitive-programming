@@ -1,0 +1,38 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Use a map to keep track of where each character occurs. A map with char as the key and a set as the value. The set is needed to keep track of the indexes as it 
+//will appear multiple times. Another set is needed to keep track of the indexes already accounted for after the initial sweep for the "bulls", the digits in the 
+//right position. Now we need to find the cows. This can be done by iterating through their guess. If their guess isn't in the array of accounted for integers,
+//check and make sure there are values there. If there are, iterate through the set and then erase the first integer you come across. Afterwards, iterate cows and
+//break. This will effectively get rid of a random value in the set, keeping track of the amount left in the secret. Then simply return.
+
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        int cows = 0, bulls = 0;
+        unordered_map<char,unordered_set<int>>m;
+        unordered_set<int>accounted;
+        for(int x = 0; x<secret.size(); x++){
+            m[secret[x]].insert(x);
+        }
+        for(int x = 0; x<secret.size(); x++){
+            if(secret[x]==guess[x]){
+                bulls++;
+                m[secret[x]].erase(x);
+                accounted.insert(x);
+            }
+        }
+        for(int x = 0; x<guess.size(); x++){
+            if(accounted.find(x)==accounted.end()){
+                if(m[guess[x]].size()!=0){
+                    for(auto it : m[guess[x]]){ 
+                        m[guess[x]].erase(it);
+                        cows++;
+                        break;
+                    }
+                }
+            }
+        }
+        return to_string(bulls) + "A" + to_string(cows) + "B";
+    }
+};
