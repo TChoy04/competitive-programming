@@ -1,0 +1,21 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//Utilize a priority queue in order to keep track of the values from smallest to largest. Take the two largest values (values on top) and insert the difference between
+//them (if it is greater than 0). If there are no stones left, return 0. Else, return the value on top as that will be the value remaining.
+
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        priority_queue<int>pq;
+        for(int x : stones) pq.push(x);
+        while(pq.size()>1){
+            int num1 = pq.top();
+            pq.pop();
+            int num2 = pq.top();
+            pq.pop();
+            if(num1!=num2) pq.push(abs(num1-num2));
+        }
+        if(pq.empty()) return 0;
+        return pq.top();
+    }
+};
