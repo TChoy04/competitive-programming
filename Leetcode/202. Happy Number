@@ -1,0 +1,22 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Keep track of seen values, if a value has been seen already, it will infinitely loop so return false. If not, keep going until it hits one or loops.
+
+class Solution {
+public:
+    bool isHappy(int n) {
+        unordered_set<int>seen;
+        while(true){
+            int temp = 0;
+            while(n>0){
+                temp+= (n%10)*(n%10);
+                n/=10;
+            }
+            if(seen.find(temp)!=seen.end()) return false;
+            if(temp==1) return true;
+            seen.insert(temp);
+            n = temp;
+        }
+        return false;
+    }
+};
