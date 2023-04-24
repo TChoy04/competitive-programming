@@ -2,4 +2,4 @@
 
 using C++ 
 
-redoing some old questions to warm up
+AtCoder contests are too early tbh
