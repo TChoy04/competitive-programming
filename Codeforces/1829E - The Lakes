@@ -1,0 +1,51 @@
+//Using DFS, search nearby areas in matrix and sum it up. If it is zero, stop searching in that direction. Else, continue searching in all 4 directions.
+//The result is the maximum volume. Set areas depth to zero after accounting for it so it doesn't get counted again.
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int helper(vector<vector<int>>&lake, int x, int y, int& sum){
+	sum+= lake[x][y];
+	if(lake[x][y]!=0){
+		lake[x][y] = 0;
+		if(x>0) helper(lake,x-1,y,sum);
+		if(y>0) helper(lake,x,y-1,sum);
+		if(x<lake.size()-1) helper(lake,x+1,y,sum);
+		if(y<lake[0].size()-1) helper(lake,x,y+1,sum);
+	}
+	return sum;
+
+}
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int n, m;
+		scanf("%i %i", &n, &m);
+		vector<vector<int>>lake;
+		int res = 0;
+		for(int x = 0; x<n; x++){
+			vector<int>temp;
+			for(int y = 0; y<m; y++){
+				int in;
+				scanf("%i", &in);
+				temp.push_back(in);
+			}
+			lake.push_back(temp);
+		}
+		for(int x = 0; x<n; x++){
+			for(int y = 0; y<m; y++){
+				if(lake[x][y]!=0){
+					int sum = 0;
+					res = max(res,helper(lake,x,y,sum));
+				}
+			}
+		}
+		cout<<res<<endl;
+		
+	}
+	return 0;
+}
