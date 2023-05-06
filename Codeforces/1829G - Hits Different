@@ -1,0 +1,54 @@
+//Failed attempt, time limit exceeded.
+//Recursion isn't effective. Dynamic programming most likely could've been used.
+//The idea was to generate the tower and then calculate the sum of the cans right above it. The can above it with the same index and the can to the right of it.
+//An unordered set was used to keep track of tracked values, however since the tower was massive, it's extremely unlikely to reach a reasonable time complexity using
+//recursion. A more optimized solution would be required to solve this.
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int helper(vector<vector<int>>tower, int x, int y,unordered_set<int>&seen){
+	if(x<0 || y <0|| tower[x].size()-1<y){
+		return 0;
+	}
+	if(seen.find(tower[x][y])!=seen.end()) return 0;
+	seen.insert(tower[x][y]);
+	return tower[x][y] + helper(tower,x-1,y,seen) + helper(tower,x-1,y-1,seen);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	int height = 1;
+	int sum = 1;
+	vector<vector<int>>tower;
+	while(height<=2023){
+		vector<int>temp;
+		for(int x = 1; x<=height; x++){
+			temp.push_back(sum*sum);
+			sum++;
+		}
+		height++;
+		tower.push_back(temp);
+	}
+	while(tc--){
+		int hit;
+		scanf("%i", &hit);
+		int x;
+		int y;
+		int len = 1;
+		for(int x = 0; x<tower.size(); x++){
+			for(int y = 0; y<tower[x].size(); y++){
+				if((int)sqrt(tower[x][y])==hit){
+					unordered_set<int>seen;
+					cout<<helper(tower,x,y,seen)<<endl;
+					break;
+				}
+			}
+		}
+
+	}
+	return 0;
+}
