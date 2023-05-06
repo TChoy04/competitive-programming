@@ -1,0 +1,37 @@
+//Keep track of the minimum time for the first and second skills and also keep track of the times when he can do both at once. If the minimum time for both is
+//less than the sum of the time it would take to do the second and first one combined, print out the time for both at once instead of the sum of minFirst & minSecond.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int books;
+		scanf("%i",&books);
+		int minFirst = INT_MAX;
+		int minSecond = INT_MAX;
+		int bothTime = INT_MAX;
+		for(int x = 0; x<books; x++){
+			int time;
+			string skill;
+			cin>>time>>skill;
+			if(skill[0]=='1' && skill[1]=='1'){
+				bothTime = min(time,bothTime);
+			}
+			if(skill[0]=='1'){
+				minFirst = min(time,minFirst);
+			}
+			if(skill[1]=='1'){
+				minSecond = min(time,minSecond);
+			}
+		}
+		if(minFirst == INT_MAX || minSecond == INT_MAX){
+			cout<<-1<<endl;
+			continue;
+		}
+		cout<<min(minFirst+minSecond,bothTime)<<endl;
+	}
+	return 0;
+}
