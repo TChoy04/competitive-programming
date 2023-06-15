@@ -1,4 +1,14 @@
+/**Simple tree traversal question. Got tripped up a bit though
+Iterated through tree and kept track of depth and running sum at position with index.
+Put into a priority queue with a pair
+Checked for the top value, then went downwards from the priority queue in order to find the lowest depth that had this running sum.
+Things I struggled with:
 
+- for some reason even when pq.top().first wasn't equal to maximum, the loop would keep going. Fixed by checking for when pq size is zero. (I am probably just an idiot)
+- Didn't initially populate the initial vector with a 0. I thought the if(list.size()-1<depth) list.push_back(0); clause would be enough for it to run perfectly, but I was wrong.
+- Didn't account for the case where it's a single node and has no leafs. Ran into an infinite loop (?) not sure how but was a simple fix by adding an initial check for children before running any processes. 
+  If there were no children, the answer was 1
+ */
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
