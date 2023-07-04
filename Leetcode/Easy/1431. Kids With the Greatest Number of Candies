@@ -1,0 +1,19 @@
+//Time Complexity: O(N)
+//Space Complexity: O(1)
+//Get greatest number, then if the current number + extraCandies is equal to or greater than the greatest number, the index in the result is true. Else false.
+
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        vector<bool>res;
+        int greatest = 0;
+        for(int x : candies){
+            greatest = max(x,greatest);
+        }
+        for(int x = 0; x<candies.size(); x++){
+            if(candies[x]+extraCandies>=greatest) res.push_back(true);
+            else res.push_back(false);
+        }
+        return res;
+    }
+};
