@@ -1,4 +1,5 @@
-
+//Time & Space Complexity: O(N)
+//Question description is terrible. Not really worth looking back at this, in my opinion, it is a bad question.
 
 class RecentCounter {
 public:
