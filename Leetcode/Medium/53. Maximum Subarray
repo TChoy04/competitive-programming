@@ -1,0 +1,22 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+SOLUTION
+1. Keep track of running sum and result.
+2. The new running sum will be either the current index value or the current running sum + the current value
+3. The result will be the greatest running sum.
+*/
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int res = nums[0];
+        int running = 0;
+        for(int x = 0; x<nums.size(); x++){
+            running = max(nums[x],running + nums[x]);
+            res = max(running,res);
+        }
+        return res;
+    }
+};
