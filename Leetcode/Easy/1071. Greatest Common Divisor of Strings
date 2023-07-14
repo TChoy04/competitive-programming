@@ -1,0 +1,16 @@
+/*
+Time Complexity: O(1)
+Space Complexity: O(1)
+1. Check to see if they are the same when appended. If they are not, they don't have a GCD
+2. Find the length of the GCD by finding the GCD between their lengths.
+3. Substring the string for the length found.
+*/
+
+class Solution {
+public:
+    string gcdOfStrings(string str1, string str2) {
+        if(str1+str2!=str2+str1) return "";
+        int n = gcd(str1.size(),str2.size());
+        return str1.substr(0,n);  
+    }
+};
