@@ -1,0 +1,20 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+Check to see if adjacent squares are empty. If they are, plant a flower there and then decrement n. If n reaches 0, return true.
+Care for when x == 0 and when x == fl.size()-1 as that is when it will be on the edges.
+*/
+
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& fl, int n) {
+        for(int x = 0; x<fl.size(); x++){
+            if((x==0 ||  fl[x-1] == 0) && fl[x] == 0 && (x==fl.size()-1 || fl[x+1]==0)){
+                fl[x] = 1;
+                n--;
+            }
+            if(n<=0) return true;
+        }
+        return false;
+    }
+};
