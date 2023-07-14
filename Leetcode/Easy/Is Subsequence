@@ -42,3 +42,20 @@ public:
         return count==s.size();
     }
 };
+
+//Revisited again and anther slightly different variation, this time without the count. Code is a bit more concise.
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        if(s.size()>t.size()) return false;
+        int R = 0;
+        for(int x = 0; x<s.size(); x++){
+            while(true){
+                if(R==t.size()) return false;
+                if(s[x]==t[R++]) break;
+            }
+        }
+        return true;
+    }
+};
