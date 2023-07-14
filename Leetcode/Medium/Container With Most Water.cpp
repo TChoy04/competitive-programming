@@ -21,3 +21,20 @@ public:
         return ans;
     }
 };
+
+//Revisited, more concise solution. Don't know why I used all those variables in the previous solution.
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int L = 0; 
+        int R = height.size()-1;
+        int res = 0;
+        while(R>L){
+            res = max(res,min(height[R],height[L])*(R-L));
+            if(height[L]<height[R]) L++;
+            else R--;
+        }
+        return res;
+    }
+};
