@@ -12,7 +12,6 @@ Immediately transitioned to two pointer solution as a result.
     d. Set count to zero.
     e. Increment length for each digit in count.
 3. Increment both count and R for each character traversed. 
-
 */
 
 
