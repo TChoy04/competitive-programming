@@ -1,3 +1,13 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+SOLUTION: 
+1. Keep track of lowest value on the left. Initialize i and j as int max so they are filled along the way
+2. If a value isn't the lowest on the left, check if it is greater than i and if j is greater than it. This will be the middle number, which will be the lowest possible number greater than i.
+3. If there is a value greater than the middle number then that means there is a valid solution.
+*/
+
 class Solution {
 public:
     bool increasingTriplet(vector<int>& nums) {
