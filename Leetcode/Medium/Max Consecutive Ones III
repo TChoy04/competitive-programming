@@ -24,3 +24,32 @@ public:
         return res;
     }
 };
+
+/*
+Revisited, redone.
+Result is basically the same, not sure why I used a vector before to keep track of the count, probably just thought I needed extra practice with arraylists, maybe. Also didn't keep track of the
+count and instead just calculated it with the right and left values, finding the value of the window. This results in a slightly nicer looking solution as I don't have to keep track of the count so it's 
+a neater solution.
+*/
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int L = 0;
+        int R = 0;
+        int res = 0;
+        int count = 0;
+        int zc = 0;
+        while(R<nums.size()){
+            if(nums[R++]==0){
+                zc++;
+            }
+            count++;
+            while(zc>k){
+                if(nums[L++]==0) zc--;
+                count--;
+            }
+            res = max(res,count);
+        }
+        return res;
+    }
+};
