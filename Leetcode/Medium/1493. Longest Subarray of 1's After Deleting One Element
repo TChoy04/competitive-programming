@@ -1,3 +1,20 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+Find the largest consecutive window with only one zero
+That zero will be deleted. If there was no zero present in the largest window possible, delete a 1. There will be a digit deleted anyways, so find the longest subarray with at most one 0 present,
+then remove one from the length.
+
+  A possible alternative:
+    instead of  res = max(res,x-L+1);
+                then
+                return res - 1;
+    We could just do res = max(res,x-L);
+                     then
+                     return res;
+But this wouldn't simulate the sliding window and then deleting one at the end, which is what I have visualized. 
+*/
+
 class Solution {
 public:
     int longestSubarray(vector<int>& nums) {
