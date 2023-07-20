@@ -1,0 +1,26 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+Standard sliding window problem. Increase size of sliding window once k is achieved then calculate result based off of the running sum inside the window.
+*/
+
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        double sum = 0;
+        int L = 0;
+        int R = 0;
+        double res = INT_MIN;
+        while(R<k){
+            sum+= nums[R++];
+        }
+        for(int x = R; x<nums.size(); x++){
+            res = max(res,sum/k);
+            sum-= nums[L++];
+            sum+= nums[x];
+        }
+        res = max(res,sum/k);
+        return res;
+ 
+    }
+};
