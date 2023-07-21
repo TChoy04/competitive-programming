@@ -1,3 +1,10 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+Use a set to keep track of the integers in first and second sets and use them to check if they're valid for the answer. 
+Insert integers that are unique in each array into the set afterwards to ensure there are no duplicates.
+*/
+
 class Solution {
 public:
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
