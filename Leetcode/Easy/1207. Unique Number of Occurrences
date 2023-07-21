@@ -1,0 +1,19 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+Use a hashmap to keep count of occurances then check to see if there is a duplicate with a set.
+*/
+
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        unordered_map<int,int>m;
+        for(int i : arr) m[i]++;
+        unordered_set<int>s;
+        for(auto it : m){
+            if(s.find(it.second)!=s.end()) return false;
+            s.insert(it.second);
+        }
+        return true;
+    }
+};
