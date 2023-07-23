@@ -1,0 +1,27 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+Iterate until you run into a separator. If current char isn't a separator include it in the current string. If it is, and the current string isn't empty, include it in the result arraylist.
+*/
+
+class Solution {
+public:
+    vector<string> splitWordsBySeparator(vector<string>& words, char separator) {
+        vector<string>res;
+        string curr = "";
+        for(int x = 0; x<words.size(); x++){
+            for(char i : words[x]){
+                if(i!=separator){
+                    curr+= i;
+                }
+                else{
+                    if(curr!="") res.push_back(curr);
+                    curr = "";
+                }
+            }
+                    if(curr!="") res.push_back(curr);
+                    curr = "";
+        }
+        return res;
+    }
+};
