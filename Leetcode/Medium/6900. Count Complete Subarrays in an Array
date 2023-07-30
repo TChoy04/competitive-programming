@@ -1,6 +1,8 @@
 class Solution {
 public:
     /*
+    Time complexity: O(N^2)
+    Space Complexity: O(N)
     [5,5,5,5]
     [5] * 4
     [5,5] * 3 
