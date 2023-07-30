@@ -1,0 +1,64 @@
+class Solution {
+public:
+    /*
+    FAILED SOLUTION: 
+    honestly, have given up during this contest, I don't think I'll be able to figure it out. Will be documenting anyways to keep track of my     previous thought process should I revisit this in the future and succeed. Didn't check for the front yet but it wouldn't have worked         anyhow.
+    POTENTIAL IDEAS:
+    Find longest string. Check the front and back and see if it fits. If it fits, append. If it is already present, don't attach.
+    ??? poorly explained but worth a try
+    or maybe something with sorting?
+    abc bca aaa
+    abcbcaaaa
+    aaaabbcc
+    nah neither of these work
+    lexographically smallest might be a hint on where to start? comparisons relevant? maybe compare the strings when starting? then what?
+    maybe start with lexographically smallest string?
+    lets try:
+    ab ba aba
+    check for lexo smallest: is ab
+    check ab front and back. if there is no point of connection from the front and back, append to the end.
+    abc bca aaa
+    aaa 
+    */
+    string minimumString(string a, string b, string c) {
+        string res = min(a,b);
+        if(a.size()==b.size() && b.size()==c.size()){
+                res = min(a,b);
+                res = min(b,c);
+        }
+        else{
+            if(a.size()>b.size()){
+                if(a.size()>c.size()) res = a;
+                else res = c;
+            }else{
+                if(b.size()>c.size()) res = b;
+                else res = c;
+            }
+        }
+        cout<<res<<endl;
+        /*erase string if it's accounted for already in result*/
+        if(res==a) a = "";
+        else if(res==b) b = "";
+        else if(res==c) c = "";
+        for(int x = a.size(); x>=0; x--){
+            if(a.substr(0,x)==res.substr(res.size()-x,res.size())){
+                res+= a.substr(x,a.size());
+                break;
+            }
+        }
+        for(int x = b.size(); x>=0; x--){
+            if(b.substr(0,x)==res.substr(res.size()-x,res.size())){
+                res+= b.substr(x,b.size());
+                break;
+            }
+        }
+        for(int x = c.size(); x>=0; x--){
+            if(c.substr(0,x)==res.substr(res.size()-x,res.size())){
+                res+= c.substr(x,c.size());
+                break;
+            }
+        }
+        return res;
+        
+    }
+};
