@@ -1,0 +1,12 @@
+//Honestly trivial solution and problem don't think it deserves much of an explanation. just iterate through array and keep track of every integer that is >= to target.
+//Time complexity: O(N) Space Complexity: O(1)
+class Solution {
+public:
+    int numberOfEmployeesWhoMetTarget(vector<int>& hours, int target) {
+        int res = 0;
+        for(int x : hours){
+            if(x>=target) res++;
+        }
+        return res;
+    }
+};
