@@ -17,7 +17,7 @@ public:
     
     
     [1,2,2]
-    
+    i ended up just checking every possibility.
     ok this solution is actually super pathetic and hopefully I can remedy this later.
     constraints of 1 <= nums.length <= 1000 meant that an O(N^2) time complexity was extremely likely to pass.
     */
