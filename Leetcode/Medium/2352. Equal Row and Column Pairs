@@ -1,6 +1,9 @@
 /*
 Time Complexity: O(N)
 Space Complexity: O(N)
+Keep track of rows that appear with a map, use a map so we can keep track of occurances as well.
+If a row matches it, it will match x times, with x being the number of times it appears as a row.
+Add x to the result counter.
 */
 
 class Solution {
