@@ -1,0 +1,43 @@
+/*
+Using string as stack
+Time Complexity: O(N)
+Space Complexity: O(1)
+*/
+class Solution {
+public:
+    string removeStars(string s) {
+        string res = "";
+        for(char x : s){
+            if(x=='*') res.pop_back();
+            else res.push_back(x);
+        }
+        return res;
+    }
+};
+/*
+Using a stack
+Time Complexity: O(N)
+Space Complexity: O(1)
+Insert string into a stack and then pop back. Keep track of how many stars have been seen and whenever you get to a nonstarred chacter, don't include it and decrement popCount instead.
+Reverse answer at the end because the stack will start from the back of the string.
+*/
+class Solution {
+public:
+    string removeStars(string s) {
+        stack<char>st;
+        string res = "";
+        for(char x : s) st.push(x);
+        int popCount = 0;
+        while(!st.empty()){
+            if(st.top()=='*'){
+                popCount++;
+            }else{
+                if(popCount>0) popCount--;
+                else res+= st.top();
+            }
+            st.pop();
+        }
+        reverse(res.begin(),res.end());
+        return res;
+    }
+}
