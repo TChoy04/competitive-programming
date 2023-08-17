@@ -1,7 +1,9 @@
 /*
 TORTOISE AND HARE INEFFICIENT
+
 Time Complexity: O(N)
 Space Complexity: O(1)
+
 Tortoise and hare. If the end is reached, The slow pointer will be on the middle of the linked list. Iterate again and remove that index when arrived at. One pass should be possible! Will redo.
 */
 
