@@ -34,3 +34,36 @@ public:
         return res;
     }
 };
+
+/*
+Solution 2/2: Using a deque
+Use a deque, insert the entire linked list the iterate the corresponding positions one by one shrinking from the edges. Calculate the result as the maximum sum of the front and back.
+*/
+
+/*
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        deque<int>dq;
+        while(head){
+            dq.push_back(head->val);
+            head = head->next;
+        }
+        int res = 0;
+        while(!dq.empty()){
+            res = max(res,dq.front()+dq.back());
+            dq.pop_back();
+            dq.pop_front();
+        }
+        return res;
+    }
+};
