@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+//Start the calculation with his damage halved for the first five moves. If the monsters hp goes under zero during this, break the loop and print the answer. If not, keep attacking until the monster is dead.
+
+int main() {
+    int tc;
+    cin>>tc;
+    while(tc--){
+        int x, hp;
+        cin>>x>>hp;
+        int count = 0;
+        for(int i = 0; i<5; i++){
+            count++;
+            hp-=(x/2);
+            if(hp<=0) break;
+        }
+        while(hp>0){
+            count++;
+            hp-=x;
+        }
+        cout<<count<<endl;
+        count = 0;
+    }
+}
