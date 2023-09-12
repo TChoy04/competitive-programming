@@ -1,0 +1,17 @@
+/*
+Time Complexity: O(1)
+Space Complexity: O(1)
+
+If you have zero moves, check and see if the starting square is the ending square
+If the starting square is the ending square, check and see if t is greater than one. If it is, you can simply walk around in circles around the square until t moves is reached
+Else, check to see if the target square can be reached. If it can be reached, you can simply walk around in circles if there are extra moves. 
+*/
+
+class Solution {
+public:
+    bool isReachableAtTime(int sx, int sy, int fx, int fy, int t) {
+        if(t==0) return (fx==sx && sy==fy);
+        if(fx==sx && sy==fy) return t>1;
+        return max(abs(fx-sx),abs(fy-sy))<=t;
+    }
+};
