@@ -1,0 +1,18 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+Use a set to keep track of the postions the car take up. Use a nested for loop to account for all the lengths of the cars.
+*/
+
+class Solution {
+public:
+    int numberOfPoints(vector<vector<int>>& nums) {
+        unordered_set<int>s;
+        for(int x = 0; x<nums.size(); x++){
+            for(int y = nums[x][0]; y<=nums[x][1]; y++){
+                s.insert(y);
+            }
+        }
+        return s.size();
+    }
+};
