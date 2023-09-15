@@ -1,0 +1,35 @@
+/*
+Time Complexity: O(N * 1000)
+Space Complexity: O(N)
+Not the fastest or most space efficient code but it works. Check for every possible missing number starting from the end until you find one that hasn't been accounted for in the set
+The set is used to keep track of integers that have already been removed. They are "removed" from the set when they are added back into the infinite set.
+Can redo it in a more efficient manner without the for loop to 1000 each call of popSmallest()
+*/
+
+class SmallestInfiniteSet {
+public:
+    set<int>s;
+    SmallestInfiniteSet() {
+        
+    }
+    int popSmallest() {
+        for(int x = 1; x<=1000; x++){
+            if(s.find(x)==s.end()){
+                s.insert(x);
+                return x;
+            }
+        }
+        return -1;
+    }
+    
+    void addBack(int num) {
+        s.erase(num);
+    }
+};
+
+/**
+ * Your SmallestInfiniteSet object will be instantiated and called as such:
+ * SmallestInfiniteSet* obj = new SmallestInfiniteSet();
+ * int param_1 = obj->popSmallest();
+ * obj->addBack(num);
+ */
