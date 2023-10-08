@@ -1,0 +1,28 @@
+//Time Complexity: O(NLogN)
+//Space Complexity: O(N)
+//First, we need to sort it so we should make an arraylist with pairs inside to sort.
+//After sorting it, we should enter the last element in the array into a stack. We will use this as a reference to the car in front. 
+//Look on the top car. This will be the car in the front of the next car. Iterate through the rest of the cars, starting from the back. Compare their rates to the car in front of them, 
+//which is the top of the stack. Calculate the amount of time it will take for it to reach the destination and if it's less than the car in front of it, it will become part of that fleet.
+//If not, it will be added to the stack as it will be it's own separate fleet.
+
+class Solution {
+public:
+    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+        stack<pair<int,int>>res;
+        vector<pair<int,int>>cars;
+        for(int x = 0; x<position.size(); x++){
+            cars.push_back({position[x],speed[x]}); 
+        }
+        sort(cars.begin(),cars.end());
+        res.push(cars[cars.size()-1]);
+        for(int x = cars.size()-2; x>=0; x--){
+            double front_time = target - res.top().first;
+            front_time/=res.top().second;
+            double current_time = target - cars[x].first;
+            current_time/=cars[x].second;
+            if(current_time>front_time) res.push(cars[x]);
+        }
+        return res.size();
+    }
+};
