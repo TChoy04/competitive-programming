@@ -2,4 +2,3 @@
 
 using C++ 
 
-AtCoder contests are too early tbh
