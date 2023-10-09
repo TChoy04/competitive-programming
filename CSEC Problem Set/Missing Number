@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	int n = tc;
+	unordered_set<int>s;
+	while(tc--){
+		int in;
+		scanf("%i",&in);
+		s.insert(in);
+	}
+	for(int x = 1; x<=n; x++){
+		if(s.find(x)==s.end()){
+			cout<<x;
+			break;
+		}
+	}
+	return 0;
+}
