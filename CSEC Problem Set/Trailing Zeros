@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ 
+int main(){
+	long long num;
+	cin>>num;
+	long long ans = 0;
+	for(long long x = 5; x<=num; x*=5){
+		ans+= num/x;
+	}
+	cout<<ans;
+	return 0;
+	}
