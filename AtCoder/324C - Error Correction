@@ -1,0 +1,40 @@
+	#include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+	int main(){
+		ll tc;
+		string word;
+		cin>>tc>>word;
+		set<int>s;
+		for(int x = 1; x<=tc; x++){
+			string comp;
+			cin>>comp;
+			int errors = 0;
+			if(comp==word){
+				s.insert(x);
+			}else if(comp.size()==word.size()){
+				for(int i = 0; i<comp.size(); i++){
+					if(comp[i]!=word[i]) errors++;
+					if(errors>1)break;
+				}
+				if(errors<=1) s.insert(x);
+			}else if(comp.size()>word.size()){
+				for(int i = 0; i<comp.size(); i++){
+					if(comp[i]!=word[i-errors]) errors++;
+					if(errors>1)break;
+				}
+				if(errors<=1) s.insert(x);
+			}else{
+				for(int i = 0; i<word.size(); i++){
+					if(word[i]!=comp[i-errors])errors++;
+					if(errors>1)break;
+				}
+				if(errors<=1) s.insert(x);
+			}
+		}
+		cout<<s.size()<<endl;
+		for(int i : s) cout<<i<<" ";
+		return 0;
+		}
+	
