@@ -1,4 +1,6 @@
 /*Trival problem, tried to initally do with xor to be fancy but not needed and was failing some test cases lol
+could also be done with a set for O(N) space and no time improvement
+*/
  
  #include <bits/stdc++.h>
 	using namespace std;
