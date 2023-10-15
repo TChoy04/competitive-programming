@@ -1,0 +1,33 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+Use map to keep track of index for minimum and maximum values in the window.
+Greedy solution, likely not the most efficient but all this problem called for was a time complexity better than O(N^2) based off of the constraints of the problem.
+Was originally a sliding window but I realized I didn't actually need to slide the window as the indexDifference just had to be greater than the provided number 
+which is ensured by starting the for loop on indexDifference
+*/
+
+class Solution {
+public:
+    vector<int> findIndices(vector<int>& nums, int indexDifference, int valueDifference) {
+        int windowMin = INT_MAX;
+        int windowMax = INT_MIN;
+        unordered_map<int,int>m1;
+        int L = 0;
+        for(int x = indexDifference; x<nums.size(); x++){
+            if(abs(nums[L]-nums[x])>=valueDifference){return {L,x};}
+            if(nums[L]<windowMin){
+                windowMin = nums[L];
+                m1[windowMin] = L;
+            }
+            if(nums[L]>windowMax){
+                windowMax = nums[L];
+                m1[windowMax] = L;
+            }
+            L++;
+            if(abs(windowMax-nums[x])>=valueDifference){ return {m1[windowMax],x};}
+            if(abs(windowMin-nums[x])>=valueDifference) return {m1[windowMin],x};
+        }
+        return {-1,-1};
+    }
+};
