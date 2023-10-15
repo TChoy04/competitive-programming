@@ -1,0 +1,18 @@
+/*
+Time Complexity: O(N^2)
+Space Complexity: O(1)
+Due to the problems constraints, it is very obvious an N^2 solution will satisfy it. However, later in 2905, we will have to solve for it with a better time complexity. This solution is very simple,
+Nested for loop and compare the differences.
+*/
+
+class Solution {
+public:
+    vector<int> findIndices(vector<int>& nums, int indexDifference, int valueDifference) {
+        for(int x = 0; x<nums.size(); x++){
+            for(int y = x+indexDifference; y<nums.size(); y++){
+                if(abs(nums[x]-nums[y])>=valueDifference) return {x,y};
+            }
+        }
+        return {-1,-1};
+    }
+};
