@@ -1,0 +1,22 @@
+	#include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+	 
+
+	int main(){
+			ll tc;
+			cin>>tc;
+			unordered_map<ll,ll>m;
+			while(tc--){
+				ll people, time;
+				cin>>people>>time;
+				for(int x = 0; x<9; x++){
+					m[(x+time)%24]+= people;
+				}
+			}
+			ll res = 0;
+			for(auto it : m) res = max(res,it.second);
+			cout<<res;
+		}
+	
