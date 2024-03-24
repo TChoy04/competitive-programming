@@ -1,0 +1,33 @@
+/*
+Time Complexity: O(N^2)?
+Space Complexity: O(N)
+Keep track of largest value pair, if this pair is decreased find a new max pair
+Use hashmap to keep track of largest values
+Looking back at it it's really simple but if you don't keep track of the largest value pair and checking if that number specifically is decreased you can easily TLE from iterating through the map every time instead of only
+when the largest pair is decreased.
+*/
+
+class Solution {
+public:
+    vector<long long> mostFrequentIDs(vector<int>& nums, vector<int>& freq) {
+        vector<long long> res;
+        unordered_map<int,long long>m;
+        pair<int,long long>maxVal = {0,0};
+        
+        for(int x = 0; x<nums.size(); x++){
+            m[nums[x]]+= freq[x];
+            if(nums[x]==maxVal.first && freq[x]<0){
+                maxVal.second = m[nums[x]];
+                for(auto it : m){
+                    if(it.second>maxVal.second){
+                        maxVal = it;
+                    }
+                }
+            }else if(x==0||m[nums[x]]>maxVal.second){
+                maxVal = {nums[x],m[nums[x]]};
+            }
+            res.push_back(maxVal.second);
+        }
+        return res;
+    }
+};
