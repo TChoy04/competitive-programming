@@ -1,4 +1,4 @@
-#check to see if there is only one character, if there is, there is no anagarm. If there is an anagram, swap any 2 unique characters.
+//check to see if there is only one character, if there is, there is no anagarm. If there is an anagram, swap any 2 unique characters.
 #include <bits/stdc++.h>
 using namespace std;
  
