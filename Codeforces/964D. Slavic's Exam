@@ -1,4 +1,5 @@
 //Check to see if the subsequence is possible. Use the ? to sub in whenever possible. Swap out the ? afterwards with a's or the characters that they will be filling in for in the subsequence. 
+//THIS IS TLE. Passed during the comp but ended up TLE after. Proper solution underneath.
 #include <bits/stdc++.h>
 	using namespace std;
 	#define ll long long
@@ -37,3 +38,41 @@
  
 			}
 		}
+//Proper solution after revisiting. No need for two for loops, the second one will always be shorter so you can just iterate through the first one with a for loop and use a pointer for the second string. Second half is the same as before.
+
+	#include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+ 
+	int main(){
+			int tc;
+			cin>>tc;
+			while(tc--){
+				string s1,s2;
+				cin>>s1>>s2;
+				int j = 0;
+				int count = 0;
+				for(int i = 0; i<s1.size(); i++){
+						if(s1[i]==s2[j] || s1[i]=='?'){
+							if(s1[i]=='?') s1[i] = s2[j];
+							j++;
+							if(j==s2.size()) break;
+						}
+					
+				}
+					if(j==s2.size()){
+						cout<<"YES"<<endl;
+						for(int x = 0; x<s1.size(); x++){
+							if(s1[x]=='?'){
+								s1[x] = 'a';
+							}
+						}
+						cout<<s1<<endl;
+					}
+					else cout<<"NO"<<endl;
+					
+ 
+			}
+		}
+	
