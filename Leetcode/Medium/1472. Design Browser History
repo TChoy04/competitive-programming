@@ -1,0 +1,38 @@
+//Use a vector to represent browser history. When browser history is initalize, add the homepage as the first page in history. When a page is visted, remove all entries in front of current index.
+// When you go back, check if the steps will turn the current index to under zero, if so, set it to 0. When going forward, check if the index will exceed the size of the history vector, if so, set to the size.
+//Remember when you are erasing you need to do history.begin()+current+1 since just history.begin()+current will remove the current index as well.
+
+class BrowserHistory {
+public:
+    vector<string>history;
+    int current = 0;
+    BrowserHistory(string homepage) {
+       history.push_back(homepage);
+    }
+    
+    void visit(string url) {    
+        history.erase(history.begin()+current+1,history.end());
+        history.push_back(url);
+        current = history.size()-1;
+    }
+    
+    string back(int steps) {
+        if(steps>=current) current = 0;
+        else current-=steps;
+        return history[current];
+    }
+    
+    string forward(int steps) {
+        if(current+steps>=history.size()-1) current = history.size()-1;
+        else current+=steps;
+        return history[current];
+    }
+};
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
+ */
