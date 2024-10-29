@@ -1,0 +1,27 @@
+//Use vectors to simulate a hashmap for characters, populate both intial hashmaps then increment the right character on second map and decrement the left character in sliding window.
+
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int>m1(26,0);
+        vector<int>m2(26,0);
+        vector<int>res;
+        if(p.size()>s.size()) return {};
+        for(int x = 0; x<p.size(); x++){
+            m1[p[x]-'a']++;
+            m2[s[x]-'a']++;
+        }
+        int L = 0;
+        for(int x = p.size(); x<s.size(); x++){
+            if(m1==m2) res.push_back(x-p.size());
+            m2[s[L]-'a']--;
+            L++;
+            m2[s[x]-'a']++;
+        }
+        if(m1==m2) res.push_back(s.size()-p.size());
+
+
+
+        return res;
+    }
+};
