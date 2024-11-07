@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& oranges) {
+        queue<pair<int,int>>rottenOranges;
+        vector<vector<int>>directions = {{0,1},{1,0},{0,-1},{-1,0}};
+        int freshOrangeCount = 0;
+        for(int x = 0; x<oranges.size(); x++){
+            for(int y = 0; y<oranges[x].size(); y++){
+               if(oranges[x][y]==2) rottenOranges.push({x,y});
+               if(oranges[x][y]==1) freshOrangeCount++;
+            }
+        }
+        if(freshOrangeCount==0 && rottenOranges.size() == 0) return 0;
+        int minutes = 0;
+        while(rottenOranges.size() && freshOrangeCount>0){
+            int n = rottenOranges.size();
+            minutes++;
+            
+            for(int x = 0; x<n; x++){
+            
+            int i = rottenOranges.front().first;
+            int j = rottenOranges.front().second;
+            rottenOranges.pop();
+            for(int z = 0; z<4; z++){
+                int directionI = i + directions[z][0];
+                int directionJ = j + directions[z][1];
+
+                if(directionI>=0 && directionJ>=0 && directionI<oranges.size() && directionJ<oranges[0].size()){
+                    if(oranges[directionI][directionJ]==1){
+                        freshOrangeCount--;
+                        oranges[directionI][directionJ] = 2;
+                        rottenOranges.push({directionI,directionJ});
+                    }
+                }
+            }
+        }
+        
+        }
+
+        return freshOrangeCount==0 ? minutes : -1;
+    }
+};
