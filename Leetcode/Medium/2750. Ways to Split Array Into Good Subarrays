@@ -1,0 +1,31 @@
+class Solution {
+public:
+    /*
+        Time Complexity: O(N)
+        Space Complexity: O(1)
+        1. Get rid of leading zeros
+        2. If there are no 1's return 0, else continue
+        3. Count the amount of zeros until you reach a 1. Multiply the answer by the count. Start count at 1
+        because each zero adds a possible combination but there will always be the possibility of the 1 alone as a 
+        choice. For example in [1,0,1] can be split into [1,0],[1] and [1],[0,1] where we keep the option of 
+        the [1] alone as an option. Set count back to 1.
+        4. Modulo by 10^9 + 7 each time in order to prevent overflows. Iterate count everytime there is a zero.
+    */
+    int numberOfGoodSubarraySplits(vector<int>& nums) {
+        long res = 1;
+        int count = 1;
+        int i = 0;
+        while(nums[i]!=1){
+            i++;
+            if(i==nums.size()) return 0;
+        }
+        for(int x = i; x<nums.size(); x++){
+            if(nums[x]==1){ 
+                res*= count;
+                res%=1000000007;
+                count = 1;
+            }else count++;
+        }
+        return res;
+    }
+};

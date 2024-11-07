@@ -1,0 +1,15 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ 
+int main(){
+	ll num;
+	cin>>num;
+	for(ll i = 1; i<=num; i++){
+		ll possible = i*i;
+		ll possible2 = (possible*(possible-1))/2;
+		if(i>2) possible2 -= 4*(i-1)*(i-2);
+		cout<<possible2<<endl;
+	}
+	return 0;
+	}

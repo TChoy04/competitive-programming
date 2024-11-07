@@ -1,0 +1,33 @@
+//Got a testcase wrong, will edit after results are out.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+
+	while(tc--){
+		int totalSum,n;
+		float remainingVal;
+		int dices;
+		scanf("%i %i",&n, &totalSum);
+		scanf("%f",&remainingVal);
+		vector<int>dice = {totalSum-remainingVal};
+		if(n==1){
+			cout<<totalSum;
+			continue;
+		}
+		for(int x = 1; x<n; x++){
+			dices = ceil(remainingVal/(n-1));
+			
+		}
+		for(int i = 0; i<n-2; i++) dice.push_back(dices);
+		dice.push_back(remainingVal-dices*(n-2));
+		for(int x : dice)cout<<x<<" ";
+		cout<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,27 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Constant space time from recursion
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+class Solution {
+public:
+    //The key to this problem is to search for the first value that is inbetween them since it is a BST
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        //If root is currently larger than both values, go to the left since the values are strictly decreasing on the left.
+        if(root->val>p->val && root->val>q->val) return lowestCommonAncestor(root->left,p,q);
+        //Vice versa, if root is currently less than both p and q, go to the right since it is strictly increasing
+        else if(root->val<p->val && root->val<q->val) return lowestCommonAncestor(root->right,p,q);
+        //Return root once you find a value that is neither larger than both p and q or less than both p and q since this will be the first value between both p and q
+        //which will be the result
+        return root;
+    }
+};

@@ -1,0 +1,55 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Sliding window problem
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        //Array to keep count of 0s and 1s
+        vector<int>counts(2,0);
+        int L = 0;
+        int res = 0;
+        //Iterate through array as right pointer
+        for(int R = 0; R<nums.size(); R++){
+            //Add values to window
+            counts[nums[R]]++;
+            //If count of zeros exceeds k, continue
+            while(counts[0]>k){
+            //Shrink window and decrement count array respectively
+            counts[nums[L++]]--;
+            }
+            //Keep track of new max result.
+            res = max(res,R-L+1);
+        }
+        //Return result
+        return res;
+    }
+};
+
+/*
+Revisited, redone.
+Result is basically the same, not sure why I used a vector before to keep track of the count, probably just thought I needed extra practice with arraylists, maybe. Also didn't keep track of the
+count and instead just calculated it with the right and left values, finding the value of the window. This results in a slightly nicer looking solution as I don't have to keep track of the count so it's 
+a neater solution.
+*/
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int L = 0;
+        int R = 0;
+        int res = 0;
+        int count = 0;
+        int zc = 0;
+        while(R<nums.size()){
+            if(nums[R++]==0){
+                zc++;
+            }
+            count++;
+            while(zc>k){
+                if(nums[L++]==0) zc--;
+                count--;
+            }
+            res = max(res,count);
+        }
+        return res;
+    }
+};

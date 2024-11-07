@@ -1,0 +1,20 @@
+//Time Complexity: O(N)
+//Space Complexity: O(1)
+//Keep track of greatest and lowest. Result will be either the difference between the current greatest in the array and the lowest value seen or the current lowest in the array and the greatest value seen.
+
+class Solution {
+public:
+    int maxDistance(vector<vector<int>>& arrays) {
+        int res = 0;
+        int lowest = arrays[0][0];
+        int greatest = arrays[0][arrays[0].size()-1];
+        for(int x = 1; x<arrays.size(); x++){
+            res = max(res,abs(lowest-arrays[x][arrays[x].size()-1]));
+            res = max(res,abs(greatest-arrays[x][0]));
+            lowest = min(lowest,arrays[x][0]);
+            greatest = max(greatest,arrays[x][arrays[x].size()-1]);
+        }
+
+        return res;
+    }
+};

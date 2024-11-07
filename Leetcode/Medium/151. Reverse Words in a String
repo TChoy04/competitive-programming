@@ -1,0 +1,41 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//Probably not the most efficient method but it was a multistep process.
+/*
+1. Remove leading spaces
+2. Remove trailing spaces
+3. Check for consecutive spaces and then remove them.
+4. Iterate through the trimmed string. If there is a space, prepend the temp string that we are keeping track of. Place a space before it. Reset the temp string to an empty string.
+5. This will get all the words except for the last one. Prepend that one at the end after the iterations but don't add a space in front of it.
+*/
+class Solution {
+public:
+    string reverseWords(string s) {
+        string res = "";
+        string temp = "";
+        int i = 0;
+        while(s[i]==' '){
+            s = s.substr(1,s.size());
+        }
+        i = s.size()-1;
+        while(s[i]==' '){
+            s = s.substr(0,s.size()-1);
+            i = s.size()-1;
+        }
+        for(int x = 0; x<s.size(); x++){
+            if(s[x]==' '){
+                while(s[x+1]==' ') s.erase(x,1);
+            }
+        }
+        for(int x = 0; x<s.size(); x++){
+            if(s[x]==' '){
+                res = " " + temp + res;
+                temp = "";
+            }else{
+                temp+=s[x];
+            }
+        }
+        res = temp + res;
+        return res;
+    }
+};

@@ -1,0 +1,35 @@
+//Time O(NLogN) Space O(N)
+//Use priority queue to keep track of elements and then put the one with the highest count on top. If there is one that is more than half of the array, return an empty string since it isn't possible
+//At the end append the last character left if there is one.
+class Solution {
+public:
+    string reorganizeString(string s) {
+        map<char,int>characters;
+        int halfpoint = ceil((s.size()+0.0)/2);
+        string res = "";
+        for(char i : s){
+            characters[i]++;
+            if(characters[i]>halfpoint) return "";
+        }
+        priority_queue<pair<int,char>>pq;
+        for(pair<char,int> it : characters) pq.push({it.second,it.first});
+        while(pq.size()>1){
+            char firstCharacter = pq.top().second;
+            int firstCount = pq.top().first;
+            pq.pop();
+            char secondCharacter = pq.top().second;
+            int secondCount = pq.top().first;
+            pq.pop();
+            firstCount--;
+            secondCount--;
+            if(firstCount) pq.push({firstCount,firstCharacter});
+            if(secondCount) pq.push({secondCount,secondCharacter});
+            res+= firstCharacter;
+            res+= secondCharacter;    
+        }
+        if(pq.size()) res+= pq.top().second;
+    
+        return res;
+        
+    }
+};

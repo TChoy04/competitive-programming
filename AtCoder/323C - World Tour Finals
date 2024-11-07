@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc, qc;
+	cin>>tc>>qc;
+	vector<int>questions;
+	while(qc--){
+		int number;
+		cin>>number;
+		questions.push_back(number);
+	}
+	int i = 1;
+	int highScore = 0;
+	vector<pair<int,vector<int>>>participants;
+	while(tc--){
+		string in;
+		int tempScore = 0;
+		cin>>in;
+		vector<int>tempQuestions = questions;
+		for(int x = 0; x<in.size();x++){
+			if(in[x]=='o'){ 
+			tempScore+= tempQuestions[x];
+			tempQuestions[x] = 0;
+			}
+			
+		}
+		tempScore += i++;
+		sort(tempQuestions.begin(),tempQuestions.end());
+		participants.push_back({tempScore,tempQuestions});
+		highScore = max(highScore,tempScore);
+	}
+	for(int x = 0; x<participants.size(); x++){
+		int steps = 0;
+		int participantScore = participants[x].first;
+		vector<int>participantQuestions = participants[x].second;
+		int R = participantQuestions.size()-1;
+		while(participantScore<highScore){
+			participantScore+= participantQuestions[R--];
+			steps++;
+		}
+		cout<<steps<<endl;		
+		
+	}
+	return 0;
+}

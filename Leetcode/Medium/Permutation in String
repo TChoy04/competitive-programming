@@ -1,0 +1,28 @@
+Time Complexity: O(N)
+Space Complexity: O(1)/O(26)
+//Sliding window approach
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        //Initalize charsets to keep count of characters in window and result.
+        vector<int>charset1(26,0);
+        vector<int>charset2(26,0);
+        int L = 0;
+        Iterate through second string using this as right side of window.
+        for(int R = 0; R<s2.size(); R++){
+            //Fill first charset with first string
+            if(R<s1.size()) charset1[s1[R]-'a']++;
+            //Fill second charset, incrementing the window
+            charset2[s2[R]-'a']++;
+            //If window is bigger than s1 size, shrink the window and remove left value from charset
+            if(R-L+1>s1.size()) charset2[s2[L++]-'a']--;
+            //If charsets are the same and right pointer is greater than or equal to the size of s1, return true. 
+            //Second check is needed to ensure the entire first charset has been filled first. 
+            if(charset1==charset2 && R>=s1.size()-1) return true;
+        }
+        //Base case, return false.
+        return false;
+        
+    }
+};

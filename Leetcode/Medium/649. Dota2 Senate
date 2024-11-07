@@ -1,0 +1,39 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+1. Use a queue to store the order the senate gets to vote. Keep count of the votes available for each side.
+2. For the side that is in the front of the queue, if there is a "vote" available for the opposing side, simply pop and decrement the oppoising sides vote. Else, increment current sides vote count and
+add it back to the back of the queue as that is when they will be able to "vote" again.
+3. The loop should cancel when there is either one element left in the queue or if the vote count for either side is equivalent to the queues size, indicating there is only one side left.
+4. Extrapolate the result from the element in the front of the queue.
+*/
+
+class Solution {
+public:
+    string predictPartyVictory(string senate) {
+        queue<char>q;
+        int rc = 0;
+        int dc = 0;
+        for(char i : senate) q.push(i);
+        while(q.size()>1 && rc!=q.size() && dc!=q.size()){
+            if(q.front()=='R'){
+                if(dc>0){
+                    dc--;
+                }else{
+                    rc++; 
+                    q.push('R');
+                }
+            }else{
+                if(rc>0){
+                    rc--;
+                }else{
+                    dc++;
+                    q.push('D');
+                }
+            }
+            q.pop();
+        }
+        if(q.front()=='R') return "Radiant";
+        return "Dire";
+    }
+};

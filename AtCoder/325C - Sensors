@@ -1,0 +1,43 @@
+	#include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+	 void helper(int x, int y, vector<vector<char>>&sensors){
+	 		if(sensors[x][y]=='.') return;
+	 		sensors[x][y] = '.';
+	 		if(x>0) helper(x-1,y,sensors);
+	 		if(y>0) helper(x,y-1,sensors);
+	 		if(x<sensors.size()-1) helper(x+1,y,sensors);
+	 		if(y<sensors[0].size()-1) helper(x,y+1,sensors);
+	 		if(x>0 && y<sensors[0].size()-1)  helper(x-1,y+1,sensors);
+			if(x>0 && y>0) helper(x-1,y-1,sensors);
+	 		if(y>0 && x<sensors.size()-1)  helper(x+1,y-1,sensors);
+	 		if(x<sensors.size()-1&&y<sensors[0].size()-1) helper(x+1,y+1,sensors);
+
+	 }
+
+	int main(){
+			ll n,m;
+			cin>>n>>m;
+			vector<vector<char>>sensors;
+			for(int x = 0; x<n; x++){
+				vector<char>temp;
+				for(int y = 0; y<m; y++){
+					char in;
+					cin>>in;
+					temp.push_back(in);
+				}
+				sensors.push_back(temp);				
+			}
+			int res = 0;
+			for(int x = 0; x<sensors.size(); x++){
+				for(int y = 0; y<sensors[0].size(); y++){
+					if(sensors[x][y]=='#') {
+						helper(x,y,sensors);
+						res++;
+					}
+				}
+			}
+			cout<<res;
+		}
+	

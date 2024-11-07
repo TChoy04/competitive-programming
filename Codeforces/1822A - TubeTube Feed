@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int out = -1;
+		int outIdx = -1;
+		int numVideos, time;
+		scanf("%i %i", &numVideos, &time);
+		vector<int>durations;
+		vector<int>ent;
+		for(int x = 0; x<numVideos; x++){
+			int temp;
+			scanf("%i", &temp);
+			durations.push_back(temp);
+			}
+		for(int x = 0; x<numVideos; x++){
+			int temp;
+			scanf("%i", &temp);
+			ent.push_back(temp);
+		}
+		for(int x = 0; x<numVideos; x++){
+			if(x+durations[x]>time) continue;
+			if(out<ent[x]){
+				out = max(out,ent[x]);
+				outIdx = x+1;
+			}
+		}
+		cout<<outIdx<<endl;
+	}
+	return 0;
+}

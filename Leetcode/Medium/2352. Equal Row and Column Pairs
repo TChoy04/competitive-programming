@@ -1,0 +1,24 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+Keep track of rows that appear with a map, use a map so we can keep track of occurances as well.
+If a row matches it, it will match x times, with x being the number of times it appears as a row.
+Add x to the result counter.
+*/
+
+class Solution {
+public:
+    int equalPairs(vector<vector<int>>& grid) {
+        map<vector<int>,int> rows;
+        int res = 0;
+        for(vector<int>i : grid) rows[i]++;
+        for(int x = 0; x<grid.size(); x++){
+            vector<int>column;
+            for(int i = 0; i <grid[x].size(); i++){
+                column.push_back(grid[i][x]);
+            }
+            res+= rows[column];
+        }
+        return res;
+    }
+};

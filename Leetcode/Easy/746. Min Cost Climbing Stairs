@@ -1,0 +1,13 @@
+Tiime Complexity: O(N)
+Space Complexity: (1)
+//Keep track of price at index = x by adding the minimum of value at x-1 or x-2 since each "price" can add one or two steps. Return the minimum of the last two as either one will get you over the end
+
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        for(int x = 2; x<cost.size(); x++){
+            cost[x] += min(cost[x-1],cost[x-2]);
+        }
+        return min(cost[cost.size()-1],cost[cost.size()-2]);
+    }
+};

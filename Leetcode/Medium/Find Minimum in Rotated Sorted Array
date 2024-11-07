@@ -1,0 +1,40 @@
+Time Complexity: O(LogN)
+Space Complexity: O(1)
+//Binary Search
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        //Init binary search
+        int L = 0;
+        int R = nums.size()-1;
+        //When R == L terminate
+        while(R>L){
+            //Midpoint formula
+            int mid = L + (R-L)/2;
+            //If mid<R it is sorted from mid to R. The result will not be on the sorted portion
+            //Examples:
+            //mid<R, result is not on right side.
+            [0,1,2,3,4]
+            //Mid<R, result is not on right side again
+            [5,1,2,3,4]
+            //Mid>R this time, result is on right side.
+            [2,3,4,5,1]
+            //Include mid as it can still be in the result
+            //Example:
+            [4,5,1,2,3]
+            //Result is not to the right of mid, but still part of result.
+            //Rest of breakdown
+            [4,5,1]
+            [1]
+            if(nums[mid]<nums[R]) R = mid;
+            //Move left because in rotated array, leftmost element cannot possibly be the lowest
+            //Examples:
+            [5,4,1,2,3]
+            [4,1,2,3,4]
+            else L = mid+1;
+        }
+        //Return nums[L] or nums[R], doesn't matter because at this point, L == R
+        return nums[L];
+    }
+};

@@ -1,0 +1,62 @@
+#Time Complexity:O(N)
+#Space Complexity: O(1)
+// Use two pointers, if letter is present in both strings, iterate both forward by one. Else, only iterate the longer string. Keep count and return compare size to count. 
+//UPDATE: this solution sucks.
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int count = 0;
+        int p1 = 0;
+        int p2 = 0;
+        while(p1<s.size() && p2<t.size()){
+            if(s[p1]==t[p2]){
+                count++;
+                p1++;
+                p2++;
+            }
+            else p2++;
+        }
+        return s.size()==count;
+    }
+};
+
+//Revisited problem later, arrived at slightly different answer
+//Same concept of keeping track of count & comparing it to the size though.
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int i = 0;
+        int count = 0;
+        for(int x = 0; x<s.size(); x++){
+            while(i<t.size()){
+                if(t[i]==s[x]){
+                    count++;
+                    i++;
+                    break;
+                }
+                i++;
+            }
+        }
+        cout<<count;
+        return count==s.size();
+    }
+};
+
+//Revisited again and anther slightly different variation, this time without the count. Code is a bit more concise.
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        if(s.size()>t.size()) return false;
+        int R = 0;
+        for(int x = 0; x<s.size(); x++){
+            while(true){
+                if(R==t.size()) return false;
+                if(s[x]==t[R++]) break;
+            }
+        }
+        return true;
+    }
+};

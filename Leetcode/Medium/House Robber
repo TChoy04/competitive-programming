@@ -1,0 +1,28 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Dynamic Programming, probably could've solved in place without using extra space.
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        //Base case if size of input is 1 return only value
+        if(nums.size()==1) return nums[0];
+        //Base case if size of input is 2 return larger of two values
+        if(nums.size()==2) return max(nums[0],nums[1]);
+        int n = nums.size();
+        //Create dynamic programming array
+        int arr[n];
+        //First value of array will be first number
+        arr[0] = nums[0];
+        //Second will be max between the first two numbers
+        arr[1] = max(nums[0],nums[1]);
+        //For example:
+        //Input: [2,7,9,3,1]
+        //Temp array: [2,7,11,11,12]
+        //Value will be whichever is larger, the previous value or current value in addition to the value two places before it.
+        for(int x = 2; x<n; x++){
+            arr[x] = max(arr[x-1],arr[x-2]+nums[x]);
+        }
+        return arr[n-1];
+    }
+};

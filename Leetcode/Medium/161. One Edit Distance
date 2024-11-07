@@ -1,0 +1,44 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Check to see if they are the same size. If they are the same size, ensure that there is only a one character difference.
+//Base cases include if the size is off by more than 1 and if there is an empty string and a string with one character (can be added to empty string)
+//If sizes aren't the same, iterate through both strings and if they are the same, iterate both. Else, iterate the longer string. 
+//Most likely not the most optimal solution possible.
+
+class Solution {
+public:
+    bool isOneEditDistance(string s, string t) {
+        int diff = s.size()-t.size();
+        if(abs(diff)>=2) return false;
+        if(s.size()==0) return t.size()==1;
+        if(t.size()==0) return s.size()==1;
+        int i = 0, j = 0;
+        int count = 0;
+        if(s.size()==t.size()){
+            while(i<s.size()){
+                if(s[i]!=t[i]) count++;
+                if(count>2) return false;
+                i++;
+            }
+            return count==1;
+        }
+        while(i<s.size() || j<t.size()){
+            if(i<s.size() && j<t.size() && s[i]==t[j]){
+                i++;
+                j++;
+            }
+            else{
+                if(s.size()>t.size()){
+                    count++;
+                    i++;
+                }
+                else{
+                    count++;
+                    j++;
+                }
+            }
+            if(count>1) return false;
+        }
+        return count==1;
+    }
+};

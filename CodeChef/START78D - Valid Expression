@@ -1,0 +1,46 @@
+/*The correct way of evaluating an expression with ∗,+, and -− is, first multiplication, then addition, and then subtraction. For example, the expression 2+3*7-5 = 2+21-5 = 23-5 = 182+3∗7−5=2+21−5=23−5=18.
+
+You are given integers NN and XX. Your task is to generate a string SS of length NN consisting only of *, +,∗,+, and -− such that when these NN operators are placed in order between (N+1)(N+1) ones, the result of the expression becomes XX.
+For example, if S =S= ++-*-, the resulting expression is 1+1+1-1*1-11+1+1−1∗1−1, which is then evaluated based on the rules above.
+
+If multiple such strings exist, print any of them. If no such string exists, print -1−1 instead.
+
+Input Format
+The first line of input will contain a single integer TT, denoting the number of test cases.
+Each test case consists of two space-separated integers NN and XX — the number of characters in the string and the result of expression after appending (N+1)(N+1) ones between all operators.
+Output Format
+For each test case, output on a new line a string SS of length NN consisting only of *, +,∗,+, and -− that satisfies the given condition.
+
+If multiple such strings exist, print any of them. If no such string exists, print -1 instead.*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+	    int n, num;
+	    scanf("%i %i",&n,&num);
+	    if(num-1>n || (num<0 && (abs(num)==n || abs(num)>n ) )){
+	        cout<<-1<<endl;
+	        continue;
+	    }
+	    int counter = 1;
+	    while(n--){
+	        if(counter==num){
+	            cout<<'*';
+	        }
+	        else if(counter>num){
+	            counter--;
+	            cout<<'-';
+	        }
+	        else if(counter<num){
+	            counter++;
+	            cout<<'+';
+	        }
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}

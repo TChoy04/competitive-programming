@@ -1,0 +1,17 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Leave a pointer at the first index of the array. If the value is equal to the value we are removing, ignore it and it will be replaced by the next element.
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int pos = 0;
+        for(int x = 0; x<nums.size(); x++){
+            if(nums[x]!= val){
+                nums[pos] = nums[x];
+                pos++;
+            }
+        }
+        return pos;
+    }
+};

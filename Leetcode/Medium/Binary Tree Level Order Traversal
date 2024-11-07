@@ -1,0 +1,58 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//BAD SOLUTION, EXTRA SPACE IS USED FOR HASHMAP. SEARCH FOR IMPROVEMENTS CAN 100% BE DONE WITHOUT HASHMAP
+//Solution without hashmap below
+class Solution {
+public:
+    void helper(TreeNode* root, int depth, map<int,vector<int>>&m){
+        //base case
+        if(!root) return;
+        //Insert value into map of vectors
+        m[depth].push_back(root->val);
+        //Recurse
+        helper(root->left,depth+1,m);
+        helper(root->right,depth+1,m);
+        
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        //Use hashmap to store vectors for each depth
+        map<int,vector<int>>m;
+        //Call helper function
+        helper(root,0,m);
+        //Create res vector
+        vector<vector<int>>res;
+        //Iterate through map to populate result vector
+        for(auto it:m){
+            res.push_back(it.second);
+        }
+        return res;
+    }
+};
+
+//Solution w/o hashmap
+class Solution {
+public:
+    void helper(TreeNode* root, int depth, vector<vector<int>>&res){
+        //Base case, if root is null return
+        if(!root) return;
+        //If result vector is same as depth, res is too small. 
+        //For example: if size is 1 and depth is 1
+        //res[1] does not exist yet as there is only res[0]
+        //Therefore, insert empty vector so res[1] will exist
+        if(res.size()==depth){
+            res.push_back({});
+        }
+        //Insert current value to array, preorder traversal
+        res[depth].push_back(root->val);
+        //Recurse
+        helper(root->left,depth+1,res);
+        helper(root->right,depth+1,res);
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        //Result vector
+        vector<vector<int>>res;
+        //Call helper function
+        helper(root,0,res);
+        return res;
+    }
+};

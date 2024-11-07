@@ -1,0 +1,42 @@
+Time Complexity: O(LogN)
+Space Complexity: O(1)
+//Binary Search
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int L = 0;
+        int R = nums.size()-1;
+        //Binary Search
+        while(R>=L){
+            //Midpoint formula
+            int mid = L + (R-L)/2;
+            //If target is found, return index
+            if(nums[mid]==target) return mid;
+            //If left part of array is sorted
+            Example:
+            [4,5,6,0,1,2]
+            6>=4
+            Therefore [4,5,6] is sorted
+            if(nums[mid]>=nums[L]){
+                //If result is in this section it must be less than the right and larger than or equal to the left side.
+                //Close the window from the right if result is in the section, else take it out of the array as result won't be in there.
+                if(nums[mid]>target && target>=nums[L]) R = mid-1;
+                else L = mid + 1;
+            }
+            //If right part of array is sorted
+            Example:
+            [4,5,1,2,3]
+            1>=4
+            Left side of array isn't sorted, therefore right side must be.
+            else{
+                //Check to see if target is within these values. It must be greater than the left side of sorted array and less than or equal to the right side
+                //Close the window from the left is the result is in the section, else take the entire section out the array as the result won't be in there
+                if(nums[mid]<target && target<=nums[R]) L = mid+1;
+                else R = mid-1;
+            }
+        }
+        //Return -1 if nothing is found.
+        return -1;
+    }
+};

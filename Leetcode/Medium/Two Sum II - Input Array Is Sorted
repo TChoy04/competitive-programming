@@ -1,0 +1,17 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Initiate pointers on left and right. Check if the numbers add up to target. If number is too big, decrease it by decrementing the right pointer, else increment left.
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int L = 0;
+        int R = numbers.size()-1;
+        while(R>L){
+            if(numbers[L]+numbers[R]==target) return {L+1,R+1};
+            if(numbers[L]+numbers[R]>target) R--;
+            else L++;
+        }
+        return {};
+    }
+};

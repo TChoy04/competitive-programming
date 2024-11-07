@@ -1,0 +1,14 @@
+//Time: O(N) Space: O(N) 
+//Rather trivial, just check each pair and see if they match
+class Solution {
+public:
+    int minChanges(string s) {
+        int res = 0;
+        char current = s[0];
+        int count = 0;
+        for(int x = 0; x<s.size()-1; x+=2){
+            if(s[x]!=s[x+1]) res++;
+        }
+        return res;
+    }
+};

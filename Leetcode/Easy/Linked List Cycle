@@ -1,0 +1,24 @@
+#Values are not immutable, simply set the value of each node to INT_MIN, check for INT_MIN in the loop, which will confirm there is a loop, else return false after looping.
+
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        while(head && head->next){
+            head->val = INT_MIN;
+            head = head->next;
+            if(head->val==INT_MIN) return true;
+        }
+        return false;
+    }
+};

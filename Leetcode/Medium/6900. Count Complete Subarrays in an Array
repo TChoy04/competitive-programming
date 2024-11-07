@@ -1,0 +1,43 @@
+class Solution {
+public:
+    /*
+    Time complexity: O(N^2)
+    Space Complexity: O(N)
+    [5,5,5,5]
+    [5] * 4
+    [5,5] * 3 
+    [5,5,5] * 2
+    [5,5,5,5] * 1
+    4 + 3 + 2 + 1 = 10
+    [1,3,1,2,2]
+    [1,3,1,2]
+    [1,3,1,2,2]
+    [3,1,2,2]
+    [3,1,2]
+    
+    
+    [1,2,2]
+    i ended up just checking every possibility.
+    ok this solution is actually super pathetic and hopefully I can remedy this later.
+    constraints of 1 <= nums.length <= 1000 meant that an O(N^2) time complexity was extremely likely to pass.
+    */
+    int countCompleteSubarrays(vector<int>& nums) {
+        int res = 0;
+        int count = 0;
+        unordered_set<int>s;
+        for(int x : nums){
+            s.insert(x);
+        }
+        for(int x = 0; x<nums.size(); x++){
+            unordered_set<int>temp;
+            temp.insert(nums[x]);
+            if(temp.size()==s.size()) res++;
+            for(int y = x+1; y<nums.size(); y++){
+                temp.insert(nums[y]);
+                if(temp.size()==s.size()) res++;
+            }
+            
+        }
+        return res;
+    }
+};

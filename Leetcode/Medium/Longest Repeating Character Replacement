@@ -1,0 +1,30 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Sliding window problem
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        //Init variables
+        int n = s.size();
+        int res = 0;
+        int L = 0;
+        int count = 0;
+        //Character array
+        vector<int>chars(26,0);
+        //Iterate through every character in the string. This will serve as the right side of the sliding window.
+        for(int x = 0; x<n; x++){
+            //Increment count of character at right pointer
+            chars[s[x]-'A']++;
+            //Keep track of the current max count
+            count = max(chars[s[x]-'A'],count);
+            //If the window has too many values that need to be flipped, slide the window shut until window is small enough. Decrement value at character count array.
+            while(x-L-count+1>k){
+                chars[s[L++]-'A']--;
+            }
+            //Check result with current window size. Add 1 because arrays are zero indexed.
+            res = max(res,x-L+1);
+        }
+        return res;
+    }
+};

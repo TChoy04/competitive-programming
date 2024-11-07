@@ -1,0 +1,32 @@
+//Keep track of largest window of zeros seen.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int len;
+		scanf("%i", &len);
+		int res = 0;
+		int count = 0;
+		for(int x = 0; x<len; x++){
+			int temp;
+			scanf("%i", &temp);
+			if(temp==1){
+				count = 0;
+			}
+			else{
+				count++;
+			}
+			res = max(res,count);
+		
+		}
+		cout<<res<<endl;
+
+	}
+	return 0;
+}

@@ -1,0 +1,47 @@
+//INCORRECT ANSWER BEWARE!!
+//INCORRECT ANSWER BEWARE!!
+//INCORRECT ANSWER BEWARE!!
+//INCORRECT ANSWER BEWARE!!
+//INCORRECT ANSWER BEWARE!!
+//I did not account for the test cases where the singles could sit in every other seat.
+//Fixing later
+/*There is a row of L chairs. Now, N groups of people will come and take seats in order. Each group consists of one or two people, and the i-th group to come consists of a 
+i people. The total number of people equals L.
+
+Each group will randomly choose unoccupied chairs where all group members can sit consecutively, and occupy those chairs. However, if there are not enough consecutive unoccupied chairs, they will leave without taking seats.
+
+Determine whether it is guaranteed that all N groups can take seats.*/
+
+//Every 3 people starting from 2 you can do 1 extra pair
+//2-4 people can have one pair
+//5-7 can have two pairs
+//8-10 can have three pairs, etc
+
+#include <bits/stdc++.h>
+ using namespace std;
+
+
+int main(){ 
+	int n, seats;
+	scanf("%i %i",&n,&seats);
+	if(n==1){
+		cout<<"Yes";
+		return 0;
+	}
+	int i = 4;
+	//count of pairs that it can take
+	int count = 1;
+	while(i<seats){
+		i+=3;
+		count++;
+	}
+	//count of pairs
+	int twos = 0;
+	for(int x = 0; x<n; x++){
+		int group;
+		scanf("%i",&group);
+		if(group==2) twos++;
+	}
+	if(twos>count)cout<<"No";
+	else cout<<"Yes";
+}

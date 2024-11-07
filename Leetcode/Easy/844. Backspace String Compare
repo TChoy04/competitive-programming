@@ -1,0 +1,20 @@
+//Time Complexity: O(N + M)
+//Space Complexity: O(N + M)
+//Use a stack to keep track of current word, remove top letter if it is a backspace and it is not empty. Else, if current value isn't a backspace, add to stack.
+
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        stack<char>word1;
+        stack<char>word2;
+        for(char x : s){
+            if(!word1.empty() && x=='#') word1.pop();
+            else if(x!='#') word1.push(x);
+        }
+        for(char x : t){
+            if(!word2.empty() && x=='#') word2.pop();
+            else if(x!='#') word2.push(x);
+        }
+        return word1==word2;
+    }
+};

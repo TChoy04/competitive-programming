@@ -1,0 +1,33 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+Standard sliding window problem. Create initial window then slide it to the side once you get the the size of k.
+If the left is a vowel, decrement count when you remove it. If the right is a vowel, increment by 1 when you include it.
+*/
+
+
+class Solution {
+public:
+    int maxVowels(string s, int k) {
+        unordered_set<char>vow;
+        vow.insert('a');
+        vow.insert('e');
+        vow.insert('i');
+        vow.insert('o');
+        vow.insert('u');
+        int L = 0;
+        int R = 0;
+        int count = 0;
+        int res = 0;
+        while(R<k){
+            if(vow.find(s[R++])!=vow.end()) count++;
+        }
+        while(R<s.size()){
+            res = max(res,count);
+            if(vow.find(s[L++])!=vow.end()) count--;
+            if(vow.find(s[R++])!=vow.end()) count++;
+        }
+        res = max(res,count);
+        return res;
+    }
+};

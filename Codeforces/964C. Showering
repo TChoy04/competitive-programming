@@ -1,0 +1,43 @@
+//Had more trouble on this one than the D question. Was approaching it incorrectly. I was trying to use an array to represent the times but that took up too much space complexity as I would store all the times between the given times. 
+//I should instead store the intervals and then calculate the difference from start and end of the intervals after sorting them so I can see if there is a difference in intervals greater than or equal to the time required to shower.
+//It really is sad as I have done a Leetcode problem that required the same thing and I had forgotten due to not having solved problems in so long. Hopefully I can get better.
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ 
+int main() {
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        int intervals, time, day;
+        cin >> intervals >> time >> day;
+ 
+        vector<pair<int, int>> tasks(intervals);
+        for (int i = 0; i < intervals; ++i) {
+            cin >> tasks[i].first >> tasks[i].second;
+        }
+        sort(tasks.begin(), tasks.end());
+        if (tasks[0].first >= time) {
+            cout << "YES" << endl;
+            continue;
+        }
+ 
+        bool solved = false;
+        for (int i = 1; i < intervals; ++i) {
+            if (tasks[i].first - tasks[i - 1].second >= time) {
+                solved = true;
+                break;
+            }
+        }
+ 
+        if (!solved && day - tasks.back().second >= time) {
+            cout<<"YES"<<endl;
+        }
+        else if (solved) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
+        }
+    }
+    return 0;
+}

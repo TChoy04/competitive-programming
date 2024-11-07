@@ -1,0 +1,75 @@
+/*https://atcoder.jp/contests/abc278/tasks/abc278_d*/
+//TLE on 2 test cases
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+
+int main(){ 
+	int n;
+	cin>>n;
+	vector<long long>arr(n,0);
+	for(int x = 0; x<n; x++){
+		int inp;
+		scanf("%i",&inp);
+		arr[x] = inp;
+	}
+	cin>>n;
+	for(int i = 0; i<n; i++){
+		int x;
+		cin>>x;
+		if(x==1){
+			int swap;
+			scanf("%i",&swap);
+			for(int j = 0; j<arr.size(); j++) arr[j] = swap;
+		}
+		else if(x==2){
+			int add,index;
+			scanf("%i",&index);
+			scanf("%i",&add);
+			arr[index-1] +=add;
+		}
+		if(x==3){
+			int index;
+			scanf("%i",&index);
+			cout<<arr[index-1]<<endl;
+		}
+	}
+}
+// TLE is when x==1, the swap function would cause a n^2 time complexity, which was too high for the test cases.
+// Find a workaround to set it in O(N) time.
+// If you clear the map and then keep track of the value that they should all be you can keep that value and reuse it when printing out the result without
+// repopulating the map.
+// For whatever reason, unordered_map will error with TLE when map will clear?? even though map should be slower since unordered_map doesn't sort.. strange but
+// There is likely a reason I don't understand.
+#include <bits/stdc++.h>
+using namespace std;
+
+
+
+int main(){ 
+	int n;
+	cin>>n;
+	int all = 0;
+	map<int,long long>m;
+	for(int x = 1; x<=n; x++){
+		scanf("%lld",&m[x]);
+	}
+	cin>>n;
+	while(n--){
+		int cmd, input;
+		scanf("%i %i",&cmd,&input);
+		if(cmd==1){
+			m.clear();
+			all = input;
+		} 
+		if(cmd==2){
+			int val;
+			scanf("%i",&val);
+			m[input] += val;
+		} 
+		if(cmd==3) cout<<m[input] + all<<endl;
+		
+	}
+}

@@ -1,0 +1,14 @@
+	#include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+	int main(){
+		ll tc;
+		cin>>tc;
+		while(tc%2==0) tc/=2;
+		while(tc%3==0) tc/=3;
+		if(tc==1) cout<<"Yes";
+		else cout<<"No";
+		return 0;
+		}
+	

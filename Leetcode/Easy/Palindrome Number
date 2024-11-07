@@ -1,0 +1,22 @@
+#Very simple solution, just missed account for when x == 0 and had to add x>0 into (x%10==0) in the initial check. 
+#Check if x is negative, then if it ends with 0 as it cannot be a palindrome if it ends with 0 as it cannot start with 0. Then we check if it is greater than 0 as
+#if it is equal to 0, it is still a palindrome. Then we try to compare half the string to the other half, as opposed to turning it into a string then reversing it and
+#comparing them. We do this by reversing the end until it is greater than the original number. Then we compare it to whatevers left of the other half, however, if there 
+#is an odd number of digits, we can ignore the middle digit by dividing the part we split by 10 to make it the same length.
+
+#Time Complexity: O(LogN);
+#Space Complexity: O(1);
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0 || (x%10==0 && x>0)) return false;
+        int y = 0;
+        while(x>y){
+            y*=10;
+            y+= x%10;
+            x/=10;
+        }
+        return (x==y || x==y/10);
+    }
+};

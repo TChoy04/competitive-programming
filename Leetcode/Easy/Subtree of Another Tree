@@ -1,0 +1,33 @@
+Time Complexity: O(M+N)
+Space Complexity: O(M+N)
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool helper(TreeNode* root, TreeNode* subRoot){
+        //If both are null, both have reached the end
+        if(!root && !subRoot) return true;
+        //If only one is null, return false as only one is at the end
+        if(!root || !subRoot) return false;
+        //Check if value is the same. If it is, continue recursively checking left and right and ensure they are true.
+        return (root->val==subRoot->val && helper(root->left, subRoot->left) && helper(root->right,subRoot->right));
+    }
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        //Recursively check tree until true
+        if(!root) return false;
+        //If helper function returns true, return true. This means a valid subtree was found.
+        if(helper(root,subRoot)) return true;
+        //If any instances returns true, return true.
+        return isSubtree(root->left,subRoot) || isSubtree(root->right,subRoot);
+    }
+};

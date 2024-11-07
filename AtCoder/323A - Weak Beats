@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	string s;
+	cin>>s;
+	for(int x = 1; x<16; x+=2){
+		if(s[x]=='1'){
+			cout<<("No");
+			return 0;
+		}
+	}
+	cout<<("Yes");
+	return 0;
+}

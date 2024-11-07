@@ -1,0 +1,36 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+This problem is similar to Two Sum
+
+1. Get the count of all the integers in a hashmap.
+2. Iterate through provided array again. Calculate the difference and then look for it in the hashmap.
+3. If the difference is the same as the current number, you will need at least 2 of them inside the hashmap.
+4. If they are different numbers, you just need to make sure you have one of each. If conditions are met, decrement each one by 1 in the hashmap and increment the result counter by 1.
+*/
+
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+        int res = 0;
+        unordered_map<int,int>m;
+        for(int x = 0; x<nums.size(); x++){
+            m[nums[x]]++;
+        }
+        for(int i : nums){
+            int diff = k-i;
+            if(m.find(diff)!=m.end()){
+                if(diff==i && m[i]>=2){
+                    m[i]-=2;
+                    res++;
+                }
+                else if(m[i]>0 && m[diff]>0 && i!=diff){
+                    res++;
+                    m[i]--;
+                    m[diff]--;
+                }
+            }
+        }
+        return res;
+    }
+};

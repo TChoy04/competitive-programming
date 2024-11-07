@@ -1,0 +1,22 @@
+Time Complexity: O(M*N);
+Space Complexity: O(M*N);
+#Breakdown coming later.
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        int graph[m][n];
+        for(int x = 0; x<m; x++){
+            graph[x][0] = 1;
+        }
+        for(int y = 0; y<n; y++){
+            graph[0][y] = 1;
+        }
+        for(int x = 1; x<m; x++){
+            for(int y = 1; y<n; y++){
+                graph[x][y] = graph[x-1][y] + graph[x][y-1];
+            }
+        }
+        return graph[m-1][n-1];
+    }
+};

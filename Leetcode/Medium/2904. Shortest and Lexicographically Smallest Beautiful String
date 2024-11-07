@@ -1,0 +1,49 @@
+/*
+Time Complexity: O(NLogN)
+Space Complexity: O(N)
+Use a sliding window. First start off until you count up to enough ones in the window. Once that is achieved, keep popping until the amount of ones is less than k. Then pop any leading zeros. 
+As long as there are enough ones, insert into result vector. We will sort this through later.
+After all this filtering, get the minimum size. I see now that I could've done this in the intial loop, but I forgot to filter for the shortest until the end during the contest.
+Once you have the minimum size, remove every value that isn't the minimum size. 
+Sort the values and then select the smallest one which will be the first value after sorting, so res[0]
+*/
+
+class Solution {
+public:
+    string shortestBeautifulSubstring(string s, int k) {
+        int L = 0;
+        int ones = 0;
+        string window = "";
+        vector<string>res;
+        for(int R = 0; R<s.size(); R++){
+            if(s[R]=='1') ones++;
+            window += s[R];
+            if(ones==k){
+                res.push_back(window);
+                while(window[0]!='1'){
+                    window.erase(0,1);
+                    res.push_back(window);
+                }
+                window.erase(0,1);
+                ones--;
+                while(window[0]=='0') window.erase(0,1);
+            }
+        }
+        if(ones==k) res.push_back(window);
+        int miniSize = INT_MAX;
+        for(string i : res){ 
+            int n = i.size();
+            miniSize = min(miniSize,n);
+        
+        }
+        for(int x = 0; x<res.size(); x++){
+            if(res[x].size()>miniSize){ 
+                res.erase(res.begin()+x,res.begin()+x+1);
+                x--;
+            }
+        }
+        if(res.size()==0) return "";
+        sort(res.begin(),res.end());
+        return res[0];
+    }
+};

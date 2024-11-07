@@ -1,0 +1,30 @@
+#Sorting Solution
+Time Compexity: O(NLogN)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        for(int x = 1; x<nums.size(); x++){
+            if(nums[x-1]==nums[x]) return true;
+        }
+        return false;
+    }
+};
+
+#Set Solution
+Time Complexity: O(N)
+Space Complexity: O(N)
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int>check;
+        for(int x : nums){
+            if(check.find(x)!=check.end()) return true;
+            else check.insert(x);
+        }
+        return false;
+    }
+};

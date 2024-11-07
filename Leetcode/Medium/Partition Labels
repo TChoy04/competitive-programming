@@ -1,0 +1,32 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Space Complexity is constant since there can only be lowercase letters in the test case, meaning the map can only go up to m[26]
+// Use a hashmap to store the last known location of each letter. Use a for loop to iterate through the string. If there is a letter in between the first letter's 
+// last position, move the end pointer to there. After you reach the end pointer, set the for loop iterator to the end pointer and push the distance between the end
+// and start.
+
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        vector<int>res;
+        unordered_map<char,int>m;
+        for(int x = 0; x<s.size(); x++){
+            m[s[x]] = x;
+        }
+        for(int x = 0; x<s.size(); x++){
+            int end = m[s[x]];
+            int start = x;
+            int it = start;
+            while(it<end){
+                if(m[s[it]]>end){
+                    end = m[s[it]];
+                }
+                it++;
+                
+            }
+            x = end;
+            res.push_back(end-start+1);
+        }
+        return res;
+    }
+};

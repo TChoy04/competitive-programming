@@ -1,0 +1,27 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Stack question
+
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        //Init stack
+        stack<int>st;
+        //Result vector, populate with zeros
+        vector<int>res(temperatures.size(),0);
+        //Iterate through temperature array
+        for(int x = 0; x<temperatures.size(); x++){
+            //If stack isn't empty and the top element is less than current temperature
+            while(!st.empty() && temperatures[st.top()]<temperatures[x]){
+                //Result of top array element has finally found a larger value
+                res[st.top()] = x-st.top();
+                //Pop top array element
+                st.pop();
+            }
+            //Populate stack with current array value.
+            st.push(x);
+        }
+        //Return result vector.
+        return res;
+    } 
+};

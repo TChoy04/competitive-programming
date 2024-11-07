@@ -1,0 +1,19 @@
+#Sliding Window
+#Use Two pointers, move right pointer the the right every time, move the left pointer to shrink window when sum is over target. Take the minimum size possible.
+Time Complexity: O(N)
+Space Compelxity: O(N)
+
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int L = 0, R = 0, sum = 0, ans = INT_MAX;
+        while(R<nums.size()){
+            sum+=nums[R++];
+            while(sum>=target){
+                ans= min(ans,R-L);
+                sum-=nums[L++];
+            }
+        }
+        return ans==INT_MAX ? 0 : ans;
+    }
+};

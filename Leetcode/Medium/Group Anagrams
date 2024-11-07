@@ -1,0 +1,20 @@
+#Initially group anagrams using a hashmap, then iterate through the hashmap in order to store the answers in an answer array list.
+Time Complexity: O(NLogN);
+Space Complexity: O(N);
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>>ans;
+        unordered_map<string,vector<string>>m;
+        for(string x : strs){
+            string temp = x;
+            sort(x.begin(),x.end());
+            m[x].push_back(temp);
+        }
+        for(auto it : m){
+            ans.push_back(it.second);
+        }
+        return ans;
+    }
+};

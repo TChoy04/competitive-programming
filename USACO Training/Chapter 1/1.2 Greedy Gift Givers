@@ -1,0 +1,56 @@
+/*A group of NP (2 ≤ NP ≤ 10) uniquely named friends has decided to exchange gifts of money. Each of these friends might or might not give some money to some or all of the other friends (although some might be cheap and give to no one). Likewise, each friend might or might not receive money from any or all of the other friends. Your goal is to deduce how much more money each person receives than they give.
+
+The rules for gift-giving are potentially different than you might expect. Each person goes to the bank (or any other source of money) to get a certain amount of money to give and divides this money evenly among all those to whom he or she is giving a gift. No fractional money is available, so dividing 7 among 2 friends would be 3 each for the friends with 1 left over – that 1 left over goes into the giver's "account". All the participants' gift accounts start at 0 and are decreased by money given and increased by money received.
+
+In any group of friends, some people are more giving than others (or at least may have more acquaintances) and some people have more money than others.
+
+Given:
+
+a group of friends, no one of whom has a name longer than 14 characters,
+the money each person in the group spends on gifts, and
+a (sub)list of friends to whom each person gives gifts,
+determine how much money each person ends up with.*/
+
+
+/*
+ID: Tszfai Choy tszfai01
+PROG: gift1
+LANG: C++                 
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void solver(){
+
+}
+
+int main(){ 
+    ofstream fout ("gift1.out");
+    ifstream fin ("gift1.in");
+    int n;
+    fin>>n;
+    vector<string>names;
+    unordered_map<string,int>m;
+    for(int x = 0; x<n; x++){
+    	string name;
+    	fin>>name;
+		names.push_back(name);
+    }
+    for(int x = 0; x<n; x++){
+    	string name;
+    	int money;
+    	int people;
+    	fin>>name>>money>>people;
+    	for(int x = 0; x<people; x++){
+    		string recieve;
+    		fin>>recieve;
+    		m[recieve] += money/people;
+    		m[name] -= money/people;
+    	}
+    }
+    for(string name : names){
+    	fout<<name << " " << m[name]<<endl;
+    }
+    
+}

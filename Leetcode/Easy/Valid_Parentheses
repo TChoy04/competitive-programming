@@ -1,0 +1,19 @@
+#Stack Solution
+Time Complexity: O(N)
+Space Complexity: O(N)
+
+class Solution {
+public:
+    bool isValid(string s) {
+     stack<char>check;
+     for(char x : s){
+         if(x=='(') check.push(')');
+         else if(x=='[') check.push(']');
+         else if(x=='{') check.push('}');
+         else if(check.empty()) return false;
+         else if(check.top()!=x) return false;
+         else check.pop();
+     }
+        return check.empty();
+    }
+};

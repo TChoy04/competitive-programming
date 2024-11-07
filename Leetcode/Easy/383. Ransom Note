@@ -1,0 +1,15 @@
+//very trivial problem, count possible characters in magazine, see if characters exist in magazine.
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        unordered_map<char,int>m;
+        for(char i : magazine){
+            m[i]++;
+        }
+        for(char i : ransomNote){
+            if(m[i]==0) return false;
+            m[i]--; 
+        }
+        return true;
+    }
+};

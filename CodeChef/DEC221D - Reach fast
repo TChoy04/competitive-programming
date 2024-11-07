@@ -1,0 +1,37 @@
+/*Chef is standing at coordinate A while Chefina is standing at coordinate B.
+
+In one step, Chef can increase or decrease his coordinate by at most K.
+
+Determine the minimum number of steps required by Chef to reach Chefina.*/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int c1,c2,move;
+		scanf("%i %i %i", &c1, &c2, &move);
+		int moves = 0;
+		while(true){
+			if(c1==c2) break;
+			moves++;
+			if(c1<c2){
+				c1+=move;
+				if(c1>c2) break;
+			}
+			else{
+				c1-=move;
+				if(c1<c2) break;
+			}
+		}
+		cout<<moves<<endl;
+	}
+
+	return 0;
+}

@@ -1,0 +1,13 @@
+//Simple hashmap solution and then checking if it fits the criteria. Optimal solution likely uses Moore Voting algorithm. Will be updated later with better solution as this doesn't solve the followup question.
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        unordered_map<int,int>m;
+        vector<int>res;
+        for(int x : nums) m[x]++;
+        for(auto it : m){
+            if(it.second>(nums.size()/3)) res.push_back(it.first);
+        }
+    return res;
+    }
+};

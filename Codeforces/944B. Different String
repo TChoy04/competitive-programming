@@ -1,0 +1,37 @@
+//check to see if there is only one character, if there is, there is no anagarm. If there is an anagram, swap any 2 unique characters.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		string temp;
+		cin>>temp;
+		set<char>s;
+		for(char i : temp){
+			s.insert(i);
+		}
+		if(s.size()==1) cout<<"NO"<<endl;
+		else{
+			char i = temp[0];
+			bool found = false;
+			for(int x = 1; x<temp.size(); x++){
+				
+				if(temp[x]!=i){
+					swap(temp[x],temp[0]);
+					found = true;
+					break;
+				}
+			}
+			if(found){
+				cout<<"YES"<<endl;
+				cout<<temp<<endl;
+			}else{
+				cout<<"NO"<<endl;
+			}
+		}
+	}
+}

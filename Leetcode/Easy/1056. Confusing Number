@@ -1,0 +1,24 @@
+//Time Complexity: O(L)
+//Space Complexity: O(1)
+//Make an array of numbers that flip. If a number doesn't flip, return false. Store reversed number. If the number is the same after reversing, return false. Else return true.
+class Solution {
+public:
+    bool confusingNumber(int num) {
+        int n = num;
+        int reversed = 0;
+        unordered_map<int,int>m;
+        m[0] = 0;
+        m[1] = 1;
+        m[6] = 9;
+        m[9] = 6;
+        m[8] = 8;
+        while(n>0){
+            if(m.find(n%10)==m.end()) return false;
+            reversed*=10;
+            reversed += m[n%10];
+            n/=10;
+        }
+        if(reversed==num) return false;
+        return true;
+    }
+};

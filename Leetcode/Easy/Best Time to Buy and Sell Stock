@@ -1,0 +1,18 @@
+#Find the cheapest possible stock. Calculate the largest difference as it goes by finding the greatest difference between minimum value so far and current value.
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int lowest = prices[0];
+        int ans = 0;
+        for(int x : prices){
+            lowest = min(lowest,x);
+            ans = max(ans,x-lowest);
+        }
+        return ans;
+    }
+};
+
+

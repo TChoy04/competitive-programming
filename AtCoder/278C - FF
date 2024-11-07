@@ -1,0 +1,65 @@
+/*https://atcoder.jp/contests/abc278/tasks/abc278_c */
+//Problem statements are impossible to copy and paste from AtCoder
+//Was getting runtime error after 7 accepted, will need to check back for error when contest is over
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main(){ 
+	int n,q;
+	cin>>n>>q;
+	vector<set<int>>follows(n+1);
+	for(int x = 0; x<q; x++){
+		int cmd, user1, user2;
+		cin>>cmd>>user1>>user2;
+		if(cmd==1){
+			follows[user1].insert(user2);
+		}
+		else if(cmd==2){
+			follows[user1].erase(user2);
+		}
+		else{
+			if(follows[user1].find(user2)!= follows[user1].end() && follows[user2].find(user1)!= follows[user2].end()){
+				cout<<"Yes"<<endl;
+			}
+			else cout<<"No"<<endl;
+		}
+	}	
+}
+
+// Fixed answer
+// Use a pair to store follows instead of vector. If 1 follows 2 then insert pair 1,2. If 2 follows 1 insert pair 2,1
+// Check to see if both pairs are present inside the set when the command = 3. 
+// Previous runtime error most likely when the set is undefined, no values inserted into follows[user2] yet.
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main(){ 
+	int n,q;
+	cin>>n>>q;
+	set<pair<int,int>>follows;
+	for(int x = 0; x<q; x++){
+		int cmd, user1, user2;
+		cin>>cmd>>user1>>user2;
+		pair<int,int>follow = {user1,user2};
+		if(cmd==1){
+			follows.insert(follow);
+		}
+		else if(cmd==2){
+			follows.erase(follow);
+		}
+		else{
+			pair<int,int>follow2 = {user2,user1};
+			if(follows.find(follow)!=follows.end() && follows.find(follow2)!=follows.end()){
+				cout<<"Yes"<<endl;
+			}
+			else cout<<"No"<<endl;
+		}
+	}
+	
+	
+}
+

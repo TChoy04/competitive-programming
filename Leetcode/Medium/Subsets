@@ -1,0 +1,21 @@
+Time Complexity: O(2^N)
+Space Complexity: O(N)
+//Use backtracking in order to bruteforce every possible answer.
+
+class Solution {
+public:
+    void helper(vector<int>&nums,vector<int>&temp,vector<vector<int>>&ans,int pos){
+    ans.push_back(temp);
+    for(int x = pos; x<nums.size(); x++){
+        temp.push_back(nums[x]);
+        helper(nums,temp,ans,x+1);
+        temp.pop_back();
+    }
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int>temp;
+        vector<vector<int>>ans;
+        helper(nums,temp,ans,0);
+        return ans;
+    }
+};

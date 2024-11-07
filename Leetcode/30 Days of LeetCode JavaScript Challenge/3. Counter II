@@ -1,0 +1,21 @@
+//pretty simple, return a javascript object with 3 functions, increment, decrement and reset.
+/**
+ * @param {integer} init
+ * @return { increment: Function, decrement: Function, reset: Function }
+ */
+var createCounter = function(init) {
+    let temp = init;
+    const res = {
+        increment : () => ++temp,
+        decrement : () => --temp,
+        reset : () => temp = init
+    }
+    return res;
+};
+
+/**
+ * const counter = createCounter(5)
+ * counter.increment(); // 6
+ * counter.reset(); // 5
+ * counter.decrement(); // 4
+ */

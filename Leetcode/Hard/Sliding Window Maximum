@@ -1,0 +1,45 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Sliding window + deque
+
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        //Result vector
+        vector<int>res;
+        //Deque to keep track of elements in window
+        deque<int>dq;
+        //Left pointer
+        int L = 0;
+        //Right pointer
+        for(int R = 0; R<nums.size(); R++){
+            //Pop every element smaller than current element
+            //Example:
+            //[3,1,4,2,5] k = 3
+            //[3]
+            //[3,1]
+            //[4] Pop 3 and 1, then insert 4 afterwards 
+            //[4,2] Insert 2, pop nothing since 4 is larger than current val 
+            //[5] Pop 4 and 2 since both are less than 5.
+            //Result [4,4,5]
+            while(!dq.empty() && nums[dq.back()]<nums[R]){
+                dq.pop_back();
+            }
+            //Insert current value after popping lesser ones above
+            dq.push_back(R);
+            //Remove values out of window
+            if(dq.front()<L){
+                dq.pop_front();
+            }
+            //If window size is equal to k
+            if(R-L+1==k){
+                //Insert result with deque having the largest current number in front
+                res.push_back(nums[dq.front()]);
+                //Increment L, shrinking the window from the left.
+                L++;
+            } 
+        }
+        //Return result vector
+        return res;
+    }
+};

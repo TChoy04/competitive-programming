@@ -1,0 +1,49 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        ListNode* fast = head;
+        ListNode* slow = head;
+        //Use fast and slow pointers to get midpoint of array
+        while(fast && fast->next){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        //Reverse second half of array
+        ListNode* prev = NULL;
+        while(slow){
+            ListNode* move = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = move;
+        }
+       ListNode* rev = prev;
+       //While the array can still move forward
+       //rev->next has to be valid since it moves onto the next node with temp = rev->next
+       while(rev->next){
+           //set temp pointer
+           ListNode*temp = head->next;
+           //set next value to element in reversed list.
+           head->next = rev;
+           //set head to temp pointer which is next pos
+           head = temp;
+           //set temp pointer to next reversed pointer
+           temp = rev->next;
+           //set next value to head
+           rev->next = head;
+           //set reversed to temp pointer which is next pos
+           rev = temp;
+       } 
+    }
+};

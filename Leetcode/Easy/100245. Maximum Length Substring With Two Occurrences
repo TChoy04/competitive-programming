@@ -1,0 +1,21 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//Sliding window solution, very trivial.
+
+class Solution {
+public:
+    int maximumLengthSubstring(string s) {
+        unordered_map<char,int>m;
+        int res = 0;
+        int L = 0;
+        for(int x = 0; x<s.size(); x++){
+            m[s[x]]++;
+            while(m[s[x]]>2){
+                m[s[L++]]--;
+            }
+            res = max(res,x-L+1);
+        }
+        return res;
+        
+    }
+};

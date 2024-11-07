@@ -1,0 +1,32 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		int len;
+		scanf("%i", &len);
+		int curr = 1;
+		char read;
+		bool res = true;
+		unordered_map<char,int>m;
+		while(len-->=0){
+			scanf("%c", &read);
+			if(m[read]==0){
+				if(curr==1) m[read] = 2;
+				else m[read] = 1;
+			}
+			else if(m[read]==curr){
+				res = false;
+			}
+			curr = m[read];
+		}
+		if(res) cout<<"YES\n";
+		else cout<<"NO\n";
+	}
+
+	return 0;
+}

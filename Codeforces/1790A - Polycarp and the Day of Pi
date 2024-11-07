@@ -1,0 +1,23 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	string expected = "314159265358979323846264338327";
+	while(tc--){
+	int res = 0;
+	string curr;
+	cin>>curr;
+	for(int x = 0; x<curr.size(); x++){
+		if(curr[x]==expected[x]) res++;
+		else break;
+	}
+	cout<<res<<endl;
+	}
+	return 0;
+}

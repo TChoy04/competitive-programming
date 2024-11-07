@@ -1,0 +1,21 @@
+Time Complexity: O(N*M)
+Space Complexity: O(1)
+//If the image is equal to the original image and isn't already the color that it's trying to change to, perform a DFS and change the color of all connected nodes.
+
+class Solution {
+public:
+    void helper(vector<vector<int>>& image, int sr, int sc, int color,int ref){
+        if(image[sr][sc]==ref && image[sr][sc]!=color){
+            image[sr][sc] = color;
+            if(sr>0) helper(image,sr-1,sc,color,ref);
+            if(sr<image.size()-1) helper(image,sr+1,sc,color,ref);
+            if(sc<image[0].size()-1) helper(image,sr,sc+1,color,ref);
+            if(sc>0) helper(image,sr,sc-1,color,ref);
+        }
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int ref = image[sr][sc];
+        helper(image,sr,sc,color,ref);
+        return image;
+    }
+};

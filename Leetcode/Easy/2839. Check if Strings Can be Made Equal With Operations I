@@ -1,0 +1,14 @@
+//Time Complexity: O(1)
+//Space Complexity: O(1)
+//Input is always 4 letters. Check if first two are equal to respective in other string and swap with i+2 if they aren't and compare strings afterwards.
+
+class Solution {
+public:
+    bool canBeEqual(string s1, string s2) {
+        for(int i = 0; i<2; i++){
+            if(s1[i]==s2[i]) continue;
+            else swap(s1[i],s1[i+2]);
+        }
+        return s1==s2;
+    }
+};

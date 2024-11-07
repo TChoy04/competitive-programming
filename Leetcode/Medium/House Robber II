@@ -1,0 +1,35 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Dynamic programming, similar solution as the original House Robber Question
+//Original House Robber: https://leetcode.com/problems/house-robber/
+//Original House Robber Solution: https://github.com/TChoy04/algo/blob/main/Medium/House%20Robber
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        //Base cases
+        if(nums.size()==1) return nums[0];
+        if(nums.size()==2) return max(nums[0],nums[1]);
+        //Temporary arraylist
+        vector<int>temp = nums;
+        //Calculate the solution for when the first value is 0 and when the last value is 0.
+        //This will simulate skipping either the first or second house
+        //We will start with skipping the last house
+        temp[nums.size()-1] = 0;
+        //Second value set to maximum of first and second value
+        temp[1] = max(temp[1],temp[0]);
+        //Current maximum value will be either the previous value or the current value + two values before it
+        for(int x = 2; x<nums.size(); x++){
+            temp[x] = max(temp[x]+temp[x-2],temp[x-1]);
+        }
+        //Same logic as above except first value is 0
+        nums[0] = 0;
+        nums[1] = max(nums[1],nums[0]);
+        for(int x = 2; x<nums.size(); x++){
+            nums[x] = max(nums[x]+nums[x-2],nums[x-1]);
+        }
+        int n = nums.size();
+        //Return maximum between array with the first value as 0 or the array with the last value as 0
+        return max(nums[n-1],temp[n-1]);
+    }
+};

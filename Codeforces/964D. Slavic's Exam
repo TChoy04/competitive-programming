@@ -1,0 +1,39 @@
+//Check to see if the subsequence is possible. Use the ? to sub in whenever possible. Swap out the ? afterwards with a's or the characters that they will be filling in for in the subsequence. 
+#include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+ 
+	int main(){
+			int tc;
+			cin>>tc;
+			while(tc--){
+				string s1,s2;
+				cin>>s1>>s2;
+				unordered_map<char,int>m;
+				int index = 0;
+				int count = 0;
+				for(char i : s2){
+					for(int x = index; x<s1.size(); x++){
+						if(s1[x]==i || s1[x]=='?'){
+							if(s1[x]=='?') s1[x] = i;
+							count++;
+							index = x+1;
+							break;
+						}
+					}
+				}
+					if(count==s2.size()){
+						cout<<"YES"<<endl;
+						for(int x = 0; x<s1.size(); x++){
+							if(s1[x]=='?'){
+								s1[x] = 'a';
+							}
+						}
+						cout<<s1<<endl;
+					}
+					else cout<<"NO"<<endl;
+					
+ 
+			}
+		}

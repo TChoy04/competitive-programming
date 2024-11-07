@@ -1,0 +1,54 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Stack
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        //Init stack
+        stack<double>st;
+        //Iterate through array
+        for(string x : tokens){
+            //Check for operation
+            if(x=="*"){
+                //Store as double because of int limitations, other operations use int.
+                //Get top of stack (most recent element)
+                double first = st.top();
+                //Pop
+                st.pop();
+                //Get second element on top and pop again.
+                double second = st.top();
+                st.pop();
+                //Push result + repeat for other operations.
+                st.push(first*second);
+            }
+            else if(x=="+"){
+                int first = st.top();
+                st.pop();
+                int second = st.top();
+                st.pop();
+                st.push(first+second);
+            }
+            else if(x=="-"){
+                int first = st.top();
+                st.pop();
+                int second = st.top();
+                st.pop();
+                st.push(second-first);         
+            }
+            else if(x=="/"){
+                int first = st.top();
+                st.pop();
+                int second = st.top();
+                st.pop();
+                st.push(second/first); 
+            }
+            //If there is no operation
+            else{
+                Turn string into int and insert int into top of stack.
+                st.push(stoi(x));
+            }
+        }
+        //Return the only element in the stack (given proper input)
+        return st.top();
+    }
+};

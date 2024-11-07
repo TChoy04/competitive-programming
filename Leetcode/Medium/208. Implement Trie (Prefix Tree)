@@ -1,0 +1,48 @@
+class Trie {
+public:
+    map<char,vector<string>>wordBank;
+    Trie() {
+        
+    }
+    
+    void insert(string word) {
+        char firstChar = word[0];
+        vector<string>& characterWords = wordBank[firstChar];
+        if(characterWords.size()==0) characterWords = {};
+        characterWords.push_back(word);
+    }
+    
+    bool search(string word) {
+        char firstChar = word[0];
+        vector<string>characterWords = wordBank[firstChar];
+        for(string i : characterWords){
+            if(i==word) return true;
+        }
+        return false;
+    }
+    
+    bool startsWith(string prefix) {
+        char firstChar = prefix[0];
+        vector<string>characterWords = wordBank[firstChar];
+        
+        for(string i : characterWords){
+            if(prefix.size()>i.size()) continue;
+            int count = 0;
+            for(int x = 0; x<prefix.size(); x++){
+                if(prefix[x]==i[x]) count++;
+                else continue;
+                if(count==prefix.size()) return true;
+            }
+        }
+        return false;
+
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */

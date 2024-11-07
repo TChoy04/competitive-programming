@@ -1,0 +1,32 @@
+//Time Complexity: O(N)
+//Space Complexity: O(1)
+//Calculate net shift then shift in that direction. Shifting left is negative, shifting right is positive. Stimualte the shift after calculating by shifting everything to the side and keeping track of first/last char.
+
+class Solution {
+public:
+    string stringShift(string s, vector<vector<int>>& shift) {
+        int shifts = 0;
+        for(int x = 0; x<shift.size(); x++){
+            if(shift[x][0]==0) shifts-= shift[x][1];
+            else shifts+=shift[x][1];
+        }
+        while(shifts<0){
+            shifts++;
+            char last = s[0];
+            for(int x = 0; x<s.size()-1; x++){
+                s[x] = s[x+1];
+            }
+            s[s.size()-1] = last;
+        }
+        
+        while(shifts>0){
+            shifts--;
+            char last = s[s.size()-1];
+            for(int x = s.size()-1; x>0; x--){
+                s[x] = s[x-1];
+            }
+            s[0] = last;
+        }
+        return s;
+    }
+};

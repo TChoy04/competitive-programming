@@ -1,0 +1,20 @@
+//Trivial
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        if(nums2.size()<nums1.size()) swap(nums1,nums2);
+        set<int>s;
+        vector<int>res;
+        for(int x = 0; x<nums2.size(); x++){
+            s.insert(nums2[x]);
+        }
+        for(int x = 0; x<nums1.size(); x++){
+            if(s.find(nums1[x])!=s.end()){
+                s.erase(nums1[x]);
+                res.push_back(nums1[x]);
+            }
+        }
+        return res;
+    }
+};

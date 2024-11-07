@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int findKOr(vector<int>& nums, int k) {
+        if(nums.size()==1) return nums[0];
+        if(k==nums.size()){
+           long long res = nums[0];
+            for(int x = 1; x<nums.size(); x++){
+                res &= nums[x];
+            }
+            return res;
+        }
+        long long res = 0;
+        long long i = 0;
+        while(i<=32){
+            int count = 0;
+            for(int x = 0; x<nums.size(); x++){
+                long long expo = (pow(2,i));
+                if((expo & nums[x]) == pow(2,i)) count++;
+            }
+            if(count<k){
+                i++;
+                continue;
+            }
+            res+= (pow(2,i));
+            i++;
+        }
+        return res;
+    }
+};

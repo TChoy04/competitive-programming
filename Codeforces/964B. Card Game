@@ -1,0 +1,23 @@
+//Trivial. Just remember to account for situations where you have one tie and one win.
+ #include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+ 
+	int main(){
+			int tc;
+			cin>>tc;
+			while(tc--){
+				int c1,c2,c3,c4;
+				cin>>c1>>c2>>c3>>c4;
+				int res = 0;
+				if((c1>c3 && (c2>c4 || c2==c4)) || (c1==c3&&c2>c4)){
+					res+=2;
+				}
+				if((c2>c3 && (c1>c4 || c1==c4)) || (c2==c3&&c1>c4) ){
+					res+=2;
+				}
+				cout<<res<<endl;
+			}
+		}
+	

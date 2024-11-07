@@ -1,0 +1,17 @@
+#Memoization Solution
+Time Complexity: O(N)
+Space Complexity: O(N)
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n<3) return n;
+        int memo[n+1];
+        memo[1] = 1;
+        memo[2] = 2;
+        for(int x = 3; x<=n; x++){
+            memo[x] = memo[x-1] + memo[x-2];
+        }
+        return memo[n];
+    }
+};

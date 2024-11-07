@@ -1,0 +1,16 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+#Use two pointers, when the slower pointer sees a value that isn't equal to it, 
+//change the element in front of it to equal the new number then move itself to that element 
+//this way we can guarantee unique numbers as it is sorted. return L+1 because arrays are 0 indexed.
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int L = 0;
+        for(int x = 0; x<nums.size(); x++){
+            if(nums[L]!=nums[x]) nums[++L] = nums[x]; 
+        }
+        return L+1;
+    }
+};

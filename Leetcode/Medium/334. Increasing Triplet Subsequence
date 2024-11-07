@@ -1,0 +1,23 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+SOLUTION: 
+1. Keep track of lowest value on the left. Initialize i and j as int max so they are filled along the way
+2. If a value isn't the lowest on the left, check if it is greater than i and if j is greater than it. This will be the middle number, which will be the lowest possible number greater than i.
+3. If there is a value greater than the middle number then that means there is a valid solution since j > i and if k > j it will mean i < j < k.
+*/
+
+class Solution {
+public:
+    bool increasingTriplet(vector<int>& nums) {
+        if(nums.size()<3) return false;
+        int i = INT_MAX, j = INT_MAX;
+        for(int x = 0; x<nums.size(); x++){
+            if(nums[x]<i) i = nums[x];   
+            else if(nums[x]>i && nums[x]<j) j = nums[x];
+            else ifnums[x]>j) return true;
+        }
+    return false;  
+    }
+};

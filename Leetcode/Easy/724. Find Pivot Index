@@ -1,0 +1,16 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Find prefix and suffix sums and then compare.
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        vector<int>nums2 = nums;
+        for(int x = 1; x<nums.size(); x++) nums[x] += nums[x-1];
+        for(int x = nums.size()-2; x>=0; x--) nums2[x] += nums2[x+1];
+        for(int x = 0; x<nums.size(); x++){
+            if(nums[x]==nums2[x]) return x;
+        }
+        return -1;
+    }
+};

@@ -1,0 +1,29 @@
+//Encode with size in front, of # so 4# if the string is a size of 4 for example "code". Use that to decode. Place in front so it will always come before the string.
+
+class Solution {
+public:
+    
+    string encode(vector<string>& strs) {
+        string res = "";
+        for(string i : strs){
+            res+= to_string(i.size()) + "#" + i;
+        }
+        return res;
+    }
+
+    vector<string> decode(string s) {
+        vector<string>res;
+        int prev = 0;
+        for(int x = 0; x<s.size(); x++){
+            if(s[x]=='#'){
+                string temp = s.substr(prev,x-prev+1);
+                int size = stoi(temp);
+                if(size<0 || size>=200) break;
+                res.push_back(s.substr(x+1,size));
+                x+=size;
+                prev = x+1;
+            }
+        }
+        return res;
+    }
+};

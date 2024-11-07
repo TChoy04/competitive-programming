@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+	int bags;
+	scanf("%i", &bags);
+	int a = 0, b = 0;
+	while(bags--){
+		int candy;
+		scanf("%i", &candy);
+		if(candy%2==0) a+=candy;
+		else b+= candy;
+	
+	}
+	if(a<=b) cout<<"NO";
+	else cout<<"YES";
+	cout<<'\n';
+	}
+
+	return 0;
+}

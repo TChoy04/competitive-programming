@@ -1,0 +1,45 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+/*
+Had a bit of trouble debugging this one but overall a pretty intuitive problem.
+First thought was some sort of sliding window but realized that didn't work because I had to keep track of the beginning to place the characters and numbers in the first place lol
+Immediately transitioned to two pointer solution as a result. 
+1. Iterate through entire array
+2. If the right pointer is either the last character or a character different from the previous one, do the following: 
+    a. Set the value on the left pointer to the current character
+    b. If the current count is greater than 1, also include the number.
+    c. If it is not the last character in the string, set the new current value to the next character.
+    d. Set count to zero.
+    e. Increment length for each digit in count.
+3. Increment both count and R for each character traversed. 
+*/
+
+
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int L = 0;
+        int R = 0;
+        char curr = chars[0];
+        int count = 1;
+        int length = 0;
+        while(R<chars.size()){
+            if((R == chars.size()-1) || chars[R+1]!=curr ){
+                chars[L++] = curr;
+                length++;
+                if(R!=chars.size()-1) curr = chars[R+1];
+                if(count>1){
+                    string temp = to_string(count);
+                    for(int x = 0; x<temp.size(); x++){
+                        chars[L++] = temp[x];
+                        length++;
+                    }
+                }
+                count = 0;
+            }
+            count++;
+            R++;
+        }
+        return length;
+    }
+};

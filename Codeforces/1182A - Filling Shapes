@@ -1,0 +1,55 @@
+/*You have a given integer n. 
+Find the number of ways to fill all 3×n tiles with the shape described in the picture below. 
+Upon filling, no empty spaces are allowed. Shapes cannot overlap. */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	int x = 2;
+	if(tc%2!=0){
+		cout<<0;
+	}
+	else{
+		while(tc-=2){
+			x*=2;
+		}
+		cout<<x;
+	}
+
+	return 0;
+}
+
+// Solved with dynamic programming
+
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	int x = 2;
+	if(tc%2!=0){
+		cout<<0;
+	}
+	else{
+		int dp[tc+1];
+		dp[2] = 2;
+		for(int x = 4; x<=tc; x+=2){
+			dp[x] = dp[x-2]*2;
+		}
+		cout<<dp[tc];
+	}
+
+	return 0;
+}

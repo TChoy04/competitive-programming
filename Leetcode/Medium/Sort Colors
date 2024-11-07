@@ -1,0 +1,21 @@
+#Time Complexity: O(N)
+#Space Complexity: O(N)
+// Use two pointers, move the twos to the end with the right pointer, move zeros to the front using the left pointer.
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int L = 0;
+        int R = nums.size()-1;
+        for(int x = 0; x<=R; x++){
+           while(nums[x]==2 && x<R){
+                swap(nums[x],nums[R--]);
+               }
+            while(nums[x]==0 && x>L){
+                swap(nums[x],nums[L++]);
+            }
+
+            
+        }
+    }
+};

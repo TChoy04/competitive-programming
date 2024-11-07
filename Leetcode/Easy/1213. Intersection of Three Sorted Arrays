@@ -1,0 +1,44 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//Insert values into a set and see which values overlap.
+//Likely O(1) space solution? Something to do with how the arrays are already sorted.
+
+class Solution {
+public:
+    vector<int> arraysIntersection(vector<int>& arr1, vector<int>& arr2, vector<int>& arr3) {
+        int i = 0, j = 0, k = 0;
+        vector<int>res;
+        set<int>s1;
+        unordered_set<int>s2;
+        for(int x = 0; x<arr2.size(); x++) s1.insert(arr2[x]);
+        for(int x = 0; x<arr3.size(); x++) s2.insert(arr3[x]);
+        for(int x = 0; x<arr1.size(); x++){
+            if(s1.find(arr1[x])!=s1.end() && s2.find(arr1[x])!=s2.end()) res.push_back(arr1[x]);
+        }
+
+        return res;
+    }
+};
+//Solution using the fact that it's already sorted.
+//Use 3 pointers and iterate through them and check if they're equal. If not, increment the ones that are less than the other two values.
+class Solution {
+public:
+    vector<int> arraysIntersection(vector<int>& arr1, vector<int>& arr2, vector<int>& arr3) {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        vector<int>res;
+        while(i<arr1.size() && j < arr2.size() && k < arr3.size()){
+            if(arr1[i]==arr2[j] && arr2[j]==arr3[k]){ 
+                res.push_back(arr1[i++]);
+                j++;
+                k++;
+            }
+            else if(arr1[i]<arr3[k] || arr1[i]<arr2[j]) i++;
+            else if(arr2[j]<arr3[k] || arr2[j]<arr1[i]) j++;
+            else if(arr3[k]<arr2[j] || arr3[k]<arr1[i]) k++;
+            
+        }
+        return res;
+    }
+};

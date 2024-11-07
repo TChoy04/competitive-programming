@@ -1,0 +1,27 @@
+/*Trival problem, tried to initally do with xor to be fancy but not needed and was failing some test cases lol
+could also be done with a set for O(N) space and no time improvement
+*/
+ 
+ #include <bits/stdc++.h>
+	using namespace std;
+	#define ll long long
+	 
+	int main(){
+		ll tc;
+		cin>>tc;
+		tc-=1;
+		ll a;
+		cin>>a;
+		while(tc--){
+			int b;
+			cin>>b;
+			if(a!=b){
+				cout<<"No";
+				return 0;
+			}
+		}
+		cout<<"Yes";
+
+		return 0;
+		}
+	

@@ -1,0 +1,58 @@
+#Sorting Solution
+Time Complexity: O(NLogN)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(),s.end());
+        sort(t.begin(),t.end());
+        return s==t;
+    }
+};
+
+#Hashmap Solution
+Time Complexity: O(N)
+Space Complexity: O(N)
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size()!=t.size()) return false;
+        unordered_map<char,int>firstString;
+        unordered_map<char,int>secondString;
+        
+        for(char x : s){
+            firstString[x]++;
+        }
+        for(char x : t){
+            secondString[x]++;
+        }
+        for(auto it: firstString){
+            if(it.second!=secondString[it.first]) return false; 
+        }
+        return true;
+    }
+};
+
+#Hashmap Solution, Array Implementation
+Time Complexity: O(N)
+Space Complexity: O(N)
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size()!=t.size()) return false;
+        int check[26] = {0};
+        for(char x : s){
+            check[x-'a']++;
+        }
+        for(char x : t){
+            check[x-'a']--;
+        }
+        for(int x = 0; x<26; x++){
+            if(check[x]) return false;
+        }
+        return true;
+    }
+};

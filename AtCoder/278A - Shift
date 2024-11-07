@@ -1,0 +1,47 @@
+/*You are given a sequence A=( 
+a1 a2 aN
+ ) of length N.
+You perform the following operation exactly K times:
+
+remove the initial element of A and append a 0 to the tail of A.
+Print all the elements of A after the operations.
+
+Constraints
+1≤N≤100
+1≤K≤100
+1≤A 
+i≤100
+All values in the input are integers.
+Input
+The input is given from Standard Input in the following format:
+
+N K
+A1 A2 ... AN
+ 
+Output
+Print the elements of A after the operations in one line, separated by spaces.*/
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+void solver(){
+ 
+}
+ 
+int main(){ 
+	int n,k;
+	cin>>n>>k;
+	vector<int>res(n,0);
+	if(k>=n){
+		for(int x : res) cout<<x<<" ";
+		return 0;
+	}
+	int index = 0;
+	for(int x = 0; x<n; x++){
+		int input;
+		cin>>input;
+		if(k--<=0) res[index++] = input;
+	}
+	for(int x : res) cout<<x<<" ";
+}

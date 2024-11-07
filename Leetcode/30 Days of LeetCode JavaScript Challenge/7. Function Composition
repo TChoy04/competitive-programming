@@ -1,0 +1,19 @@
+//Iterate through functions array and run the functions and redefine x.
+
+/**
+ * @param {Function[]} functions
+ * @return {Function}
+ */
+var compose = function(functions) {
+	return function(x) {
+        for(let i = functions.length; i>0; i--){
+            x = functions[i-1](x);
+        }
+        return x;
+    }
+};
+
+/**
+ * const fn = compose([x => x + 1, x => 2 * x])
+ * fn(4) // 9
+ */

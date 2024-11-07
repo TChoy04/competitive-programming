@@ -1,0 +1,31 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Trivial solution, simple 2 pointer application
+class Solution {
+public:
+    string reverseVowels(string s) {
+        unordered_set<char>us;
+        us.insert('a');
+        us.insert('e');
+        us.insert('i');
+        us.insert('o');
+        us.insert('u');
+        us.insert('A');
+        us.insert('E');
+        us.insert('I');
+        us.insert('O');
+        us.insert('U');
+        int L = 0;
+        int R = s.size()-1;
+        while(R>L){
+            if(us.find(s[L])==us.end()) L++;
+            if(us.find(s[R])==us.end()) R--;
+            if(us.find(s[L])!=us.end() && us.find(s[R])!=us.end()){
+                swap(s[L],s[R]);
+                L++;
+                R--;
+            }
+        }
+        return s;
+    }
+};

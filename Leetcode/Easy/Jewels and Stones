@@ -1,0 +1,16 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+// Add all jewels into a set, use set to check all the stones in an o(1) operation.
+
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        unordered_set<char>s;
+        int ans = 0;
+        for(char x : jewels) s.insert(x);
+        for(char x : stones){
+            if(s.find(x)!=s.end()) ans++;
+        }
+        return ans;
+    }
+};

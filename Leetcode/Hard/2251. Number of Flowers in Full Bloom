@@ -1,0 +1,35 @@
+class Solution {
+public:
+    static bool customCompare(vector<int>&a,vector<int>&b){
+        return a[1]<b[1];
+    }
+    vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& people) {
+        vector<int>res;
+        vector<vector<int>>ending = flowers;
+        sort(ending.begin(),ending.end(),customCompare);
+        sort(flowers.begin(),flowers.end());
+        for(int x = 0; x<people.size(); x++){
+            int L = 0;
+            int R = flowers.size();
+            int arrival = people[x];
+            while(R>L){
+                int mid = (R-L)/2 + L;
+                if(flowers[mid][0]>arrival) R = mid;
+                else L = mid+1;
+            }
+            int bloomed = R;
+            L = 0;
+            R = ending.size();
+            //6,7,12,13
+            //0,0,2,2
+            while(R>L){
+                int mid = (R-L)/2 + L;
+
+                if(ending[mid][1]>=arrival) R = mid;
+                else L = mid + 1 ;
+            }
+            res.push_back(bloomed-R);
+        }
+        return res;
+    }
+};

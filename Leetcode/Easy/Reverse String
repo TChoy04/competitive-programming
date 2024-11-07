@@ -1,0 +1,13 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+// Make a pointer at the beginning and end, swap the elements and then increment/decrement respectively.
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+     int L = 0;
+     int R = s.size()-1;
+     while(R>L){
+         swap(s[L++],s[R--]);
+     }
+    }
+};

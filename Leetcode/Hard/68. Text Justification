@@ -1,0 +1,70 @@
+class Solution {
+public:
+    vector<string> fullJustify(vector<string>& words, int maxWidth) {
+        vector<string>res;
+        vector<string>currentStrings;
+        int length = 0;
+        //length = 8
+        //min spaces = 2;
+        //17-8
+        //9/2 = ceil(4.5)
+        //5
+        //9-5
+        //4
+        //ceil(4/2)
+        //maxWidth = 20
+        //Science  is what we
+        //15
+        //20-15 = 5;
+        //5-1
+        //5 - 3
+        //2/3 
+        //4
+        //5 spaces
+        //7 spaces
+        //6 spaces 
+        //7 calcspaces
+        //2 spaces
+        //5 calcspaces
+        //3 spaces
+
+        for(int x = 0; x<words.size(); x++){
+            if(length + currentStrings.size() + words[x].size()>maxWidth){
+                int tempWidth = maxWidth;
+                int spaces = currentStrings.size()-1;
+                string tempString = "";
+                tempWidth-=length;
+                cout<<tempWidth<<endl;
+                tempString+= currentStrings[0];
+                if(spaces==0){
+                    while(tempWidth--) tempString+= ' ';
+                }else{
+                    int calculatedSpaces = tempWidth/spaces;
+                    int extraSpaces = tempWidth%spaces;
+                    for(int i = 1;i<=spaces; i++){
+                        for(int z = 0; z<calculatedSpaces; z++) tempString+=' ';
+                        if(extraSpaces-->0) tempString+=' ';
+                        tempString+= currentStrings[i];
+                    }
+                }
+                res.push_back(tempString);
+                currentStrings.clear();
+                currentStrings.push_back(words[x]);
+                length = words[x].size();
+            }else{
+                currentStrings.push_back(words[x]);
+                length+= words[x].size();
+            }
+        }
+        string tempString = "";
+        for(int x = 0; x<currentStrings.size()-1; x++){
+            tempString+= currentStrings[x] + " ";
+            maxWidth--;
+        }
+        tempString+= currentStrings[currentStrings.size()-1];
+        int m = maxWidth-length;
+        while(m--) tempString+=' ';
+        res.push_back(tempString);
+        return res;
+    }
+};

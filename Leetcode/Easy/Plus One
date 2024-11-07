@@ -1,0 +1,22 @@
+Time Complexity: O(N)
+Space Complexity: O(1)
+//Iterate through array. If value is 9, set value to 0 and continue to next value. If current value isn't 9 then increment by 1 and return array; 
+//If everything is 9 increase size of array by 1 by adding a 0 at the end and replace first element with 1
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        for(int x = digits.size()-1; x>=0; x--){
+            if(digits[x]==9){
+                digits[x]=0;
+            }
+            else{
+                digits[x]+=1;
+                return digits;
+            }
+        }
+        digits.push_back(0);
+        digits[0] = 1;
+        return digits;
+    }
+};

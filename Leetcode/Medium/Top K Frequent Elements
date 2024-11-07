@@ -1,0 +1,23 @@
+#Use a map to store values and their counts. Then insert it into a priority queue. Take the top values from the priority queue to populate answer array 
+#until there are K elements
+Time Complexity: O(NLogN)
+Space Complexity: O(N)
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int,int>m;
+        for(int x : nums) m[x]++;
+        priority_queue<pair<int,int>>q;
+        for(auto it: m){
+            q.push({it.second,it.first});
+        }
+        vector<int>ans;
+        for(int x = 0; x<k; x++){
+            ans.push_back(q.top().second);
+            q.pop();
+        }
+        return ans;
+        
+    }
+};

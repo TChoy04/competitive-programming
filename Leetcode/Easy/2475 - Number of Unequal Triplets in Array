@@ -1,0 +1,21 @@
+/*You are given a 0-indexed array of positive integers nums. Find the number of triplets (i, j, k) that meet the following conditions:
+
+0 <= i < j < k < nums.length
+nums[i], nums[j], and nums[k] are pairwise distinct.
+In other words, nums[i] != nums[j], nums[i] != nums[k], and nums[j] != nums[k].
+Return the number of triplets that meet the conditions.*/
+
+class Solution {
+public:
+    int unequalTriplets(vector<int>& nums) {
+        int res = 0;
+        for(int x = 0; x<nums.size(); x++){
+            for(int y = x+1; y<nums.size(); y++){
+                for(int i = y+1; i<nums.size();i++){
+                    if(nums[x]!=nums[y] && nums[y]!=nums[i] && nums[i]!=nums[x]) res++;
+                }
+            }
+        }
+        return res;
+    }
+};

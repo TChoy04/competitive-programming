@@ -1,0 +1,31 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+Trivial problem to be honest. Should be self explanatory. 
+*/
+
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        int count = 0;
+        int res = 0;
+        for(int i : gain){
+            count+=i;
+            res = max(res,count);
+        }
+        return res;
+    }
+};
+
+//Without count variable and using prefix sum instead.
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        int res = max(gain[0],0);
+        for(int x = 1; x<gain.size(); x++){
+            gain[x] += gain[x-1];
+            res = max(gain[x],res);
+        }
+        return res;
+    }
+};

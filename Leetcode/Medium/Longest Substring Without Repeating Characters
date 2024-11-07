@@ -1,0 +1,66 @@
+#Messy Solution but
+#Iterate through the string until a duplicate is found to find the size of sliding window.
+#Use sliding window to find largest substring, use a set to keep track of the letters in the substring. Use a res variable to keep track of the maximum result.
+Time Complexity: O(N)
+Space Complexity: O(N)
+#There is probably a more efficient way to do the same thing if rewritten. There is definetely a more concise solution.
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char>ans;
+        int p1 = 0;
+        int p2 = 0;
+        int res = 0;
+        for(char x : s){
+            if(ans.find(x)==ans.end()) {
+                ans.insert(x);
+                p2++;
+                int g = ans.size();
+                res = max(g,res);
+                }
+            else break;
+        }
+        while(p2!=s.size()){
+            if(ans.find(s[p2])!=ans.end()){
+                ans.erase(s[p1]);
+                p1++;
+            }
+            else{
+                ans.insert(s[p2]);
+                p2++;
+                
+            }
+            int g = ans.size();
+            res = max(g,res);
+        }
+        return res;
+        
+    }
+};
+
+#After further analysis, there is no need to find the size of the first window, meaning we can get rid of the first for loop.
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        //set to keep count of current letters
+        unordered_set<char>letters;
+        int res = 0;
+        int L = 0;
+        int R = 0;
+        //While right pointer isn't at the end
+        while(R<s.size()){
+            //If current value is found, iterate left pointer until window goes previous iteration of current value
+            while(letters.find(s[R])!=letters.end()){
+                //Remove value from set and iterate left pointer.
+                letters.erase(s[L++]);
+            }
+            //expand window by incrementing right side of window and insert value into set.
+            letters.insert(s[R++]);
+            //Result is the maxmimum size of window.
+            res = max(res,R-L);
+        }
+        return res;
+    }
+};

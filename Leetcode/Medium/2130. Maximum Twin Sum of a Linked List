@@ -1,0 +1,69 @@
+/*
+Two Solutions
+Solution 1/2: Iterate through the first half with a stack, use the tortoise and hare algorithm to find the midpoint and add everything before midpoint to a stack.
+Once midpoint has been found, simply look at the top of the stack and add it to the next value moving onwards as that will be the corresponding position.
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        stack<int>st;
+        ListNode* fast = head;
+        while(fast && fast->next){
+            st.push(head->val);
+            head = head->next;
+            fast = fast->next->next;
+        }
+        int res = 0;
+        while(head){
+            res = max(res,st.top()+head->val);
+            st.pop();
+            head = head->next;
+        }
+
+        return res;
+    }
+};
+
+/*
+Solution 2/2: Using a deque
+Use a deque, insert the entire linked list the iterate the corresponding positions one by one shrinking from the edges. Calculate the result as the maximum sum of the front and back.
+*/
+
+/*
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        deque<int>dq;
+        while(head){
+            dq.push_back(head->val);
+            head = head->next;
+        }
+        int res = 0;
+        while(!dq.empty()){
+            res = max(res,dq.front()+dq.back());
+            dq.pop_back();
+            dq.pop_front();
+        }
+        return res;
+    }
+};

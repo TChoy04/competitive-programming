@@ -1,0 +1,28 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//Sliding window problem, slide the window when there are less than 2 unique elements, shrink the window when there are more than 2 unique elements.
+
+class Solution {
+public:
+    int lengthOfLongestSubstringTwoDistinct(string s) {
+        int res = 0;
+        unordered_map<char,int>st;
+        int L = 0;
+        int R = 0;
+        while(R<s.size()){
+            if(st.size()<=2){
+                st[s[R]]++;
+                R++;
+            }
+            
+            if(st.size()>2){
+                st[s[L]]--;
+                if(st[s[L]]==0) st.erase(s[L]);
+                L++;
+            }
+            res = max(res,R-L);
+
+        }
+        return res;
+    }
+};

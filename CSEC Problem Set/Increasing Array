@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	scanf("%i",&tc);
+	vector<int>arr;
+	long long count = 0;
+	while(tc--){
+		int num;
+		scanf("%i",&num);
+		arr.push_back(num);
+	}
+	for(int x = 1; x<arr.size(); x++){
+		if(arr[x]<arr[x-1]){
+			count+= arr[x-1]-arr[x];
+			arr[x] = arr[x-1];
+		}
+	}
+	cout<<count;
+	return 0;
+}

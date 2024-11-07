@@ -1,0 +1,18 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+Preload first 2 values and use dynamic programming to calculate the remaining values.
+*/
+
+class Solution {
+public:
+    int fib(int n) {
+        vector<int>dp;
+        dp.push_back(0);
+        dp.push_back(1);
+        for(int x = 2; x<=n; x++){
+            dp.push_back(dp[x-1]+dp[x-2]);
+        }
+        return dp[n];
+    }
+};

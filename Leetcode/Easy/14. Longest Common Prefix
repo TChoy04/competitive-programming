@@ -1,0 +1,27 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Time Complexity is equal to the length of the shortest string. Worst case scenario, they are all the same length.
+//Find shortest string then iteratet through the array of strings, checking up until the length of the shortest string. Use a set to ensure that all the strings at
+//given index are the same. If it isn't the same, return at the given index.
+//Highly likely a space inefficient solution. Can most likely be solved without the set simply using a nested for loop.
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string res = "";
+        int smallest = INT_MAX;
+        for(int x = 0; x<strs.size(); x++){
+            int size = strs[x].size();
+            smallest = min(smallest,size);
+        }
+        for(int x = 0; x<smallest; x++){
+            unordered_set<char>s;
+            for(int i = 0; i<strs.size(); i++){
+                s.insert(strs[i][x]);
+                if(s.size()>1) return res;  
+            }
+            res+= strs[0][x];
+        }
+        return res;
+    }
+};

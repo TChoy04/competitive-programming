@@ -1,0 +1,61 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Keep track of max from left and right with an array.
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+    //Keep track of max from left and right with an array.
+        vector<int>rmax = height;
+        vector<int>lmax = height;
+        int maxi = lmax[0];
+        int res = 0;
+        //Store left max for current position
+        for(int x = 1; x<lmax.size(); x++){
+            lmax[x] = max(maxi,lmax[x]);
+            maxi = lmax[x];
+        }
+        //Set maximum value to last value in array.
+        maxi = rmax[rmax.size()-1];
+        //Store right max for current position
+        for(int x = rmax.size()-2; x>=0; x-- ){
+            rmax[x] = max(maxi,rmax[x]);
+            maxi  = rmax[x];
+        }
+        //Iterate through heights. Max wall height is minimum between left max and right max. The height subtracted from current positions height is the amount of water.
+        for(int x = 1; x<height.size()-1; x++){
+            int h = min(rmax[x],lmax[x]);
+            res = max(res,res+(h-height[x]));
+        }
+        return res;
+    }
+};
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int L = 0;
+        int R = height.size()-1;
+        int res = 0;
+        int lmax = 0, rmax = 0;
+        //Until L == R
+        while(R>L){
+            //If height is greater on the right, the value will always be dependent on the left
+            if(height[L]<height[R]){
+                //See if current left height increases result
+                res = max(res+lmax-height[L],res);
+                //See if current height is higher than current left max and iterate
+                lmax = max(lmax,height[L++]);
+            }
+            else{
+                //See if current right height increases result
+                res = max(res+rmax-height[R],res);
+                //See if current right height is greater than current right max and iterate
+                rmax = max(rmax,height[R--]);
+            }
+        }
+        return res;
+    }
+};

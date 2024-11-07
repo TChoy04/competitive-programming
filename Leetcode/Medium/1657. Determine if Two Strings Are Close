@@ -1,0 +1,43 @@
+/*
+Time Complexity: O(NLogN)
+Space Complexity: O(N)
+1. If the words are the same, return true. If they are a different size, return false.
+2. Create 2 initial maps to keep count of each character in each word. Use a set to keep track of letters in the first string. Use two vectors to compare 2 the strings. The vector will contain
+the counts of the characters in each string. If you sort it, it will ensure that the counts are the same. For example, if you have 2 different letters that appear twice and a letter that appears 3 times in both of them,
+sorting will make them equivalent if they have the same count as it will keep track of the counts.
+3. Use the map to keep count of the appearance of each character.
+4. Check the second word and see if there are any characters that don't appear in the first string. If there is a character that doesn't appear in the first string, return false as there is no solution.
+5. Push the counts of each character into the compare vectors.
+6. Sort them and this will ensure there are the same number of unique characters and counts in each string.
+7. Sort the 2 strings and if they are not the same, return false. If they are return true.
+EXAMPLE:
+"abca"
+"bbca"
+This is possible because there are the same characters present and there are the same amount of unique counts. The first 1 has 2 occurences of a, one of b and one of c totalling to a vector of [2,1,1]
+The second has two occurrences of b, one of c and one of a. This results in a compare vector of [2,1,1]. This is a valid solution because after you sort it, they are both [1,1,2], which means that a solution with 
+the provided rules is possible.
+*/
+
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
+        if(word1==word2) return true;
+        if(word1.size()!=word2.size()) return false;
+        unordered_map<char,int>m;
+        unordered_map<char,int>mp;
+        unordered_set<char>s;
+        vector<int>compare1;
+        vector<int>compare2;
+        for(int x = 0; x<word1.size(); x++){
+            m[word1[x]]++;
+            mp[word2[x]]++;
+            s.insert(word1[x]);
+        }
+        for(char x : word2) if(s.find(x)==s.end()) return false;
+        for(auto it : m) compare1.push_back(it.second); 
+        for(auto it : mp) compare2.push_back(it.second);
+        sort(compare1.begin(),compare1.end());
+        sort(compare2.begin(),compare2.end());
+        return compare1==compare2;
+    }
+};

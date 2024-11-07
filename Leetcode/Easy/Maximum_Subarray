@@ -1,0 +1,18 @@
+#Greedy Solution
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int runningSum = 0;
+        int currMax = INT_MIN;
+        int ans = INT_MIN;
+     for(int x : nums){
+         runningSum = max(runningSum+x,x);
+         currMax = max(currMax,runningSum);
+         ans = max(ans,currMax);
+     }   
+        return ans;
+    }
+};

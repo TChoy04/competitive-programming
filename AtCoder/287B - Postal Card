@@ -1,0 +1,32 @@
+//Touch more difficult than last question, far easier than next question.
+//Next question left unsolved.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc,checkSize;
+	cin>>tc>>checkSize;
+	vector<string>arr;
+	while(tc--){
+	string val;
+	cin>>val;
+	arr.push_back(val);
+	}
+	unordered_set<string>s;
+	while(checkSize--){
+		string val;
+		cin>>val;
+		s.insert(val);
+	}
+	int res = 0;
+	for(string x : arr){
+		string temp = x.substr(x.size()-3, x.size());
+ 
+		if(s.find(temp)!=s.end()) res++;
+	}
+	cout<<res;
+	return 0;
+}

@@ -1,0 +1,25 @@
+#Sliding Window Solution
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr, int k, int threshold) {
+        int count = 0;
+        int total = 0;
+        int left = 0, right = k;
+        
+        for(int x = 0; x<k; x++){
+            total += arr[x];
+        }
+        if(total/k>=threshold) count++;
+            while(right<arr.size()){
+                total -= arr[left++];
+                total+= arr[right++];
+            if(total/k>=threshold) count++;
+   
+        }
+        return count;
+        
+    }
+};

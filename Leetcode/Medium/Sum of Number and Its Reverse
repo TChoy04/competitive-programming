@@ -1,0 +1,27 @@
+//315th LeetCode Weekly Contest 3/4
+Time Complexity: O(N)
+Space Complexity: O(1)
+//same space and time every time, generate all possible sums of numbers and their inverses.
+//Brute Force
+
+class Solution {
+public:
+    bool sumOfNumberAndReverse(int num) {
+        //Generate it for every number from 0 to n
+        for(int x= 0; x<=num; x++){
+            //Temporary int and int to hold reversed string.
+            int temp = x;
+            int rev = 0;
+            //Reverse the int
+            while(temp>0){
+                rev*=10;
+                rev+=temp%10;
+                temp/=10;
+            }
+            //If reversed + number is equal to current number, return true.
+            if(rev+x==num) return true;
+        }
+        //Sum was not found, return false
+        return false;
+    }
+};

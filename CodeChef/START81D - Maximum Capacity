@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int tc;
+    scanf("%i", &tc);
+    while(tc--){
+        int people, weight;
+        scanf("%i %i",&people, &weight);
+        if(people>8){
+            cout<<"NO"<<endl;
+            continue;
+        }
+        else if(people*weight>500){
+            cout<<"NO"<<endl;
+            continue;
+        }
+        cout<<"YES"<<endl;
+    }
+}

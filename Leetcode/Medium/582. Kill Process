@@ -1,0 +1,26 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+// Use unordered map to keep track of a number's children. Iterate through the arrays and since we know that ppid[i] is the parent of pid[i] we can insert pid[i] into
+// the arraylist at ppid[i]. Insert the "kill" value into a queue, and then insert the children back into the queue until all the children under the kill value have been
+// inserted into the queue, inserting the value of the current node every iteration. Remove front value from queue every iteration and insert it into the result vector.
+
+class Solution {
+public:
+    vector<int> killProcess(vector<int>& pid, vector<int>& ppid, int kill) {
+        unordered_map<int,vector<int>>m;
+        vector<int>res;
+        queue<int>q;
+        for(int x = 0; x<ppid.size(); x++){
+            if(ppid[x]==0) continue;
+            m[ppid[x]].push_back(pid[x]);
+        }
+        q.push(kill);
+        while(!q.empty()){
+            for(int x : m[q.front()]) q.push(x);
+            res.push_back(q.front());
+            q.pop();
+        }
+
+        return res;
+    }
+};

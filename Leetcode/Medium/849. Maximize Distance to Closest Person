@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int maxDistToClosest(vector<int>& seats) {
+        int res = 0;
+        int preDistance = 0;
+        int rearDistance = 0;
+        for(int x = 0; x<seats.size(); x++){
+            if(seats[x]==1){
+                preDistance = x;
+                break;
+            }
+        }
+        for(int x = seats.size()-1; x>=0; x--){
+            if(seats[x]==1){
+                rearDistance = seats.size()-1-x;
+                break;
+            }
+        }
+        res = max(rearDistance,preDistance);
+        int lastSpotted = 0;
+        int count = 0;
+        for(int x = 0; x<seats.size(); x++){
+            if(seats[x]==1){
+                
+                count++;
+                if(count>=2){
+                    int distance = (x-lastSpotted)/2;
+                    res = max(distance,res);
+                }
+                lastSpotted = x;
+            }
+   
+        }
+        return res;
+    }
+};

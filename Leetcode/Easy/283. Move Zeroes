@@ -1,0 +1,17 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(1)
+Iterate through array. If there is a nonzero integer, swap the position of the left pointer with the nonzero integer. This will guarantee the order is maintained and that the zeros end up in the end.
+*/
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int L = 0;
+        int R = 0;
+        while(R<nums.size()){
+            if(nums[R]!=0) swap(nums[L++],nums[R]);
+            R++;
+        }
+    }
+};

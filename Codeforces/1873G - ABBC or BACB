@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	/*
+	AB = BC
+	BA = CB
+	BAAABAA
+	CBAABAA 1
+	CCBABAA 2
+	CCCBCBA 3
+	CCCBCCB 4
+	BAB
+	AABA
+	 
+	
+	*/
+	while(tc--){
+		string in;
+		cin>>in;
+		int res = 0;
+		vector<int>aGroups;
+		int ac = 0;
+		for(int x = 0; x<in.size(); x++){
+			if(in[x]=='A')ac++;
+			if(in[x]=='B'){
+				aGroups.push_back(ac);
+				ac = 0;
+			}
+		}
+		aGroups.push_back(ac);
+		sort(aGroups.begin(),aGroups.end());
+		for(int x = 1; x<aGroups.size(); x++) res+=aGroups[x];
+		
+		cout<<res<<endl;
+	}
+	return 0;
+}

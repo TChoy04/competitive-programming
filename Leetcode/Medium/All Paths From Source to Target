@@ -1,0 +1,22 @@
+Time Complexity: O(2^N)
+Space Complexity: O(N)
+#Check every possible path, backtrack when you get to the end (When i is equal to the size of graph)
+
+class Solution {
+public:
+    void helper(vector<vector<int>>& ans, vector<vector<int>>& graph, int i, vector<int> temp){
+        temp.push_back(i);
+        if(i == graph.size()-1) ans.push_back(temp);
+        else for(int it : graph[i]){
+            cout<<it<<endl;
+            helper(ans,graph,it,temp);
+        }
+        temp.pop_back();
+    }
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+       vector<vector<int>>ans;
+       vector<int>temp;
+       helper(ans,graph,0,temp);
+       return ans;
+    }
+};

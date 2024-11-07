@@ -1,0 +1,14 @@
+Time Complexity: O(NLogN)
+Space Complexity: O(1)
+//If empty, no appointments therefore true. Sort intervals then make sure they don't overlap.
+class Solution {
+public:
+    bool canAttendMeetings(vector<vector<int>>& intervals) {
+        if(intervals.empty()) return true;
+        sort(intervals.begin(),intervals.end());
+        for(int x = 0; x<intervals.size()-1; x++){
+            if(intervals[x][1]>intervals[x+1][0]) return false;
+        }
+        return true;
+    }
+};

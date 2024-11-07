@@ -1,0 +1,56 @@
+Time Complexity: O(S+T)
+Space Complexity: O(S+T)
+//Sliding window problem
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        //If t is larger than s, return empty string (no possible answer)
+        if(t.size()>s.size()) return "";
+        //Left window
+        int L = 0;
+        //Result string
+        string res = "";
+        //Used to check for smallest window size
+        int smallest = INT_MAX;
+        //Window to hold characters in t
+        unordered_map<char,int>chars;
+        //Put characters from t into hashmap
+        for(char x : t) chars[x]++;
+        //Used to keep track of letters satisfied
+        int count = 0;
+        //Size of map
+        int n = chars.size();
+        //Hashmap to hold characters in window.
+        unordered_map<char,int>window;
+        //Right window
+        for(int R = 0; R<s.size(); R++){
+            //Increment value at right window
+            window[s[R]]++;
+            //If count in window is equal to char count, increment count by one
+            if(window[s[R]]==chars[s[R]]) count++;
+            //While window is valid
+            while(count==n){
+                //If window is smaller than current smallest window
+                if(R-L<smallest){
+                    //Init temp string
+                    string temp = "";
+                    //Update smallest value
+                    smallest = R-L;
+                    //Fill temp string
+                    for(int x = L; x<=R; x++){
+                        temp+= s[x];
+                    }
+                    //Set result equal to temp
+                    res = temp;
+                }
+                //Decrement count if current left pointer is on character in t.
+                if(window[s[L]]==chars[s[L]]) count--; 
+                //Decrement window value on left pointer.
+                window[s[L++]]--;
+            }
+        }
+        //Return result.
+        return res;
+    }
+};

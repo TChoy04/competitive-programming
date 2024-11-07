@@ -1,0 +1,30 @@
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+Use a set to keep track of the integers in first and second sets and use them to check if they're valid for the answer. 
+Insert integers that are unique in each array into the set afterwards to ensure there are no duplicates.
+*/
+
+class Solution {
+public:
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        vector<vector<int>>res = {{},{}};
+        unordered_set<int>s;
+        for(int i : nums1) s.insert(i);
+        for(int i : nums2){
+            if(s.find(i)==s.end()){ 
+                res[1].push_back(i);
+                s.insert(i);
+            }
+        }
+        s.clear();
+        for(int i : nums2) s.insert(i);
+        for(int i : nums1){
+            if(s.find(i)==s.end()){
+                res[0].push_back(i);
+                s.insert(i);
+            }
+        }
+        return res;
+    }
+};

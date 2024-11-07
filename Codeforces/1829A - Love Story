@@ -1,0 +1,20 @@
+//trivial problem
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	int tc;
+	scanf("%i",&tc);
+	while(tc--){
+		string in;
+		cin>>in;
+		string compare = "codeforces";
+		int count = 0;
+		for(int x = 0; x<compare.size(); x++){
+			if(compare[x]!=in[x]) count++;
+		}
+		cout<<count<<endl;
+	}
+	return 0;
+}

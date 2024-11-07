@@ -1,0 +1,26 @@
+/* You are given two strings s and t consisting of only lowercase English letters.
+
+Return the minimum number of characters that need to be appended to the end of s so that t becomes a subsequence of s.
+
+A subsequence is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.*/
+
+
+class Solution {
+public:
+    int pivotInteger(int n) {
+        int L = 0;
+        int R = n;
+        int sumL = 0;
+        int sumR = n;
+        while(L<R){
+
+            if(sumL<=sumR){
+                sumL+=++L;
+            }
+            else{
+                sumR+= --R;
+            }
+        }
+        return sumL == sumR ? L : -1;
+    }
+};

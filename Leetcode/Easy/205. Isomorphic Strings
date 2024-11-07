@@ -1,0 +1,23 @@
+//Time Complexity: O(N)
+//Space Complexity: O(N)
+//check to see if there has been valued mapped to char before. if there has, make sure it's the same char. check to see if the char has been mapped to already.
+
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        unordered_map<char,char>m;
+        unordered_set<char>seen;
+        for(int x = 0; x<s.size(); x++){
+            char mapped = m[s[x]];
+            if(mapped){
+                if(m[s[x]]!=t[x]) return false;
+            }
+            else{
+                if(seen.find(t[x])!=seen.end()) return false;
+            }
+            m[s[x]] = t[x];  
+            seen.insert(t[x]);
+        }
+        return true;
+    }
+};

@@ -1,0 +1,18 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Naive solution would be nested for loop with N^2 time complexity and O(1) space. 
+//More optimized solution would be to use a hashmap as I did in this solution and store all the values and their index for the array, nums2.
+
+class Solution {
+public:
+    vector<int> anagramMappings(vector<int>& nums1, vector<int>& nums2) {
+        unordered_map<int,int>m;
+        for(int x = 0; x<nums2.size(); x++){
+            m[nums2[x]] = x;
+        }
+        for(int x = 0; x<nums1.size(); x++){
+            nums1[x] = m[nums1[x]];
+        }
+        return nums1;
+    }
+};

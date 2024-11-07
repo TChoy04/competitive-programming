@@ -1,0 +1,30 @@
+//First get the number in front of each domain and then find all domains by spliiting it by the period. Then use a map to keep count of how many times that domain appears. Iterate through map at end and attach to result vector.
+class Solution {
+public:
+    vector<string> subdomainVisits(vector<string>& cpdomains) {
+        vector<string>res;
+        map<string,int>m;
+        for(string domain : cpdomains){
+            int num;
+            string name = "";
+            for(int x = 0; x<domain.size(); x++){
+                if(domain[x]==' '){
+                    num = stoi(domain.substr(0,x+1));
+                    name = domain.substr(x+1);
+                }
+            }
+           for(int x = 0; x<name.size(); x++){
+                if(name[x]=='.'){
+                    string temp = name.substr(x+1);
+                    m[temp]+=num;
+                }
+           }
+            m[name] +=num;
+        }
+        for(pair<string,int> it : m){
+            res.push_back(to_string(it.second) + " "+ it.first);
+        }
+         return res;
+
+    }
+};

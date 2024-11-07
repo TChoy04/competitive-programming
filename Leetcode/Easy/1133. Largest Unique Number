@@ -1,0 +1,36 @@
+Time Complexity: O(N)
+Space Complexity: O(N)
+//Use map to keep track of count and return largest number with a count of 1
+
+class Solution {
+public:
+    int largestUniqueNumber(vector<int>& nums) {
+        unordered_map<int,int>m;
+        for(int x = 0; x<nums.size(); x++){
+            m[nums[x]]++;
+        }
+        int res = -1;
+        for(int x = 0; x<nums.size(); x++){
+            if(m[nums[x]]==1 && nums[x]>res) res = nums[x];
+        }
+        return res;
+    }
+};
+
+Time Complexity: O(NLogN)
+Space Complexity: O(1)
+//Sorting solution
+//Sort and skip duplicates.
+
+class Solution {
+public:
+    int largestUniqueNumber(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        if(nums.size()==1) return nums[0];
+        for(int x = nums.size()-1; x>=0; x--){
+            if(x==0 || nums[x]!=nums[x-1]) return nums[x];
+            while(x>0 && nums[x]==nums[x-1]) x--;
+        }
+        return -1;
+    }
+};

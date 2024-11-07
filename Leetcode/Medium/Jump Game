@@ -1,0 +1,16 @@
+#Iterate through the array. Calculate the maximum distance you can jump by adding the current array position with max jump distance from there.
+#If you arrive at an array position that is greater than the maximum jump distance, you are unable to reach it, thus returning false.
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int jumped = 0;
+        for(int x = 0; x<nums.size(); x++){
+            if(jumped<x) return false;
+            jumped = max(jumped,nums[x]+x);
+        }
+        return true;
+    }
+};
