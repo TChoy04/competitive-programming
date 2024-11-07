@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        if(amount==0) return 0;
+        vector<int>coinCount(amount+1,INT_MAX);
+        for(int x : coins){
+            if(x>amount) continue;
+            coinCount[x] = 1;
+        }
+
+        for(int x = 0; x<amount; x++){
+            if(coinCount[x]!=INT_MAX){
+                for(long coin : coins){
+                    long long sum = coin + x;
+                    if(sum>amount) continue;
+                    coinCount[sum] = min(coinCount[sum],coinCount[x] + 1);
+                }
+            }
+        }
+        return coinCount[amount] == INT_MAX ? -1 : coinCount[amount];
+        
+    }
+};
