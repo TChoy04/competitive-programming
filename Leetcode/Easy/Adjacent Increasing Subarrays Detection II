@@ -1,0 +1,36 @@
+//use a binary search, prefixsum array is not actually a prefix sum, but it computes the increasing subarrays
+class Solution {
+public:
+
+    int maxIncreasingSubarrays(vector<int>& nums) {
+        vector<int>prefixSum(nums.size(),1);
+        prefixSum.push_back(nums[0]);
+        for(int x = nums.size()-2; x>=0; x--){
+            if(nums[x]<nums[x+1]){
+                prefixSum[x] = prefixSum[x+1] +1;
+            }
+        }
+        int L  = 1;
+        int R = nums.size()/2;
+        int res = 0;
+        while(R>=L){
+            int mid = (R-L)/2 + L;
+            int flag1 = 0;
+            for(int i = 0; nums.size()>i+2*mid-1; ++i){
+                if(prefixSum[i]>=mid && prefixSum[i+mid]>=mid){
+                    flag1 = 1;
+                    break;
+                }
+            }
+            if(flag1){
+                res = mid;
+                L = mid+1;
+                
+            }else{
+                R = mid-1;
+            }
+        }
+        return res;
+        
+    }
+};
