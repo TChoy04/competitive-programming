@@ -1,0 +1,48 @@
+//Check the consecutive start and end
+//Since you can only perform one action you must find the longest consecutive prefix or suffix
+//If they are equal then you can sum them since you will only be replacing the center
+//If either are the entire length that means that the entire array is the same returning 0
+//If the size is one then return 0
+//Get left count and then right count.
+//If either are equal to the size return 0
+//If the first and last element are the same return the length of the center with the formula n+1-countRight-countLeft
+//Otherwise return the longest consecutive sequence from either the prefix or suffix subtracted from the length of the array.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int solve(vector<int>arr){
+	int n = arr.size()-1;
+	int countRight = 1, countLeft = 1;
+	if(n==0) return 0;
+	for(int R = n; R>=1; R--){
+		if(arr[R]==arr[R-1]) countRight++;
+		else break;
+	}
+	for(int L = 0; L<n; L++){
+		if(arr[L]==arr[L+1]) countLeft++;
+		else break;
+	}
+	if(countRight==n+1 || countLeft==n+1) return 0;
+	if(arr[0]==arr[n]) return n+1-countRight-countLeft;
+	return n+1- max(countRight,countLeft);
+}
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		vector<int>arr;
+		for(int i = 0; i<n; i++){
+			int temp;
+			cin>>temp;
+			arr.push_back(temp);
+		}
+		cout<<solve(arr)<<"\n";
+	}
+	return 0;
+}
