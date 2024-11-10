@@ -1,0 +1,17 @@
+//Set solution
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	int tc;
+	cin>>tc;
+	set<int>unique;
+	while(tc--){
+		int temp;
+		cin>>temp;
+		unique.insert(temp);
+	}
+	cout<< unique.size();
+}
