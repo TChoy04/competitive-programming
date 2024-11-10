@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+string temp = "";
+int n = 0;
+bool solve(int start){
+	if(start<0) return false;
+	if(start>=n-3) return false;
+	if(temp[start]=='1' && temp[start+1]=='1' && temp[start+2]=='0' && temp[start+3] =='0') return true;
+	return false;
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		cin>>temp;
+		n = temp.size();
+		int count = 0;
+		for(int x = 0; x<temp.size(); x++){
+			if(solve(x)) count++; 
+		}
+		int queries = 0;
+		cin>>queries;
+		while(queries--){
+			int i, j;
+			cin>>i>>j;
+			i--;
+			if(temp[i]!=j+'0'){
+				bool beforeCount = solve(i) || solve(i-1) || solve(i-2) || solve(i-3);
+				temp[i] = j+'0';
+				bool afterCount = solve(i) || solve(i-1) || solve(i-2) || solve(i-3);
+				count+= afterCount-beforeCount;
+			}
+			cout<<(count?"YES\n" : "NO\n");
+		
+		}
+
+
+	}
+	return 0;
+}
