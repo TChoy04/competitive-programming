@@ -1,0 +1,98 @@
+//Count zeros and ones
+//As long as zeros and ones are greater than 0, you can perform operations
+//Increment the one being added and remove a zero and one every operation
+//Order doesn't really matter for string i since you can make the operation anywhere as long as a zero and one exist.
+#include <bits/stdc++.h>
+using namespace std;
+
+bool solve(string i, string j){
+	long long zeros = 0, ones = 0;
+	for(char c : i){
+		if(c=='0') zeros++;
+		else ones++;
+	}
+	if(zeros==0 || ones==0) return false;
+	for(int x = 0; x<j.size(); x++){
+		if(zeros==0 || ones==0) return false;
+		if(j[x]=='0') zeros++;
+		else ones++;
+		zeros--;
+		ones--;
+		
+	}
+	return zeros>=0 || ones>=0;
+}
+
+
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int len;
+		cin>>len;
+		string firstString = "", secondString ="";
+		cin>>firstString>>secondString;
+		cout<<(solve(firstString,secondString) ? "YES\n":"NO\n");
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+//First solution
+//TLE, simulate the process.
+//More efficient solution above
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+
+bool solve(string i, string j){
+	int n = i.size();
+	int m = j.size();
+	if(n==0) return true;
+	if(n<m) return false;
+	for(int x = 0; x<m; x++){
+		bool flag = false;
+		for(int y = 0; y<i.size()-1; y++){
+			if(i[y]!=i[y+1]){
+				i[y] = j[x];
+				i.erase(y+1,1);
+				flag = true;
+				break;
+			}
+		}
+		if(flag==false){
+			return false;
+		}
+	}
+	return true;
+	
+	
+}
+
+
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int len;
+		cin>>len;
+		string firstString = "", secondString ="";
+		cin>>firstString>>secondString;
+		cout<<(solve(firstString,secondString) ? "YES\n":"NO\n");
+	}
+	return 0;
+}
