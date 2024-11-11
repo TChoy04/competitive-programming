@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(),g.end());
+        sort(s.begin(),s.end());
+        if(s.size()==0 || g.size()==0) return 0;
+        int cookiePointer = 0;
+        int count = 0;
+        
+        for(int x = 0; x<g.size(); x++){
+            if(cookiePointer>=s.size()) break;
+            while(s[cookiePointer]<g[x]){
+                cookiePointer++;
+                if(cookiePointer>=s.size()) return count;
+            }
+            if(s[cookiePointer]>=g[x]){
+                count++;
+                cookiePointer++;
+            }
+        }
+        return count;
+    }
+};
