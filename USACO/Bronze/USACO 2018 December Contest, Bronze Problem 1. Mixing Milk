@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	setIO("mixmilk");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int c1,b1,c2,b2,c3,b3;
+	cin>>c1>>b1>>c2>>b2>>c3>>b3;
+	int count = 100;
+	int bucket = 1;
+	while(count--){
+		if(bucket==1){
+			int remaining = c2-b2;
+			int possible = min(remaining,b1);
+			b1-=possible;
+			b2+= possible;
+			bucket = 2;
+		}else if(bucket==2){
+			int remaining = c3-b3;
+			int possible = min(remaining,b2);
+			b2-=possible;
+			b3+= possible;
+			bucket = 3;
+		}else{
+			int remaining = c1-b1;
+			int possible = min(remaining,b3);
+			b3-=possible;
+			b1+= possible;
+			bucket = 1;
+		}
+	}
+	cout<<b1<<"\n"<<b2<<"\n"<<b3;
+	
+	return 0;
+}
