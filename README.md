@@ -1,7 +1,7 @@
 # competitive programming
 
 ## Goals:
->>  - [X] **Achieve Knight on LeetCode**
+ - [X] **Achieve Knight on LeetCode**
 >  - [ ] **Achieve Pupil on Codeforces**
 >  - [ ] **Achieve Apprentice on Codeforces**
 >  - [ ] **Achieve Specialist on Codeforces**
