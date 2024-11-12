@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	setIO("shell");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int tc;
+	cin>>tc;
+	vector<int>res(3);
+	vector<int>shells = {0,1,2};
+	while(tc--){
+		int a,b,c;
+		cin>>a>>b>>c;
+		a--;b--;c--;
+		swap(shells[a],shells[b]);
+		res[shells[c]]++;
+	}
+	cout<<max({res[0],res[1],res[2]})<<endl;
+	
+	return 0;
+}
