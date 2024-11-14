@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+int main(){
+	setIO("cowsignal");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int m, n, k;
+	cin>>m>>n>>k;
+	for(int i = 0; i<m; i++){
+		string tempString = "";
+		for(int j = 0; j<n; j++){
+			char character;
+			cin>>character;
+			for(int x = 0; x<k; x++){
+				tempString+= character;
+			}
+		}
+		for(int x = 0; x<k; x++){
+			cout<<tempString<<"\n";
+		}
+	}
+	
+	
+	return 0;
+}
