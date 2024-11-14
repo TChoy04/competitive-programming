@@ -1,0 +1,33 @@
+//Optimized
+class Solution {
+public:
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<int>res = nums;
+        vector<int>current;
+        for(int x = nums.size()-1; x>=0; x--){
+            auto it = lower_bound(current.begin(),current.end(),nums[x]);
+            res[x] = (it-current.begin());
+            current.insert(it,nums[x]);
+        }
+        //1,2,6
+        // 2
+        return res;
+    }
+};
+
+//Less optimal
+
+class Solution {
+public:
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<int>res = nums;
+        for(int x = 0; x<nums.size(); x++){
+            vector<int>temp(nums.begin()+x+1,nums.end());
+            sort(temp.begin(),temp.end());
+            res[x] = lower_bound(temp.begin(),temp.end(),nums[x]) - temp.begin();
+        }
+        //1,2,6
+        // 2
+        return res;
+    }
+};
