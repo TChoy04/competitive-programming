@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+int main(){
+	setIO("speeding");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int n,m;
+	cin>>n>>m;
+	//length, speed limit
+	deque<pair<int,int>>q1;
+	//distance, speed 
+	deque<pair<int,int>>q2;
+	for(int i = 0; i<n; i++){
+		int a,b;
+		cin>>a>>b;
+		q1.push_back({a,b});
+	}
+	for(int i = 0; i<m; i++){
+		int a,b;
+		cin>>a>>b;
+		q2.push_back({a,b});
+	}
+	int res = 0;
+	while(q2.size()){
+		int roadDistance = q1.front().first;
+		int speedLimit = q1.front().second;
+		q1.pop_front();
+		int travelledDistance = q2.front().first;
+		int speed = q2.front().second;
+		q2.pop_front();
+		res = max(res,speed-speedLimit);
+		if(roadDistance-travelledDistance>0){
+			q1.push_front({roadDistance-travelledDistance,speedLimit});
+		}else if(roadDistance-travelledDistance!=0){
+			q2.push_front({travelledDistance-roadDistance,speed});
+		}
+	}
+	
+	cout<<res;
+	
+	
+	
+	return 0;
+}
