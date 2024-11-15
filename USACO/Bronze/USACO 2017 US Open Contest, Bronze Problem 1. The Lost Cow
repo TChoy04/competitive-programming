@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+ 
+int main(){
+	//3 6
+	//3->4 res = 1
+	//4-> 1 res = 4
+	//1->7 res = 10
+	setIO("lostcow");
+	//4 - 5 1
+	//-5 - 5 10
+	//-5 5 
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int x,y;
+	cin>>x>>y;
+	int res = 0;
+	int mult = 1;
+	int i = 1;
+	int current = x;
+	if(y>x){
+		while(true){
+			int destination = x+(i*mult);
+			if(destination>=y){
+				res += abs(current-y);
+				break;
+			}
+			res+= abs(destination-current);
+			current = destination;
+			
+			i*=2;
+			mult*=-1;
+		}
+	}else{
+		while(true){
+			int destination = x+(i*mult);
+			if(destination<=y){
+				res += abs(current-y);
+				break;
+			}
+			res+= abs(destination-current);
+			current = destination;
+			
+			i*=2;
+			mult*=-1;
+		}
+	}
+	cout<<res;
+	return 0;
+}
