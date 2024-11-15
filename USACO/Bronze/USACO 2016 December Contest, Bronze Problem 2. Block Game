@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+ 
+int main(){
+	setIO("blocks");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int tc;
+	cin>>tc;
+	vector<int>res(26,0);
+
+	for(int i = 0; i<tc; i++){
+		string first, second;
+		cin>>first>>second;
+		map<char,int>s1;
+		map<char,int>s2;
+		for(char j : first){
+			s1[j]++;
+		}
+		for(char j : second){
+			s2[j]++;
+		}
+		unordered_set<int>seen;
+		for(auto it : s1){
+			res[it.first-'a'] += max(s1[it.first],s2[it.first]);
+			seen.insert(it.first-'a');
+		}
+		for(auto it : s2){
+			if(seen.find(it.first-'a')!=seen.end()){
+				continue;
+			}else{
+				res[it.first-'a'] += max(s1[it.first],s2[it.first]);
+			}
+		}
+	}
+	for(int i : res) cout<<i<<"\n";
+	return 0;
+}
