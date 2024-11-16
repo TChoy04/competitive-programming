@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+ 
+int main(){
+	//setIO("problemname");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int tc;
+	cin>>tc;
+	vector<int>xAxis(tc,0);
+	vector<int>yAxis(tc,0);
+	int res = 0;
+	for(int i = 0; i<tc; i++){
+		cin>>xAxis[i];
+	}
+	for(int i = 0; i<tc; i++){
+		cin>>yAxis[i];
+	}
+	for(int i = 0; i<tc; i++){
+		for(int j = i+1; j<tc; j++){
+			int val1 = xAxis[i] - xAxis[j];
+			val1 = pow(val1,2);
+			int val2 = yAxis[i] - yAxis[j];
+			val2 = pow(val2,2);
+			res = max(res,val1+val2);
+		}
+	}
+	cout<<res;
+	
+	return 0;
+}
