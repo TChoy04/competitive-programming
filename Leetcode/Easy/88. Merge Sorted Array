@@ -1,0 +1,16 @@
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int R = m+n-1;
+        if(nums2.size()==0) return;
+        if(nums1.size()==nums2.size()) nums1 = nums2;
+        n--;
+        m--;
+        while(n>=0 && m>=0){
+            if(nums1[m]>nums2[n]) nums1[R--] = nums1[m--];
+            else nums1[R--] = nums2[n--];
+        }
+        while(m>=0) nums1[R--] = nums1[m--];
+        while(n>=0) nums1[R--] = nums2[n--];
+    }
+};
