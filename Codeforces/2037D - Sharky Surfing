@@ -1,0 +1,60 @@
+//Keep track of hurdles and powerups
+//When you can't pass a hurdle, check the available powerups from you and use the ones that have the highest values first since you want the least number of powerups possible. 
+//Use a priority queue to keep track of the highest value possible powerups and use queues to keep track of the order of hurdles and powerups available since they are inputted in order.
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+//1,2,3,4,5
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n,m,L;
+		cin>>n>>m>>L;
+		queue<pair<int,int>>hurdles;
+		queue<pair<int,int>>powerups;
+		for(int i = 0; i<n; i++){
+			int first,second;
+			cin>>first>>second;
+			hurdles.push({first,second});
+		}
+		for(int i = 0; i<m; i++){
+			int first,second;
+			cin>>first>>second;
+			powerups.push({first,second});
+		}
+		int count = 0;
+		int jumpDistance = 1;
+		priority_queue<int>possiblePowerups;
+		int failed = 1;
+		while(hurdles.size() && failed){
+			pair<int,int> current = hurdles.front();
+			int distance = current.second-current.first+2;
+			while(powerups.size() && current.first>powerups.front().first){
+				possiblePowerups.push(powerups.front().second);
+				powerups.pop();
+			}
+			while(distance>jumpDistance){
+				if(possiblePowerups.size()==0){
+					failed = 0;
+					break;
+				}
+				count++;
+				jumpDistance+= possiblePowerups.top();
+				possiblePowerups.pop();
+			}
+			hurdles.pop();
+		}	
+		if(hurdles.size() || failed==0) cout<<"-1\n";
+		else cout<<count<<"\n";
+	}
+	return 0;
+}
