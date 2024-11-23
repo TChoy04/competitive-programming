@@ -1,0 +1,34 @@
+//Check to see if there is a valid combination found for the dimensions. The dimensions will always be the size of the inputs subtracted by 2 since there are 2 values that don't belong. I added a found flag so I could get the rest of the inputs lol.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		set<int>s;
+		int arraySize = n-2;
+		bool found = false;
+		for(int i = 0; i<n; i++){
+			
+			int temp;
+			cin>>temp;
+			int expected = arraySize/temp;
+			if(arraySize%temp==0 && s.find(expected)!=s.end() && found==false){
+				found = true;
+				cout<<expected<<" "<<temp<<"\n";
+			}
+			s.insert(temp);
+		}
+	}
+	return 0;
+}
