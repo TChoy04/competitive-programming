@@ -1,0 +1,41 @@
+//If there is 4 or less numbers, it is not possible to generate a permutation with all composite numbers due to there always being at least one prime number when you use 1,2,3,4
+//If it is greater than 4, split the evens since even + even will always be even and odd + odd will always be even which will result in a composite number. 
+//The reason it doesn't work for less than 4 is because the pivot must be 4 + 5 since that is the first even/odd pair that will create a composite number
+//Previous possibilities for even/odd: 
+//1+2 = 3 (prime)
+//2+3 = 5 (prime)
+//3+4 = 7 (prime)
+//4+5 = 9 (composite) which is what we want.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+//1,2,3,4,5
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		if(n<=4) cout<<-1<<"\n";
+		else{
+			for(int i = 1; i<=n; i++){
+				if(i==4) continue;
+				if(i%2==0) cout<<i<<" ";
+			}
+			cout<<"4 5 ";
+			for(int i = 1; i<=n; i++){
+				if(i==5) continue;
+				if(i%2==1) cout<<i<<" ";
+			}
+			cout<<"\n";
+		}
+	}
+	return 0;
+}
