@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+//trivial
+int main(){
+	ios::sync_with_stdio(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		string input;
+		cin>>input;
+		int left = 0, right = 0;
+		bool change = false;
+		for(int x = 0; x<input.size(); x++){
+			if(isdigit(input[x])==false){
+				change = true;
+				continue;
+			}
+			if(change){
+				right*=10;
+				right+= input[x]-'0';
+			}else{
+				left*=10;
+				left+=input[x]-'0';
+			}
+		}
+		if(left==right)cout<<left<<"="<<right<<"\n";
+		if(left<right)cout<<left<<"<"<<right<<"\n";
+		if(left>right)cout<<left<<">"<<right<<"\n";
+	}
+	return 0;
+}
+
