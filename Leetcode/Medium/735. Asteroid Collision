@@ -1,0 +1,39 @@
+//could use further optimization
+//time complexity: O(n^2)
+//space complexity: O(n)
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int>res;
+        stack<int>pos;
+        for(int i : asteroids){
+            if(i>0){
+                pos.push(i);
+            }
+            else{
+                int flag = 1;
+                while(pos.size()){
+                    if(pos.top()<abs(i)){
+                        pos.pop();
+                    }else if(pos.top()==(abs(i))){
+                        flag = 0;
+                        pos.pop();
+                        break;
+                    }else{
+                        break;
+                    }
+                }
+                if(pos.empty() && flag==1) res.push_back(i);
+            }
+        }
+        vector<int>res2;
+        while(pos.size()){
+            res2.push_back(pos.top());
+            pos.pop();
+        }
+        reverse(res2.begin(),res2.end());
+        for(auto i : res2) res.push_back(i);
+        return res;
+    }
+};
