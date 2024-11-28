@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	int twinMoney = 0;
+	vector<int>coins(tc,0);
+	for(int i = 0; i<tc; i++){
+		cin>>coins[i];
+		twinMoney+= coins[i];
+	}
+	sort(coins.begin(),coins.end());
+	int myMoney = 0;
+	int count = 0;
+	for(int i = tc-1; i>=0; i--){
+		if(twinMoney>=myMoney){
+			myMoney += coins[i];
+			twinMoney -= coins[i];
+			count++;
+		}else{
+			break;
+		}
+	}
+	cout<<count;
+	return 0;
+}
