@@ -1,0 +1,28 @@
+//to minimize palindromes, get as many unique characters as you can. then when you need to repeat a character place it in front so you don't get another palindrome since for it to be a palindrome you'll need to be to somewhere else
+//for example aaeiou will not generate any extra palindromes other than aa.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	vector<char>vowels = {'a','e','i','o','u'};
+	while(tc--){
+		int n;
+		cin>>n;
+		string res = "";
+		for(int i = 0; i<n; i++){
+			res+=vowels[i%5];
+		}
+		sort(res.begin(),res.end());
+		cout<<res<<"\n";
+	}
+	return 0;
+}
