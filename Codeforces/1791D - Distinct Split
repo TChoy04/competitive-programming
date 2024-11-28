@@ -1,0 +1,40 @@
+//Start with the first substring as the first character and then just slide it over and keep track of the counts every iteration. Use a map to keep track of counts and use the size of map to keep track of unique characters. If the count is 0, remove it from the right window.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		int res = 0;
+		string str;
+		cin>>str;
+		map<char,int>chars;
+		map<char,int>chars2;
+		chars[str[0]]++;
+		for(int i = 1; i<n; i++){
+			chars2[str[i]]++;
+		}
+		int u = chars.size(), m = chars2.size();
+		res = max(res,u+m);
+		for(int i = 1; i<n; i++){
+			chars2[str[i]]--;
+			chars[str[i]]++;
+			if(chars2[str[i]]==0) chars2.erase(str[i]);
+			int u = chars.size(), m = chars2.size();
+			res = max(res,u+m);
+		}
+		cout<<res<<"\n";
+		
+	}
+	return 0;
+}
