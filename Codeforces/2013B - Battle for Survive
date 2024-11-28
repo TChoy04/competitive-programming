@@ -1,0 +1,35 @@
+//Sum up everything to the left of the 2nd to last number. This is because we want to subtract all of these from the 2nd to last. Then we will get the lowest possible number to subtract from the last number. 
+//If it is negative it will add and that will be optimal.
+//If it is positive it will be the lowest possible positive number and will still be optimal.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		long long sum = 0;
+		for(int i = 0; i<n-2; i++){
+			long long num;
+			cin>>num;
+			sum+=num;
+		}
+		long long diff;
+		cin>>diff;
+		diff-=sum;
+		long long res;
+		cin>>res;
+		res-=diff;
+		cout<<res<<"\n";
+	}
+	return 0;
+}
