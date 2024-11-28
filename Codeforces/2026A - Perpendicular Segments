@@ -1,0 +1,23 @@
+//In a square when you draw the diagonal that is the longest possible perpendicular line you can get. If you find the shorter of the two lengths and make a square with that and then draw the diagonals you will have the longest possible lines. 
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int x,y,k;
+		cin>>x>>y>>k;
+		int side = min(x,y);
+		cout<<"0 0 "<<side<<" "<<side<<"\n"<<side<<" 0 0 "<<side<<"\n";
+
+	}
+	return 0;
+}
