@@ -1,0 +1,47 @@
+//Two repeated characters will always work:
+//aa
+//a,aa = 2 which is even
+//Three unique characters will also always work
+//abc
+//a,b,c,ab,bc,abc which is valid
+//
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		string word;
+		cin >> word;
+		bool found = false;
+		for(int i = 0; i<word.size()-1; i++){
+			if(word[i]==word[i+1]){
+				cout<<word[i]<<word[i]<<"\n";
+				found = 1;
+				break;
+			}
+		}
+		if(found==true){
+			continue;
+		}
+		int n = word.size();
+		for(int i = 0; i<n-2; i++){
+			if(word[i]!=word[i+1] && word[i]!=word[i+2] && word[i+1]!=word[i+2]){
+				cout<<word[i]<<word[i+1]<<word[i+2]<<"\n";
+				found = true;
+				break;
+			}
+		}
+		if(found==false) cout<<"-1\n";
+	
+	}
+	return 0;
+}
