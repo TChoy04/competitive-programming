@@ -1,0 +1,31 @@
+//just keep count lol
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	string players;
+	cin>>players;
+	char current = players[0];
+	int count = 0;
+	for(char i : players){
+		if(i==current){
+			count++;
+			if(count==7){
+				cout<<"YES";
+				return 0;
+			}
+		}else{
+			current = i;
+			count = 1;
+		}
+	}
+	cout<<"NO";
+	return 0;
+}
