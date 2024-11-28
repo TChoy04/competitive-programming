@@ -1,0 +1,28 @@
+//relatively trivial 1000 rated question
+//use queue and check for the characters in order.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	string word;
+	cin>>word;
+	queue<char>hello;
+	string desired = "hello";
+	for(char i : desired) hello.push(i);
+	for(char i : word){
+		if(hello.empty()) break;
+		if(i==hello.front()){
+			hello.pop();
+		}
+	}
+	cout<< (hello.empty() ? "YES" : "NO");
+	
+	return 0;
+}
