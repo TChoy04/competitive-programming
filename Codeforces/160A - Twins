@@ -1,3 +1,4 @@
+//Sort and then start taking the highest value coins first. Greedy solution.
 #include <bits/stdc++.h>
 using namespace std;
  
