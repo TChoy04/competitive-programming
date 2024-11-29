@@ -1,0 +1,33 @@
+//check all elements from 4-n to see first if they are lucky and if they are if input mod i is zero
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	for(int i = 4; i<=tc; i++){
+		string temp = to_string(i);
+		int valid = true;
+		for(char j : temp){
+			if(j!='4' && j!='7'){
+				valid = false;
+				 break;
+			}
+		}
+		if(valid && tc%i==0){
+			cout<<"YES";
+			return 0;
+		}
+		}
+		cout<<"NO";
+		return 0;
+	}
+
+
