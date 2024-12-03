@@ -1,0 +1,58 @@
+//The parity of won't change of negative numbers. If there are 2 odds next to each other there will be 2 more positives which means the parity remains the same. If there is a negative and a positive next to each other, they reverse and there is an odd number anyways. 
+/*
+If it is even you can always remove all the negatives. Example shown under. Just shift the negatives until there are 2 negatives next to each other and then turn them positive. If there is even parity, you can get rid of all the negatives
+
+//2 -2 7 -3
+//2 -2 7 -3
+//2 2 -7 -3 
+//2 2 7 3 
+If it is an odd parity you can get rid of all but one. Keep the negative that has the 'greatest' value. (smallest absolute value) Example under.
+2 -2 -7 4 -3 
+2 -2 7 -4 -3
+2 -2 7 4 3 
+*/
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+//2 -2 -7 -3
+//2 -2 -7 3
+//2 2 7 -3 
+//2 -2 7 3 
+//
+//
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		vector<int>arr(n,0);
+		int negatives = 0;
+		priority_queue<int,vector<int>,greater<int>>pq;
+		for(int i = 0; i<n; i++){
+			cin>>arr[i];
+			if(arr[i]<0){
+				 negatives++;
+				 pq.push(abs(arr[i]));
+			}
+		}
+		int res = 0;
+			for(int i : arr){
+				res+= abs(i);
+			}
+		if(negatives%2==1){
+			res-= pq.top()*2;
+		}
+			cout<<res<<"\n";
+		}
+			return 0;
+		}
+
+
