@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	cin.ignore();
+	int res = 0;
+	while(tc--){
+		string input;
+		getline(cin,input);
+		stringstream line(input);
+		int num;
+		vector<int>a;
+		while(line>>num){
+			a.push_back(num);
+		}
+		if(a[0]>a[1]){
+			int valid = 1;
+			
+			for(int i = 0; i<a.size()-1; i++){
+				int diff = abs(a[i]-a[i+1]);
+				if(a[i]<=a[i+1] || diff>3){
+					valid = 0;
+					break;
+				}
+			}	
+			if(valid) res++;
+		}else{
+			int valid = 1;
+			for(int i = 0; i<a.size()-1; i++){
+				int diff = abs(a[i]-a[i+1]);
+				if(a[i]>=a[i+1] || diff>3){
+					valid = 0;
+					break;
+				}
+			}	
+			if(valid) res++;
+		}
+
+	}
+	cout<<res;
+	return 0;
+}
