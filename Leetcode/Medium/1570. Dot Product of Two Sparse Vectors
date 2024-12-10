@@ -1,0 +1,68 @@
+//Submission 1: Naive
+class SparseVector {
+public:
+    vector<int>v1;
+    SparseVector(vector<int> &nums) {
+        v1 = nums;
+    }
+    
+    // Return the dotProduct of two sparse vectors
+    int dotProduct(SparseVector& vec) {
+        int res = 0;
+        for(int i = 0; i<v1.size(); i++){
+            res+= v1[i]* vec.v1[i];
+        }
+        return res;
+    }
+};
+Submission 2: Hashmap
+class SparseVector {
+public:
+    map<int,int>m;
+    SparseVector(vector<int> &nums) {
+        for(int i = 0; i<nums.size(); i++){
+            if(nums[i]!=0) m[i] = nums[i];
+        }
+    }
+    
+    // Return the dotProduct of two sparse vectors
+    int dotProduct(SparseVector& vec) {
+        int res = 0;
+        if(vec.m.size()<m.size()){
+            swap(m,vec.m);
+        }
+        for(auto it : m){
+            res+= it.second* vec.m[it.first];
+        }
+        return res;
+    }
+};
+Submission 3: Optimized 2 pointer
+class SparseVector {
+public:
+    vector<pair<int,int>>v1;
+    SparseVector(vector<int> &nums) {
+        for(int i = 0; i<nums.size(); i++){
+            if(nums[i]!=0){
+                v1.push_back({i,nums[i]});
+            }
+        }
+    }
+    
+    // Return the dotProduct of two sparse vectors
+    int dotProduct(SparseVector& vec) {
+        int i = 0, j = 0, res = 0;
+        while(i<v1.size() && j<vec.v1.size()){
+            if(vec.v1[j].first==v1[i].first){
+                res+= vec.v1[j].second*v1[i].second;
+                i++;
+                j++;
+            }else if(vec.v1[j].first>v1[i].first){
+                i++;
+            }else{
+                j++;
+            }
+        }
+        return res;
+    }
+};
