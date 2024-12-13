@@ -1,0 +1,31 @@
+//TC NLogN
+//SC N
+//Use a priority queue that sorts in descending order. Use it to store a pair with the value first index second since you want the lowest value and then the lowest index if the values are thje same
+//Add all values to priority queue
+//Iterate through priority queue, use a vector to keep track of iterated indexes
+//Add current value in priority queue to result. Mark current index, mark neighbors if valid.
+//If index has already been marked, skip
+//Simple simulation problem
+
+class Solution {
+public:
+    long long findScore(vector<int>& nums) {
+        long long res = 0;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        for(int i = 0; i<nums.size(); i++){
+            pq.push({nums[i],i});
+        }
+        vector<bool>marked(nums.size(),false);
+        while(pq.size()){
+            pair<int,int> i = pq.top();
+            pq.pop();
+            if(marked[i.second]) continue;
+            marked[i.second] = true;
+            if(i.second+1<nums.size()) marked[i.second+1] = true;
+            if(i.second-1>=0) marked[i.second-1] = true;
+            res+= i.first;
+        }
+
+       return res; 
+    }
+};
