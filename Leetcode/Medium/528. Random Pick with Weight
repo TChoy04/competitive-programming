@@ -1,0 +1,27 @@
+//somewhat trivial, practical problem
+//O(N)
+//
+class Solution {
+public:
+vector<int>curr;
+    Solution(vector<int>& w) {
+        curr = w;
+    }
+    
+    int pickIndex() {
+       int idx = (rand()%accumulate(curr.begin(),curr.end(),0))+1;
+       int sum = 0;
+       for(int i = 0; i<curr.size(); i++){
+            sum+= curr[i];
+            if(sum>=idx) return i;
+            
+       }
+        return -1;
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(w);
+ * int param_1 = obj->pickIndex();
+ */
