@@ -31,3 +31,27 @@ public:
         return helper(root);
     }
 };
+
+//drafted solution here, more optimal uses dfs
+class Solution {
+public:
+    //2
+//  /  \
+   1    3
+   //2 min_range = LONG_MIN max_range = LONG_MAX
+   //works if 2 > LONG_MIN and 2 < max_range
+   //1 works if 1 < 2
+   //max range = root->val 
+   //max_range = min(root->val,max_range)
+   //3 works if 3 > min_range
+   //min range = max(root->val,min_range)
+    bool helper(TreeNode* root,long min_range, long max_range){
+        if(!root) return true;
+        if(root->val<=min_range || root->val >= max_range) return false;
+        return helper(root->left,min_range,min((long)root->val,max_range)) && helper(root->right,max((long)root->val,min_range),max_range);
+        
+    }
+    bool isValidBST(TreeNode* root) {
+        return helper(root,LONG_MIN, LONG_MAX);
+    }
+};
