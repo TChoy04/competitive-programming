@@ -1,0 +1,17 @@
+class Solution {
+public:
+    long long calculateScore(string s) {
+        long long res = 0;
+        map<char,priority_queue<int>>m;
+        for(int i = 0; i<s.size(); i++){
+            char mirror = abs(s[i]-'z') +'a';
+            if(m[mirror].size()==0){
+                m[s[i]].push(i);
+            }else{
+                res+= i- m[mirror].top();
+                m[mirror].pop();
+            }   
+        }
+        return res;
+    }
+};
