@@ -1,0 +1,23 @@
+TC: N^2
+SC: N
+//possibly the most inefficient solution that would've passed test cases. There are test cases that can be written that this would fail. 
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int n = gas.size();
+        for(int i = 0; i<n; i++){
+            int start = i;
+            int currentGas = gas[i];
+            if(gas[i]-cost[i]<=0 && gas.size()>1) continue;
+            for(int j = 0; j<n; j++){
+                int idx = (start+j)%n;  
+                currentGas-=  cost[idx];
+               // cout<<start<<" "<<currentGas<<endl;
+                if(currentGas>=0 && j==n-1) return start;
+                if(currentGas<0 && j!=n-1) break;
+                currentGas+= gas[(start+j+1)%n];
+            }
+        }
+        return -1;
+    }
+};
