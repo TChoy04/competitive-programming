@@ -1,0 +1,42 @@
+TC: N*M
+SC: N*M
+//simple bfs
+//remember to mark seen before inserting into bfs so the same element isn't repeated due to it not being marked seen until it is reached.
+class Solution {
+public:
+    int getFood(vector<vector<char>>& grid) {
+        vector<vector<int>>directions = {{0,1},{1,0},{0,-1},{-1,0}};
+        queue<vector<int>>bfs;
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<bool>>seen(n,vector<bool>(m,false));
+        int found = 0;
+        for(int i = 0; i<n; i++){
+            for(int j = 0; j<m; j++){
+                if(grid[i][j]=='*'){
+                    bfs.push({i,j,0});
+                    found = 1;
+                    break;
+                }
+            }
+            if(found) break;
+        }
+        while(bfs.size()){
+            int i = bfs.front()[0];
+            int j = bfs.front()[1];
+            int depth = bfs.front()[2];
+            if(grid[i][j]=='#') return depth;
+            bfs.pop();
+            for(int k = 0; k<4; k++){
+                int newI = i+directions[k][0];
+                int newJ = j+directions[k][1];
+                if(newI>=0 && newJ>=0 && newI<n && newJ<m && seen[newI][newJ]==false && grid[newI][newJ]!='X'){
+                    seen[newI][newJ] = true;
+                    bfs.push({newI,newJ,depth+1});
+                }
+            }
+        }
+
+        return -1;
+    }
+};
