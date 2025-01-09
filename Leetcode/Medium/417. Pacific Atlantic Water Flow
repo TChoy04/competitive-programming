@@ -1,4 +1,7 @@
 //bfs starting from the oceans starting points and then flow upwards to go from reverse to avoid traversing the impossible to reach tiles
+//tc n*m 
+//sc n*m
+//included a TLE solution that performs dfs on every single node that will try to reach the edges
 class Solution {
 public:
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
@@ -51,6 +54,47 @@ public:
         for(int i = 0; i<n; i++){
             for(int j = 0; j<m; j++){
                 if(reachesPacific[i][j] && reachesAtlantic[i][j]){
+                    res.push_back({i,j});
+                }
+            }
+        }
+        return res;
+    }
+};
+//tle solution that does a dfs from each tile
+class Solution {
+public:
+    vector<vector<int>>res;
+    vector<vector<bool>>reachPacific;
+    vector<vector<bool>>reachAtlantic;
+    vector<vector<int>>directions = {{0,1},{1,0},{-1,0},{0,-1}};
+    void helper(vector<vector<int>>&heights,int originalI, int originalJ, int i, int j,set<pair<int,int>>seen){
+        if(i==0 || j==0) reachPacific[originalI][originalJ] = true;
+        if(i==heights.size()-1 || j==heights[0].size()-1) reachAtlantic[originalI][originalJ] = true;
+        seen.insert({i,j});
+        
+        for(int z = 0; z<4; z++){
+            int newI = i+directions[z][0];
+            int newJ = j+directions[z][1];
+            if(newI>=0 && newJ>=0 && newI<heights.size() && newJ<heights[0].size() && seen.find({newI,newJ})==seen.end()){
+                if(heights[i][j]>=heights[newI][newJ]){
+                     helper(heights,originalI,originalJ,newI,newJ,seen);
+                }
+            }
+        }
+    }
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        reachPacific.assign(heights.size(),vector<bool>(heights[0].size(),false));
+        reachAtlantic.assign(heights.size(),vector<bool>(heights[0].size(),false));
+        for(int i = 0; i<heights.size(); i++){
+            for(int j = 0; j<heights[0].size(); j++){
+                set<pair<int,int>>seen;
+                helper(heights,i,j,i,j,seen);
+            }
+        }
+        for(int i = 0;i<heights.size(); i++){
+            for(int j = 0; j<heights[0].size(); j++){
+                if(reachPacific[i][j]&&reachAtlantic[i][j]){
                     res.push_back({i,j});
                 }
             }
