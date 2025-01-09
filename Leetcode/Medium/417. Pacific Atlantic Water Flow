@@ -1,0 +1,60 @@
+//bfs starting from the oceans starting points and then flow upwards to go from reverse to avoid traversing the impossible to reach tiles
+class Solution {
+public:
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        int n = heights.size();
+        int m = heights[0].size();
+        vector<vector<bool>>reachesAtlantic(n,vector<bool>(m,false));
+        vector<vector<bool>>reachesPacific(n,vector<bool>(m,false));
+        queue<pair<int,int>>atlanticBfs;
+        queue<pair<int,int>>pacificBfs;
+        vector<vector<int>>res;
+        vector<vector<int>>directions = {{0,1},{1,0},{-1,0},{0,-1}};
+        for(int i = 0; i<n; i++){
+            pacificBfs.push({i,0});
+            atlanticBfs.push({i,m-1});
+        }
+        for(int i = 0; i<m; i++){
+            pacificBfs.push({0,i});
+            atlanticBfs.push({n-1,i});
+        }
+        set<pair<int,int>>seen;
+        while(pacificBfs.size()){
+            int i = pacificBfs.front().first;
+            int j = pacificBfs.front().second;
+            pacificBfs.pop();
+            reachesPacific[i][j] = true;
+            seen.insert({i,j});
+            for(int z = 0; z<4; z++){
+                int newI = i+directions[z][0];
+                int newJ = j+directions[z][1];
+                if(newI>=0 && newJ>=0 && newI<n && newJ<m && seen.find({newI,newJ})==seen.end()){
+                    if(heights[newI][newJ]>=heights[i][j]) pacificBfs.push({newI,newJ});
+                }
+            }
+        }
+        seen.clear();
+        while(atlanticBfs.size()){
+            int i = atlanticBfs.front().first;
+            int j = atlanticBfs.front().second;
+            atlanticBfs.pop();
+            reachesAtlantic[i][j] = true;
+            seen.insert({i,j});
+            for(int z = 0; z<4; z++){
+                int newI = i+directions[z][0];
+                int newJ = j+directions[z][1];
+                if(newI>=0 && newJ>=0 && newI<n && newJ<m && seen.find({newI,newJ})==seen.end()){
+                    if(heights[newI][newJ]>=heights[i][j]) atlanticBfs.push({newI,newJ});
+                }
+            }
+        }
+        for(int i = 0; i<n; i++){
+            for(int j = 0; j<m; j++){
+                if(reachesPacific[i][j] && reachesAtlantic[i][j]){
+                    res.push_back({i,j});
+                }
+            }
+        }
+        return res;
+    }
+};
