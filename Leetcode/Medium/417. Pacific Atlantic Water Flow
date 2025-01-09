@@ -1,7 +1,7 @@
 //bfs starting from the oceans starting points and then flow upwards to go from reverse to avoid traversing the impossible to reach tiles
 //tc n*m 
 //sc n*m
-//included a TLE solution that performs dfs on every single node that will try to reach the edges
+//included a TLE solution underneath this solution that performs dfs on every single node that will try to reach the edges
 class Solution {
 public:
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
