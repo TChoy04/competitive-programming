@@ -1,0 +1,35 @@
+//tc N
+//sc numRows*N
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(s.size()==numRows || numRows==1) return s;
+        string res = "";
+        vector<vector<char>>sim(numRows,vector<char>(s.size(),'-'));
+        int i = 0;
+        int j = 0;
+        int idx = 0;
+        while(idx<s.size()){
+            while(idx<s.size() && i<numRows){
+                sim[i][j] = s[idx];
+                i++;
+                idx++;    
+                
+            }
+            i--;
+            while(idx<s.size() && i>0){
+                j++;
+                i--;
+                sim[i][j] = s[idx];
+                idx++;
+            }
+            i++;
+        }
+        for(int x = 0; x<sim.size(); x++){
+            for(int y = 0; y<sim[0].size(); y++){
+                if(sim[x][y]!='-') res+=sim[x][y];
+            }
+        }
+        return res;
+    }
+};
