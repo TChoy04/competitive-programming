@@ -1,0 +1,32 @@
+tc: 2^n
+sc: n
+backtracking
+class Solution {
+public:
+    vector<vector<int>>res;
+    void helper(vector<int>&candidates, int target, vector<int>&curr, int index){
+        if(target==0){
+            vector<int>temp = curr;
+           // sort(temp.begin(),temp.end());
+            res.push_back(temp);
+            return;
+        }
+        if(target<0){
+            return;
+        }
+        for(int i = index; i<candidates.size(); i++){
+            //if it is not the first element of this iteration and it is the same as the previous element that means it has already been counted. same recursive layer + same value is unneeded since there it is already taking into consideration the fact that all uses of the number are being used
+            if (i > index && candidates[i] == candidates[i - 1]) continue;
+            if(candidates[i]>target) return;
+            curr.push_back(candidates[i]);
+            helper(candidates,target-candidates[i],curr,i+1);
+            curr.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<int>curr;
+        sort(candidates.begin(),candidates.end());
+        helper(candidates,target,curr,0);
+        return res;
+    }
+};
