@@ -1,0 +1,29 @@
+tc:2^n
+sc:n
+
+//relatively trivial
+
+class Solution {
+public:
+    vector<vector<int>>res;
+    void helper(int k, vector<int>&candidates, vector<int>&curr,int n, int index){
+        if(curr.size()==k){
+            if(n==0) res.push_back(curr);
+            return;
+        }
+        for(int i = index; i<candidates.size(); i++){
+            curr.push_back(candidates[i]);
+            helper(k,candidates,curr,n-candidates[i],i+1);
+            curr.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int> candidates;
+        vector<int> curr;
+        for(int i = 1; i<=9;i++){
+            candidates.push_back(i);
+        }
+        helper(k,candidates,curr,n,0);
+        return res;
+    }
+};
