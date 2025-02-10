@@ -1,0 +1,23 @@
+//backtracking, prune when more closed than open parentheses since that is invalid
+class Solution {
+public:
+    vector<string>res;
+    void helper(string& curr,int open, int closed,int& n){
+        if(closed>open || open>n || closed>n) return;
+        if(open==closed && open==n){
+            res.push_back(curr);
+            return;
+        }
+        curr+='(';
+        helper(curr,open+1,closed,n);
+        curr.pop_back();
+        curr+=')';
+        helper(curr,open,closed+1,n);
+        curr.pop_back();
+    }
+    vector<string> generateParenthesis(int n) {
+        string curr;
+        helper(curr,0,0,n);
+        return res;
+    }
+};
