@@ -1,0 +1,51 @@
+//contest question D
+#include <bits/stdc++.h>
+using namespace std;
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+/*
+1 1 2 2 1 1 3 3 1 1
+1 
+*/
+int main(){
+	//setIO("problemname");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		vector<int>nums(n,0);
+		for(int i = 0; i<n; i++){
+			cin>>nums[i];
+		}
+		set<int>s;
+		for(int i : nums){
+			s.insert(i);
+		}
+		vector<int>unused;
+		//7 5
+		int idx = 1;
+		int diff = n-s.size();
+		while(unused.size()<diff){
+			if(s.find(idx)==s.end()){
+				unused.push_back(idx);
+			}
+			idx++;
+		}
+		idx = 0;
+		for(int i : nums){
+			if(s.find(i)!=s.end()){
+				cout<<i<<" ";
+				s.erase(i);
+			}else{
+				cout<<unused[idx++]<<" ";
+			}
+		}
+		cout<<"\n";
+	}
+	return 0;
+}
