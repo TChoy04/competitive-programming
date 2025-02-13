@@ -1,0 +1,22 @@
+//extremely trivial
+#include <bits/stdc++.h>
+using namespace std;
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+ //7
+ //1,6 6,1 3,4 4,3 2,5 5,2
+int main(){
+	//setIO("problemname");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		cout<<n-1<<"\n";
+	}
+	return 0;
+}
