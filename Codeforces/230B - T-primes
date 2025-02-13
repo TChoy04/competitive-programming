@@ -1,0 +1,35 @@
+//use sieve
+//only things that have 3 factors are squares of prime numbers since they will have themselves as a factor and the 2 other factors that made them a prime in the first place.
+#include <bits/stdc++.h>
+using namespace std;
+ 
+ 
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int n;
+	cin>>n;
+	vector<bool>sieve(1e6,true);
+	sieve[0] = false;
+	sieve[1] = false;
+	for(long long i = 2; i<sieve.size(); i++){
+		if(sieve[i]){
+			for(long long j = i+i; j<sieve.size(); j+=i){
+				sieve[j] = false;
+			}
+		}
+	}
+	set<long long>check;
+	for(long long i = 2; i<sieve.size(); i++){
+		if(sieve[i]){
+			check.insert(i*i);
+		}
+	}
+	while(n--){
+		long long temp;
+		cin>>temp;
+		if(check.find(temp)!=check.end()) cout<<"YES";
+		else cout<<"NO";
+		cout<<"\n";
+	}
+}
