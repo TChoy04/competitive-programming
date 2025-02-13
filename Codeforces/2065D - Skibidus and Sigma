@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void setIO(string s) {
+    freopen((s + ".in").c_str(), "r", stdin);
+    freopen((s + ".out").c_str(), "w", stdout);
+}
+
+/*
+
+2 2 2 2 
+3 2 1 2 
+4 1 2 1 
+4 1 2 1 + 3 2 1 2 + 2 2 2 2
+4 + 5 + 7 + 8 + 11 + 13 + 14 + 16 + 18 + 20 + 22 + 24
+1 2
+3 4
+5 6
+5 + 11 + 14 + 18 + 19 + 21
+
+4 5 6 1 2 3 
+4 + 9 + 15 + 16 + 18 + 21
+*/
+long long getWeight(vector<long long>a){
+	long long n = a.size();
+	long long aWeight = 0;
+	for(long long i = 0; i<a.size(); i++){
+		aWeight += (n-i)*a[i];
+	}
+	return aWeight;
+}
+struct comp {
+    bool operator()(const vector<long long>& a, const vector<long long>& b) {
+        long long asum = accumulate(a.begin(), a.end(), 0), bsum = accumulate(b.begin(), b.end(), 0);
+        if(asum!=bsum) return asum<bsum;
+ 		return getWeight(a)<getWeight(b);
+    }
+};
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long tc;
+    cin >> tc;
+
+    while (tc--) {
+		long long n,m;
+		cin>>n>>m;
+		priority_queue<vector<long long>, vector<vector<long long>>, comp> pq;
+		for(long long i = 0; i<n; i++){
+			vector<long long>temp(m);
+			for(long long j = 0; j<m; j++){
+				 cin>>temp[j];
+			}
+			pq.push(temp);
+		}
+		long long res = 0;
+		long long sum = 0;
+		while(pq.size()){
+			vector<long long>temp = pq.top();
+			for(long long i : temp){
+				sum+= i;
+				res+=sum;
+			}
+			pq.pop();
+		}
+		cout<<res<<endl;
+		
+		
+    }
+ 
+}
