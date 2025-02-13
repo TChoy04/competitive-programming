@@ -1,0 +1,21 @@
+//trivial
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        int res = 0;
+        priority_queue<long long,vector<long long>,greater<long long>>pq;
+        for(int i : nums){
+            pq.push(i);
+        }
+        while(pq.top()<k){
+            long long first = pq.top();
+            pq.pop();
+            long long second = pq.top();
+            pq.pop();
+            res++;
+            long long third = min(first,second)*2+(max(first,second));
+            pq.push(third);
+        }
+        return res;
+    }
+};
