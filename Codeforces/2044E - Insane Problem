@@ -1,0 +1,42 @@
+//contest question E
+#include <bits/stdc++.h>
+using namespace std;
+
+void setIO(string s) {
+    freopen((s + ".in").c_str(), "r", stdin);
+    freopen((s + ".out").c_str(), "w", stdout);
+}
+
+/*
+y/x = k^n
+y = k^n * x
+L2<= k^n*x <= R2
+L2/k^n <= x <= R2/k^n
+*/
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int tc;
+    cin >> tc;
+
+    while (tc--) {
+        long long k, L1, R1, L2, R2;
+        cin >> k >> L1 >> R1 >> L2 >> R2;
+
+        long long res = 0;
+        long long powK = 1;
+        while(powK<=R2){
+        	long long leftBound = ceil((L2+0.0)/(powK+0.0));
+        	long long rightBound = R2/powK;
+        	leftBound = max(leftBound,L1);
+        	rightBound = min(rightBound,R1);
+        	if(leftBound<=rightBound)res+= (rightBound-leftBound+1);
+        	powK*=k;
+        }
+
+        cout << res << "\n";
+    }
+
+    return 0;
+}
