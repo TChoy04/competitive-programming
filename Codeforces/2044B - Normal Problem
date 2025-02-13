@@ -1,0 +1,29 @@
+//contest question B
+#include <bits/stdc++.h>
+using namespace std;
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+ //7
+ //1,6 6,1 3,4 4,3 2,5 5,2
+ //4
+ //2,2 1,3 3,1 
+int main(){
+	//setIO("problemname");
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		string s;
+		cin>>s;
+		reverse(s.begin(),s.end());
+		for(char& i : s){
+			if(i=='q') i = 'p';
+			else if(i=='p') i = 'q';
+		}
+		cout<<s<<"\n";
+	}
+	return 0;
+}
