@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+/*
+s before p is also difficult because you will have this:
+sspp
+second s will want order so it will need to be something like 4123
+but then p will want something like 123 behind it in any permutation
+this is not possible because the second s will want everything in front of it
+s and p cannot coexist except for when:
+p is in last position
+since p wants everything before it to be in order
+if p is the last element, everything behind it will be in order
+or if s is in the first position
+since s wants everything in front of it to be in order, if it is the first element, everything must be a permutation
+otherwise, p and s cannot coexist with each other. 
+if p is last or s is first you can turn them into a .
+
+
+
+p before s is difficult because the p will have to hold a lower number, which could potentially be 1
+every subarray needs the 1 since it needs to be from 1-n
+so p will have 1-p
+example of p before s behind impossible
+ppss
+second p wants 123 in front of it
+first s wants 123 behind it 
+both cannot be true since it'll have to be 
+4123 for second p's condition (any permutation of 123 like 4321 etc)
+and first s will want something like 1234 or 1324 but it can't have the 4 since the n is 3 in this situation and the second p's condition will force the 4 in the first position
+therefore this is impossible
+
+x
+6
+pss..s 
+1
+.sp.
+s here will need 123 in front of it
+p here will need 123 behind it 
+s wants 4123
+p wants 1234
+sp
+s wants 12
+p wants 12 as well
+sp.
+s wants 123 or 132
+p wants 12 
+.sp
+s wants 12 or 21
+p wants 123 or 213
+
+
+pss..s
+
+*/
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n;
+		cin>>n;
+		string s;
+		cin>>s;
+		if(s[0]=='s'){
+			s[0] = '.';
+		}
+		if(s[n-1]=='p'){
+			s[n-1] = '.';
+		}
+		set<char>chars;
+		for(char i : s){
+			chars.insert(i);
+		}
+		cout<<((chars.find('p')!=chars.end() && chars.find('s')!=chars.end()) ? "NO\n" : "YES\n");
+	}
+}
