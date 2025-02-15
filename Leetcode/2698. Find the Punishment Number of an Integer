@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool partitions(string num, int current, int desired, int L, int R){
+        if(current==desired && L==num.size() && R==num.size()){
+             return true;
+        }
+        if(R==num.size()) return false;
+        //cout<<L<<":"<<R<<endl;
+        int sub = stoi(num.substr(L,R-L+1));
+        //cout<<sub<<endl;
+        return partitions(num,current+sub,desired,R+1,R+1) || partitions(num,current,desired,L,R+1);
+    }
+    int punishmentNumber(int n) {
+        int res = 0;
+        for(int i = 1; i<=n; i++){
+            string num = to_string(i*i);
+            if(partitions(num,0,i,0,0)){
+                 res+=i*i;
+            }
+        }
+        return res;
+    }
+};
