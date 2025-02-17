@@ -1,0 +1,83 @@
+//solution 2, less conditional, keep track of last zero index. Intial solution under
+class ProductOfNumbers {
+public:
+    //3,0,2,10,40 
+    //1,2,3,4,5
+    //1,2,6,24,120
+    //
+    vector<int>nums;
+    int lastZero = -1;
+  
+    ProductOfNumbers() {
+        nums.push_back(1);
+    }
+    
+    void add(int num) {
+        if(num==0){
+            lastZero = nums.size();
+            nums.push_back(1);
+        }else{
+            nums.push_back(num*nums[nums.size()-1]);
+        }
+    }
+    
+    int getProduct(int k) {
+        int n = nums.size();
+        if(n-k<=lastZero) return 0;
+        return nums[n-1]/nums[n-1-k];
+    }
+};
+
+/**
+ * Your ProductOfNumbers object will be instantiated and called as such:
+ * ProductOfNumbers* obj = new ProductOfNumbers();
+ * obj->add(num);
+ * int param_2 = obj->getProduct(k);
+ */
+
+Solution 1
+//more conditional statements
+  class ProductOfNumbers {
+public:
+    //3,0,2,10,40 
+    //1,2,3,4,5
+    //1,2,6,24,120
+    //
+    vector<int>nums;
+    ProductOfNumbers() {
+        
+    }
+    
+    void add(int num) {
+        if(num==0){
+            vector<int>temp(nums.size(),0);
+            temp.push_back(-1);
+            nums = temp;
+            return;
+        }
+        if(nums.size()==0 || nums[nums.size()-1]==0 || nums[nums.size()-1]==-1) nums.push_back(num);
+        else{
+            nums.push_back(nums[nums.size()-1]*num);
+        }
+    }
+    
+    int getProduct(int k) {
+        int n = nums.size()-1;
+        if(k==nums.size()){
+            for(int i : nums){
+                if(i==0 || i==-1) return 0;
+            }
+            return nums[n];
+        }
+        if(nums[n-k]==-1) return nums[n];
+        if(nums[n-k]==0) return 0;
+        return nums[n]/nums[n-k];
+    }
+};
+
+/**
+ * Your ProductOfNumbers object will be instantiated and called as such:
+ * ProductOfNumbers* obj = new ProductOfNumbers();
+ * obj->add(num);
+ * int param_2 = obj->getProduct(k);
+ */
