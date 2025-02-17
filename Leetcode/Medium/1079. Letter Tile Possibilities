@@ -1,0 +1,25 @@
+//use backtracking to generate all possibilities and insert into set
+class Solution {
+public:
+    set<string>res;
+    void helper(string& tiles, vector<bool>&seen, string& curr){
+        if(curr.size()>0){
+            res.insert(curr);
+        }
+        if(curr.size()==tiles.size()) return;
+        for(int i = 0; i<tiles.size(); i++){
+            if(seen[i]) continue;
+            curr+= tiles[i];
+            seen[i] = true;
+            helper(tiles,seen,curr);
+            curr.pop_back();
+            seen[i] = false;
+        }
+    }
+    int numTilePossibilities(string tiles) {
+        vector<bool>seen(tiles.size(),false);
+        string current;
+        helper(tiles,seen,current);
+        return res.size();
+    }
+};
