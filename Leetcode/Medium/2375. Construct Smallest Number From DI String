@@ -1,0 +1,41 @@
+/*
+backtracking
+no need for a vector to store result, i was computing all results before
+the observation can be made that the first valid sequence will be valid since you are iterating bottom upwards and the smallest valid sequence will be the first one to finish
+use backtracking to generate all possible permutations from 1-9 starting with 1. Prune with the conditions of the pattern.
+It is valid if:
+it has not been used yet
+the current pattern is increasing and it is greater than the last element
+the current pattern is decreasing and it is lower than the previous element
+
+All other solutions will not proceed with the recursion
+
+*/
+
+class Solution {
+public:
+    vector<string>res;
+    void helper(string pattern, int i, string& current,vector<bool>&used){
+        int index = current.size()-1;
+        if(current.size()==pattern.size()+1){
+            res.push_back(current);
+            return;
+        }
+        for(int x = 1; x<=9; x++){
+            if((used[x]==false) && (current.size()==0 || (pattern[index] == 'I' && current[index]<x+'0') || (pattern[index]=='D' && current[index]>x+'0')) ){
+                current.push_back(x+'0');
+                used[x] = true;
+                helper(pattern,i,current,used);
+                if(res.size()==1) return;
+                current.pop_back();
+                used[x] = false;      
+            }
+        }
+    }
+    string smallestNumber(string pattern) {
+        vector<bool>used(10,false);
+        string current;
+        helper(pattern,0,current,used);
+        return res[0];
+    }
+};
