@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+/*
+middle value will be either: 
+sum of first two
+the difference between 5th and 4th val since a4+a3 = a5 
+or difference between 4th and 2nd since a2 + a3 = a4 which means a3 = a4-a2
+*/
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+			int i,j,k,l;
+			cin>>i>>j>>k>>l;
+			int res = 0;
+			unordered_map<int,int>m;
+			m[l-k]++;
+			res = max(m[l-k],res);
+			m[k-j]++;
+			res = max(m[k-j],res);
+			m[i+j]++;
+			res = max(m[i+j],res);
+			cout<<res<<"\n";
+		}
+		cout<<"\n";
+	}
