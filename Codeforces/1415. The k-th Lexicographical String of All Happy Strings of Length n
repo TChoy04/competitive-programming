@@ -1,0 +1,30 @@
+//backtrack to generate solutions
+//no need to sort after generating solutions since they will be generated in order already sicne we are starting with a in recursion
+//add to solution set if valid
+//terminate early if result vector size is equal to k
+//if result vector size is less than k return an empty string as there is no valid solution
+class Solution {
+public:
+    vector<string>res;
+    void helper(int n, string& curr,int k){
+        if(curr.size()==n){
+            res.push_back(curr);
+            return;
+        }
+        for(int i = 0; i<3; i++){
+            char newChar = 'a'+i;
+            if(curr.empty() || newChar!=curr[curr.size()-1]){
+                curr+= newChar;
+                helper(n,curr,k);
+                if(res.size()==k) return;
+                curr.pop_back();
+            }
+        }
+    }
+    string getHappyString(int n, int k) {
+        string curr;
+        helper(n,curr,k);
+       // sort(res.begin(),res.end());
+        return res.size()>=k ? res[k-1] : "";
+    }
+};
