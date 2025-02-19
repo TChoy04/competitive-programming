@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+/*
+1 1 2 3 3 3 4 5 5 5 6 7 8 9 9 9 
+pick 1 bob picks 8
+pick 1 bob picks 9
+pick 2 bob picks 7 
+pick 3 bob picks 6
+pick 3 bob picks 9
+pick 3 bob picks 9
+pick 4 bob picks 5
+pick 5 bob picks 5
+*/
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		int n,k;
+		cin>>n>>k;
+		vector<int>nums(n);
+		for(int i = 0; i<n; i++){
+			cin>>nums[i];
+		}
+		int res = 0;
+		sort(nums.begin(),nums.end());
+		map<int,int>m;
+		for(int i : nums) m[i]++;
+		for(int i = 0; i<n; i++){
+			int search = k-nums[i];
+			m[nums[i]]--;
+			if(m[search]>0){
+				m[search]--;
+				res++;
+			}
+			
+		}
+		cout<<res<<"\n";
+	}
+	}
