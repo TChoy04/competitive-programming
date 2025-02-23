@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int n = 0;
+    string res;
+    void helper(set<string>&check, string& curr){
+        if(curr.size()==n){
+            if(check.find(curr)==check.end()){
+                res = curr;
+            }
+            return;
+        }
+        for(int i = 0; i<=1; i++){
+            curr+= i+'0';
+            helper(check,curr);
+            if(res.size()>0) return;
+            curr.pop_back();
+        }
+    }
+    string findDifferentBinaryString(vector<string>& nums) {
+        set<string>check(nums.begin(),nums.end());
+        n = nums[0].size();
+        string curr = "";
+        helper(check,curr);
+        return res;
+    }
+};
