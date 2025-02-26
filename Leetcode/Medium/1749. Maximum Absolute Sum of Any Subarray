@@ -1,0 +1,26 @@
+//kadanes
+//tc n
+//sc n
+class Solution {
+public:
+    /*
+    [1,-3,2,3,-4]
+    1 -2 0 3 -1 
+
+    */
+    int maxAbsoluteSum(vector<int>& nums) {
+        int res = 0;
+        int pos = 0, neg = 0;
+        int curr = 0;
+        for(int i : nums){
+            curr = max(i+curr,0);
+            res = max(curr,res);   
+        }
+        curr = 0;
+        for(int i : nums){
+            curr = min(i+curr,0);
+            res = max(-1*curr,res);
+        }
+        return res;
+    }
+};
