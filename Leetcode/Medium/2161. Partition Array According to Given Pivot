@@ -1,0 +1,32 @@
+//tc n
+//sc n
+class Solution {
+public:
+    vector<int> pivotArray(vector<int>& nums, int pivot) {
+        vector<int>front;
+        vector<int>back;
+        int count = 0;
+        for(int i : nums){
+            if(i==pivot) count++;
+            else if(i<pivot){
+                front.push_back(i);
+            }else{
+                back.push_back(i);
+            }
+        }
+        int i = 0;
+        for(int j : front){
+            nums[i] = j;
+            i++;
+        }
+        while(count--){
+            nums[i] = pivot;
+            i++;
+        }
+        for(int j : back){
+            nums[i] = j;
+            i++;
+        }
+        return nums;
+    }
+};
