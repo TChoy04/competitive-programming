@@ -1,0 +1,35 @@
+//bfs
+//tc m*n
+//sc m*n
+class Solution {
+public:
+    int INF = INT_MAX;
+    vector<vector<int>>directions = {{0,1},{1,0},{0,-1},{-1,0}};
+    void wallsAndGates(vector<vector<int>>& rooms) {
+        queue<vector<int>>bfs;
+        vector<vector<bool>>seen(rooms.size(),vector<bool>(rooms[0].size()));
+        for(int i = 0; i<rooms.size(); i++){
+            for(int j = 0; j<rooms[0].size(); j++){
+                if(rooms[i][j]==0){
+                    seen[i][j] = true;
+                    bfs.push({i,j,0});
+                }
+            }
+        }
+        while(bfs.size()){
+            int currI = bfs.front()[0];
+            int currJ = bfs.front()[1];
+            int depth = bfs.front()[2];
+            bfs.pop();
+            for(int i = 0; i<4; i++){
+                int newI = currI + directions[i][0];
+                int newJ = currJ + directions[i][1];
+                if(newI>=0 && newJ>=0 && newI<rooms.size() && newJ<rooms[0].size() && rooms[newI][newJ]!=-1 && seen[newI][newJ] == false){
+                    seen[newI][newJ] = true;
+                    rooms[newI][newJ] = depth+1;
+                    bfs.push({newI,newJ,depth+1});
+                }
+            }
+        }
+    }
+};
