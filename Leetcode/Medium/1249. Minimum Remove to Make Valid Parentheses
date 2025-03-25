@@ -1,0 +1,34 @@
+//tc n
+//sc o(1)
+//check how many open parenthesis there are. if there are none do not add closing. afterwards remove all extra open parenthesis
+
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        string res;
+        int open = 0;
+        for(char c : s){
+            if(c=='('){
+                open++;
+                res+=c;
+            }
+            else if(c==')'){
+                if(open){
+                    open--;
+                    res+= c;
+                }
+            }else{
+                res+=c;
+            }
+        }
+        for(int i = res.size()-1; i>=0; i--){
+            if(open==0) return res;
+            if(res[i]=='('){
+                res.erase(i,1);
+                // i--;
+                open--;
+            }
+        }
+        return res;
+    }
+};
