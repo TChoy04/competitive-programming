@@ -1,0 +1,32 @@
+//generate permutations, check if it is even and a valid number.
+class Solution {
+public:
+    set<string>perms;
+    bool isEven(string s){
+        return (s[s.size()-1]-'0')%2==0 && s[0]!='0';
+    }
+    set<int>seen;
+    void helper(vector<char>&digits, string& curr){
+        if(curr.size()==3){
+            cout<<curr<<endl;
+            if(isEven(curr))perms.insert(curr);
+            return;
+        }
+        for(int i = 0; i<digits.size(); i++){
+            if(!seen.count(i)){
+                curr+= digits[i];   
+                seen.insert(i);
+                helper(digits,curr);
+                curr.pop_back();
+                seen.erase(i);
+            }
+        }
+    }
+    int totalNumbers(vector<int>& digits) {
+        vector<char>sDigits;
+        string curr;
+        for(int i : digits) sDigits.push_back(i+'0');
+        helper(sDigits,curr);
+        return perms.size();
+    }
+};
