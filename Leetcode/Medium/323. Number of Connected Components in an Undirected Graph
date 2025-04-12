@@ -1,0 +1,30 @@
+//union find solution 
+
+class Solution {
+public:
+    vector<int>parent;
+    void add(int num){
+        parent[num] = num;
+    }
+    int find(int num){
+        if(parent[num]==num) return num;
+        return find(parent[num]); 
+    }
+    void join(int a, int b){
+        a = find(a);
+        b = find(b);
+        if(a!=b) parent[b] = a;
+    }
+    int countComponents(int n, vector<vector<int>>& edges) {
+        parent.resize(n);
+        for(int i = 0; i<n; i++) add(i);
+        for(vector<int>&i : edges){
+            join(i[0],i[1]);
+        }
+        set<int>res;
+        for(int i = 0; i<n; i++){
+            res.insert(find(i));
+        }
+        return res.size();
+    }
+};
