@@ -2,7 +2,15 @@
 using namespace std;
  
 /*
-
+remove everything except for zeros in front of the first nonzero number from the back and one nonzero number
+example:
+102030
+3 in the second to last position is our first nonzero number from back
+keep both zeros in front
+remove everything else except for one number
+this can be found by num.size - zero count - 1
+zero count since you will be keeping all those zeros
+subtracting 1 since you will be keeping a 1
 */
 int main(){
 	ios::sync_with_stdio(0);
