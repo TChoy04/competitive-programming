@@ -1,0 +1,37 @@
+//sorting solution
+class Twitter {
+public:
+    unordered_map<int,unordered_set<int>>followers;
+    unordered_map<int,vector<vector<int>>>tweets;
+    Twitter() {
+        
+    }
+    int time = 0;
+    void postTweet(int userId, int tweetId) {
+    //    if(tweets[userId].size()==0) tweets[userId] = {};
+       tweets[userId].push_back({time++,tweetId}); 
+    }
+    
+    vector<int> getNewsFeed(int userId) {
+        vector<int>res;
+        vector<vector<int>>temp;
+        followers[userId].insert(userId);
+        for(int i :followers[userId]){
+            for(vector<int>&j : tweets[i]) temp.push_back(j);
+        }
+        sort(temp.begin(),temp.end());
+        for(int i = temp.size()-1; i>=0; i--){
+            res.push_back(temp[i][1]);
+            if(res.size()==10) break;
+        }
+        return res;
+    }
+    
+    void follow(int followerId, int followeeId) {
+        followers[followerId].insert(followeeId);
+    }
+    
+    void unfollow(int followerId, int followeeId) {
+        followers[followerId].erase(followeeId);
+    }
+};
