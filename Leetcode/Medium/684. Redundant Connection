@@ -1,0 +1,38 @@
+
+class Solution {
+public:
+/*
+union find
+if the connection already exists as in they are already connected then that is a valid result. keep updating it until end of edge vector as if there are multiple valid answers, the result is the last one.
+ 1 1
+ 2 1 
+ 3 1
+ 2 3  
+
+*/
+    unordered_map<int,int>uf;
+
+    int find(int a){
+        if(a == uf[a]) return a;
+        return find(uf[a]);
+    }
+    void join(int a, int b){
+         a = find(a);
+         b = find(b);
+        if(a==b) return;
+        uf[a] = b;
+    }
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        for(int i = 1; i<=edges.size(); i++){
+            uf[i] = i;
+        }
+        vector<int>res;
+        for(vector<int>&curr : edges){
+            if(find(curr[0])==find(curr[1])) res = curr;
+            else{
+                join(curr[0],curr[1]);
+            }
+        }
+        return res;
+    }
+};
