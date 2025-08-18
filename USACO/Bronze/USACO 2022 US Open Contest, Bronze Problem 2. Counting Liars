@@ -1,0 +1,35 @@
+//count left then right then find lowest sum
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int tc;
+    cin>>tc;
+    vector<pair<int,char>>arr;
+    vector<int>left(tc);
+    vector<int>right(tc);
+    int n = tc;
+    while (tc--) {
+		char pos;
+		int x;
+		cin>>pos>>x;
+		arr.push_back({x,pos});
+    }
+    sort(arr.begin(),arr.end());
+    for(int i = 1; i<arr.size(); i++){
+    	left[i]+= left[i-1];
+    	if(arr[i-1].second=='L') left[i]++;
+    }
+    for(int i = arr.size()-2; i>=0; i--){
+    	right[i]+= right[i+1];
+    	if(arr[i+1].second=='G') right[i]++;
+    }
+	int res = n;
+	for(int i = 0; i<n; i++){
+		res = min(res,left[i]+right[i]);
+	}
+	cout<<(res==INT_MAX ? 0 : res);
+    return 0;
+}
