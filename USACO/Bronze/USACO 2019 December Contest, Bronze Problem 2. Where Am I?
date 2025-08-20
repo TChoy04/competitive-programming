@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+map<string,int>m;
+void gen_subsets(string& s){
+	for(int i = 0; i<s.size(); i++){
+		for(int j = i; j<s.size(); j++){
+			string sub = s.substr(i,j-i+1);
+			m[sub]++;
+		}
+	}
+}
+int main(){
+	setIO("whereami")
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	string s, curr;
+	cin>>tc;
+	cin>>s;
+	gen_subsets(s);
+	int n = INT_MAX;
+	for(int box = 1; box<=s.size(); box++){
+		map<string,int>counts;
+		bool flag = true;
+		for(int i = 0; i<s.size(); i++){
+			string temp = s.substr(i,box);
+			counts[temp]++;
+			if(counts[temp]>1) flag = false;
+		}
+		if(flag){
+			cout<<box<<endl;
+			return 0;
+		}
+	}
+	return 0;
+}
