@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+int res = INT_MAX;
+int main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tc;
+	cin>>tc;
+	vector<int>kayaks(tc*2);
+	for(int i = 0; i<tc*2; i++){
+		cin>>kayaks[i];
+	}
+	for(int i = 0; i<kayaks.size(); i++){
+		for(int j = i+1; j<kayaks.size(); j++){
+			vector<int>temp = kayaks;
+			vector<int>diffs;
+			temp[i] = 0;
+			temp[j] = 0;
+			priority_queue<int>pq;
+			sort(temp.begin(),temp.end());
+			for(int i = 0; i<kayaks.size(); i+=2){
+				int diff = temp[i]-temp[i+1];
+				diffs.push_back(abs(diff));
+			}
+			int running = accumulate(diffs.begin(),diffs.end(),0);
+			res = min(res,running);	
+		}
+	}
+	cout<<res;
+	return 0;
+}
+/*
+4
+305 139 205 406 530 206
+139 205 206 305 406 530
+*/
