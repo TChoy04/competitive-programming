@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+int main(){
+	setIO("notlast");
+	ios::sync_with_stdio(0);
+	int tc;
+	cin>>tc;
+	cin.ignore();
+	map<string,int>m;
+	m["Bessie"] = 0;
+	m["Maggie"] = 0;
+	m["Elsie"] = 0;
+	m["Henrietta"] = 0;
+	m["Gertie"] = 0;
+	m["Daisy"] = 0;
+	m["Annabelle"] = 0;
+	while(tc--){
+		string name;
+		int milk;
+		cin>>name>>milk;
+		m[name] += milk;
+	}
+	map<int,vector<string>>m2;
+	for(auto& it : m){
+		m2[it.second].push_back({it.first});
+	}
+	int i = 0;
+	if(m2.size()==1){ cout<<"Tie";
+	return 0;
+	}
+	for(auto& it : m2){
+		i++;
+		if(i==2){
+			if(it.second.size()>1) cout<<"Tie";
+			else cout<<it.second[0];
+		}
+	}
+	
+	return 0;
+} 
