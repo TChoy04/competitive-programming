@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+
+int main(){
+	setIO("herding");
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	vector<int>cows(3);
+	for(int i = 0; i<3; i++) cin>>cows[i];
+	sort(cows.begin(),cows.end());
+	if(cows[0]==cows[2]-2) cout<<0;
+	else if((cows[1]-cows[0]==2) || (cows[2]-cows[1]==2)) cout<<1;
+	else cout<<2;
+	cout<<endl<<max(cows[1]-cows[0],cows[2]-cows[1])-1;
+	return 0;
+}
