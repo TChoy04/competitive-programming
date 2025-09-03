@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+ void setIO(string s) {
+	freopen((s + ".in").c_str(), "r", stdin);
+	freopen((s + ".out").c_str(), "w", stdout);
+}
+bool checker(vector<int>cows, vector<int>&order){
+	vector<int>cowToPos(cows.size(),-1);
+	for(int i = 0; i<cows.size(); i++){
+		if(cows[i]!=-1){
+			cowToPos[cows[i]] = i;
+		}
+	}
+	int j = 0;
+	for(int i = 0; i<cows.size() && j<order.size(); i++){
+		if(cowToPos[order[j]]!=-1){
+			if(i>cowToPos[order[j]]) return false;
+			i = cowToPos[order[j]];
+			j++;
+		}else{
+			while(i<cows.size() && cows[i]!=-1) i++;
+			if(i==cows.size()) return false;
+			cows[i] = order[j];
+			cowToPos[order[j]] = i;
+			j++;
+		}
+	}
+	
+	return true;
+}
+int main(){
+	setIO("milkorder");  
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int n,m,k;
+	cin>>n>>m>>k;
+	vector<int>cows(n,-1);
+	vector<int>order(m);
+	for(int i = 0; i<m; i++){
+		 cin>>order[i];
+		 order[i]--;
+	}
+	for(int i = 0; i<k; i++){
+		int cow, pos;
+		cin>>cow>>pos;
+		cows[--pos] = --cow;
+		if(cow==0){
+			cout<<pos+1;
+			return 0;
+}	}
+	for(int i = 0; i<n; i++){
+		if(cows[i]==-1){
+			cows[i] = 0;
+			if(checker(cows,order)){
+				cout<<i+1<<endl;
+				return 0;
+			}
+			cows[i] = -1;
+		}
+	}
+	return 0;
+}
