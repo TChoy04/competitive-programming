@@ -1,0 +1,70 @@
+class Solution {
+public:
+    vector<vector<char>> rows;
+    vector<vector<char>> cols;
+    vector<vector<char>> boxes;
+    bool solved = false;
+
+    bool isValid(vector<vector<char>>& board, int row, int col, char c) {
+        if(find(rows[row].begin(), rows[row].end(), c) != rows[row].end()) return false;
+        if(find(cols[col].begin(), cols[col].end(), c) != cols[col].end()) return false;
+        if(find(boxes[(row/3) * 3 + col/3].begin(), boxes[(row/3) * 3 + col/3].end(), c) != boxes[(row/3) * 3 + col/3].end()) return false;
+        return true;
+    }
+
+    void helper(vector<vector<char>>& board, int row, int col) {
+        if(board[row][col] != '.') {
+            if(row == 8 && col == 8) {
+                solved = true;
+                return;
+            } 
+            if(row == 8) {
+                helper(board, 0, col+1);
+            } else {
+                helper(board, row+1, col);
+            }
+        } else {
+            for(int i = 1; i <= board.size(); i++) {
+                char c = i + '0';
+                if(isValid(board, row, col, c)) {
+                    board[row][col] = c;
+                    rows[row].push_back(c);
+                    cols[col].push_back(c);
+                    boxes[(row/3) * 3 + col/3].push_back(c);
+
+                    if(row == 8 && col == 8) {
+                        solved = true;
+                        return;
+                    } 
+                    if(row == 8) {
+                        helper(board, 0, col+1);
+                    } else {
+                        helper(board, row+1, col);
+                    }
+
+                    if(!solved) {
+                        rows[row].erase(find(rows[row].begin(), rows[row].end(), c));
+                        cols[col].erase(find(cols[col].begin(), cols[col].end(), c));
+                        boxes[(row/3) * 3 + col/3].erase(find(boxes[(row/3) * 3 + col/3].begin(), boxes[(row/3) * 3 + col/3].end(), c));
+                        board[row][col] = '.';
+                    }
+                }
+            }
+        }
+    }
+
+    void solveSudoku(vector<vector<char>>& board) {
+        rows.resize(9);
+        cols.resize(9);
+        boxes.resize(9);
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++) {
+                if(board[i][j] == '.') continue;
+                rows[i].push_back(board[i][j]);
+                cols[j].push_back(board[i][j]);
+                boxes[(i/3) * 3 + j/3].push_back(board[i][j]);
+            }
+        }
+        helper(board, 0, 0);
+    }
+};
