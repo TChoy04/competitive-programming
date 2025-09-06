@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string email(string s){
+        string front, back;
+        for(int i = 0; i<s.size(); i++){
+            if(s[i]=='@'){
+                front = tolower(s[0]);
+                front+= "*****";
+                front+= tolower(s[i-1]);
+                back = s.substr(i,s.size()-i);
+                for(int i = 0; i<back.size(); i++){
+                    back[i] = tolower(back[i]);
+                }
+            }
+        }
+        return front+back;
+    }
+    string phone(string s){
+        //trim
+        string temp = "";
+        for(char c : s){
+            if(c!='+' && c!='-' && c!='(' && c!=')' && c!=' '){
+                temp+=c;
+            }
+        }
+        string back = temp.substr(temp.size()-4,4);
+        if(temp.size()==10) return "***-***-" + back;
+        if(temp.size()==11) return "+*-***-***-" + back;
+        if(temp.size()==12) return "+**-***-***-" + back;
+        return "+***-***-***-" + back;
+    }
+    string maskPII(string s) {
+        for(char c : s){
+            if(c=='@'){
+                return email(s);
+            }
+        }
+        return phone(s);
+    }
+};
