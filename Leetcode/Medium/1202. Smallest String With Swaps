@@ -1,0 +1,56 @@
+class Solution {
+public:
+    /*
+        addb [0,1] [0,3]
+        dadb
+        badb
+        dcaba
+        0 -> 0,3,4 
+        1 -> 1,2
+        2 -> 1,2 
+        3 -> 0,3
+        4 -> 4
+
+    */
+    vector<int>dsu;
+    int find(int a){
+        if(a==dsu[a]) return a;
+        return dsu[a] = find(dsu[a]);
+    }
+    void join(int a,int b){
+        a = find(a);
+        b = find(b);
+        if(a!=b){
+            dsu[b] = a;
+        }
+    }
+    void create(int a){
+        dsu[a] = a;
+    }
+
+    string smallestStringWithSwaps(string s, vector<vector<int>>& pairs) {
+        dsu.resize(s.size());
+        for(int i = 0; i<s.size(); i++) create(i);
+        for(vector<int>& pair : pairs){
+            join(pair[0],pair[1]);
+        }
+        vector<vector<int>>groups(s.size());
+        for(int i = 0; i<dsu.size(); i++){
+            groups[find(i)].push_back(i);
+        }
+        string res = s;
+        for(int i = 0; i<groups.size();i++){
+            string chars;
+            for(int j : groups[i]){
+                chars.push_back(s[j]);
+            }
+            sort(chars.begin(),chars.end());
+            vector<int>indexes = groups[i];
+            sort(indexes.begin(),indexes.end());
+            for(int j = 0; j<indexes.size(); j++){
+                res[indexes[j]] = chars[j];
+            }
+        }
+        return res;
+    }
+};
