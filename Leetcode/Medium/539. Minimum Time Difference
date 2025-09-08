@@ -1,0 +1,30 @@
+class Solution {
+public:
+    /*
+    
+    */
+    int toMinutes(string time){
+        int res = 0;
+        res+= (time[0]-'0')*600;
+        res+= (time[1]-'0')*60;
+        res+= (time[3]-'0')*10;
+        res+= time[4]-'0';
+        return res;
+    }
+    int findMinDifference(vector<string>& timePoints) {
+        set<string>s;
+        vector<pair<int,string>>times;
+        for(string i : timePoints){
+            if(s.find(i)!=s.end()) return 0;
+            s.insert(i);
+            times.push_back({toMinutes(i),i});
+            times.push_back({toMinutes(i)+1440,i});
+        }
+        sort(times.begin(),times.end());
+        int res = INT_MAX;
+        for(int i = 0; i<times.size()-1; i++){
+            res = min(res,times[i+1].first-times[i].first);
+        }
+        return res;
+    }
+};
