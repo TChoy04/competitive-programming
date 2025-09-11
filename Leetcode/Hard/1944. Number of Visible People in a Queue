@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> canSeePersonsCount(vector<int>& heights) {
+        int n = heights.size();
+        vector<int>res(n,0);
+        deque<int>visible;
+        for(int i = heights.size()-1; i>=0; i--){
+            int count = 0;
+            for(int person : visible){
+                count++;
+                if(person>=heights[i]) break;
+            }
+            res[i] = count;
+            while(visible.size() && visible.front()<=heights[i]){
+                visible.pop_front();
+            }
+            visible.insert(visible.begin(),heights[i]);
+        }
+        return res;
+    }
+};
