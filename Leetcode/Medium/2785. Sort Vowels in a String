@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isVowel(char a){
+        set<char>s = {'A','E','I','O','U','a','e','i','o','u'};
+        if(s.find(a)!=s.end()) return true;
+        return false;
+    }
+    string sortVowels(string s) {
+        string vowels;
+        for(char c : s){
+            if(isVowel(c)) vowels+=c;
+        }
+        sort(vowels.begin(),vowels.end());
+        string res;
+        int j = 0;
+        for(int i = 0; i<s.size(); i++){
+            if(isVowel(s[i])){
+                res+= vowels[j++];
+            }
+            else if(isVowel(s[i])==false){
+                res+=s[i];
+            }
+        }
+        return res;
+    }
+};
