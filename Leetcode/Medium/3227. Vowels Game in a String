@@ -1,0 +1,20 @@
+class Solution {
+public:
+/*
+der 
+er
+
+*/
+    set<char>vowels = {'a','e','i','o','u'};
+    bool isVowel(char& c){
+        if(vowels.find(tolower(c))!=vowels.end()) return true;
+        return false;
+    }
+    bool doesAliceWin(string s) {
+        int count = 0;
+        for(char& c : s){
+            if(isVowel(c)) return true;
+        }
+        return false;
+    }
+};
