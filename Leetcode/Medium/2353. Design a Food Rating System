@@ -1,0 +1,40 @@
+class FoodRatings {
+public:
+struct comp {
+    bool operator()(const pair<int,string>& a, const pair<int,string>& b) const {
+        if (a.first == b.first) 
+            return b.second < a.second; 
+        return a.first < b.first;      
+    }
+};
+    map<string, priority_queue<pair<int,string>, vector<pair<int,string>>, comp>> m;
+
+
+    map<string,int>foodToRating;
+    map<string,string>foodToCuisine;
+    FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ratings) {
+        int n = foods.size();
+        for(int i = 0; i<n; i++){
+            m[cuisines[i]].push({ratings[i],foods[i]});
+            foodToRating[foods[i]] = ratings[i];
+            foodToCuisine[foods[i]] = cuisines[i];
+        }
+    }
+    
+    void changeRating(string food, int newRating) {
+        foodToRating[food] = newRating;
+        string cuisine = foodToCuisine[food];
+        m[cuisine].push({newRating,food});
+    }
+    string highestRated(string cuisine) {
+        while(m[cuisine].top().first!=foodToRating[m[cuisine].top().second]) m[cuisine].pop();
+        return m[cuisine].top().second;
+    }
+};
+
+/**
+ * Your FoodRatings object will be instantiated and called as such:
+ * FoodRatings* obj = new FoodRatings(foods, cuisines, ratings);
+ * obj->changeRating(food,newRating);
+ * string param_2 = obj->highestRated(cuisine);
+ */
