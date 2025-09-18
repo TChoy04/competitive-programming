@@ -1,0 +1,49 @@
+class TaskManager {
+public:
+    priority_queue<vector<int>>users;
+    map<int,int>idToPrio;
+    map<int,int>idToUser;
+    TaskManager(vector<vector<int>>& tasks) {
+        for(vector<int>& task : tasks){
+            users.push({task[2],task[1],task[0]});
+            idToPrio[task[1]] = task[2];
+            idToUser[task[1]] = task[0]; 
+        }
+    }
+    
+    void add(int userId, int taskId, int priority) {
+        users.push({priority,taskId,userId});
+        idToPrio[taskId] = priority;
+        idToUser[taskId] = userId;
+    }
+    
+    void edit(int taskId, int newPriority) {
+        idToPrio[taskId] = newPriority;
+        int user = idToUser[taskId];
+        users.push({newPriority,taskId,user});
+    }
+    
+    void rmv(int taskId) {
+        idToPrio[taskId] = -1;
+    }
+    
+    int execTop() {
+        while(users.size() && users.top()[0]!=idToPrio[users.top()[1]]){
+            users.pop();
+        }
+        if(users.empty()) return -1;
+        int res = users.top()[2];
+        idToPrio[users.top()[1]] = -1;
+        users.pop();
+        return res;
+    }
+};
+
+/**
+ * Your TaskManager object will be instantiated and called as such:
+ * TaskManager* obj = new TaskManager(tasks);
+ * obj->add(userId,taskId,priority);
+ * obj->edit(taskId,newPriority);
+ * obj->rmv(taskId);
+ * int param_4 = obj->execTop();
+ */
