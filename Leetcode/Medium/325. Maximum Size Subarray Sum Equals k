@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxSubArrayLen(vector<int>& nums, int k) {
+        map<long long,int>found;
+
+        int n = nums.size();
+        vector<long long>prefix(n+1);
+        found[0] = 0;
+        int res = 0;
+        for(int i = 1; i<prefix.size(); i++){
+            prefix[i] += prefix[i-1]+ nums[i-1];
+            if(found.count(prefix[i])==0){
+                found[prefix[i]] = i;
+            }
+            long long find = prefix[i]-k;
+            if(found.count(find)!=0) res = max(res,i-found[find]);
+        }
+        return res;
+    }
+};
