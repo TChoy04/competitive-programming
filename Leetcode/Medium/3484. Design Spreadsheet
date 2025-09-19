@@ -1,0 +1,72 @@
+class Spreadsheet {
+public:
+ bool isNumeric(const std::string& s) {
+        if (s.empty()) {
+            return false;
+        }
+        size_t start_index = 0;
+        bool has_decimal = false;
+        if (s[0] == '-' || s[0] == '+') {
+            start_index = 1;
+        }
+
+        for (size_t i = start_index; i < s.length(); ++i) {
+            if (std::isdigit(static_cast<unsigned char>(s[i]))) {
+                continue;
+            } else if (s[i] == '.' && !has_decimal) {
+                has_decimal = true;
+            } else {
+                return false; 
+            }
+        }
+        return true;
+    }
+    vector<vector<int>>sheet;
+    Spreadsheet(int rows) {
+        sheet.resize(26);
+        for(vector<int>&row : sheet) row.resize(rows);
+    }
+    
+    void setCell(string cell, int value) {
+        int pos = stoi(cell.substr(1,cell.size()-1))-1;
+        sheet[cell[0]-'A'][pos] = value;
+    }
+    
+    void resetCell(string cell) {
+        int pos = stoi(cell.substr(1,cell.size()-1))-1;
+        sheet[cell[0]-'A'][pos] = 0;
+    }
+    int getVal(string cell){
+        int pos = stoi(cell.substr(1,cell.size()-1))-1;
+        return sheet[cell[0]-'A'][pos];
+    }
+    int getValue(string formula) {
+        string first, second;
+        for(char& c : formula){
+            if(c!='=' && c!='+'){
+                first+=c;
+            }else if(c=='+'){
+                second = first;
+                first = "";
+            }
+        }
+        if(isNumeric(first) && isNumeric(second)){
+            return stoi(first) + stoi(second);
+        }
+        if(isNumeric(first)){
+            return stoi(first) + getVal(second);
+        }
+        if(isNumeric(second)){
+            return getVal(first) + stoi(second);
+        }
+        return getVal(first) + getVal(second);
+    }
+};
+
+/**
+ * Your Spreadsheet object will be instantiated and called as such:
+ * Spreadsheet* obj = new Spreadsheet(rows);
+ * obj->setCell(cell,value);
+ * obj->resetCell(cell);
+ * int param_3 = obj->getValue(formula);
+ */
