@@ -1,0 +1,12 @@
+//very trivial q2 for a contest?
+class Solution {
+public:
+    long long maxTotalValue(vector<int>& nums, int k) {
+        long long hi = 0, lo = INT_MAX;
+        for(int i = 0; i<nums.size(); i++){
+            lo = min(lo,(long long)nums[i]);
+            hi = max(hi,(long long)nums[i]);
+        }
+        return (hi-lo)*k;
+    }
+};
