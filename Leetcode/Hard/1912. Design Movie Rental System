@@ -1,0 +1,54 @@
+class MovieRentingSystem {
+public:
+    map<int,set<vector<int>>>availableMovies;
+    set<vector<int>>rented;
+    map<pair<int,int>,int>prices;
+    MovieRentingSystem(int n, vector<vector<int>>& entries) {
+        for(vector<int>&entry : entries){
+            int shop = entry[0];
+            int movie = entry[1];
+            int price = entry[2];
+            prices[{shop,movie}] = price;
+            availableMovies[movie].insert({price,shop});
+        }
+    }
+    
+    vector<int> search(int movie) {
+        vector<int>res;
+        for(auto& it : availableMovies[movie]){
+                res.push_back(it[1]);
+                if(res.size()==5) return res;
+        }
+        return res;
+    }
+    
+    void rent(int shop, int movie) {
+        int price = prices[{shop,movie}];
+        rented.insert({price,shop,movie});
+        availableMovies[movie].erase({price,shop});
+    }
+    
+    void drop(int shop, int movie) {
+        int price = prices[{shop,movie}];
+        rented.erase({price,shop,movie});
+        availableMovies[movie].insert({price,shop});
+    }
+    
+    vector<vector<int>> report() {
+        vector<vector<int>>res;
+        for(auto& it : rented){
+            res.push_back({it[1],it[2]});
+            if(res.size()==5) break;
+        }
+        return res;
+    }
+};
+
+/**
+ * Your MovieRentingSystem object will be instantiated and called as such:
+ * MovieRentingSystem* obj = new MovieRentingSystem(n, entries);
+ * vector<int> param_1 = obj->search(movie);
+ * obj->rent(shop,movie);
+ * obj->drop(shop,movie);
+ * vector<vector<int>> param_4 = obj->report();
+ */
