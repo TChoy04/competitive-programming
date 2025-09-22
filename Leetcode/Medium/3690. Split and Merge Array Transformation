@@ -1,0 +1,33 @@
+//cool problem. bfs
+class Solution {
+public:
+    set<vector<int>>seen;
+    int minSplitMerge(vector<int>& nums1, vector<int>& nums2) {
+        if(nums1==nums2) return 0;
+        queue<pair<vector<int>,int>>bfs;
+        bfs.push({nums1,0});
+        while(bfs.size()){
+            vector<int>curr = bfs.front().first;
+            int steps = bfs.front().second;
+            bfs.pop();
+            for(int L = 0; L<nums1.size(); L++){
+                for(int R = L; R<nums1.size(); R++){
+                    vector<int>mid(curr.begin()+L,curr.begin()+R+1);
+                    vector<int>left(curr.begin(),curr.begin()+L);
+                    vector<int>right(curr.begin()+R+1,curr.end());
+                    left.insert(left.end(),right.begin(),right.end());
+                    for(int i = 0; i<left.size(); i++){
+                        vector<int>in = left;
+                        in.insert(in.begin()+i,mid.begin(),mid.end());
+                        if(in==nums2) return steps+1;
+                        if(seen.count(in)==0){
+                            bfs.push({in,steps+1});
+                            seen.insert(in);
+                        }
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+};
