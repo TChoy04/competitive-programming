@@ -1,0 +1,28 @@
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+    Node* parent;
+};
+*/
+
+class Solution {
+public:
+    bool hasChild(Node* p, Node* q){
+        if(p==q) return true;
+        if(p->left && p->right) return hasChild(p->left,q) || hasChild(p->right,q);
+        if(p->left) return hasChild(p->left,q);
+        if(p->right) return hasChild(p->right,q); 
+        return false;
+    }
+    Node* lowestCommonAncestor(Node* p, Node * q) {
+        while(p->parent){
+            if(hasChild(p,q)) return p;
+            p = p->parent;
+        }
+        return p;
+    }
+};
