@@ -1,0 +1,56 @@
+class Solution {
+public:
+    map<char,vector<char>>adj;
+    set<char>validChars;
+
+    string alienOrder(vector<string>& words) {
+        string res;
+        if(words.size()==1){
+            map<char,int>unique;
+            for(char&c : words[0]) unique[c]++;
+            string res;
+            for(auto& c : unique){
+                res+=c.first;
+            }
+            return res;
+        }
+        for(int i = 0; i<words.size()-1; i++){
+            string first = words[i];
+            string second = words[i+1];
+            if(second.size()<first.size() && first.substr(0,second.size())==second) return "";
+            for(auto&c : first) validChars.insert(c);
+            for(auto&c : second) validChars.insert(c);
+            for(int j = 0; j<min(first.size(),second.size()); j++){
+                if(first[j]!=second[j]){
+                    adj[first[j]].push_back(second[j]);
+                    break;
+                }
+            }
+        }
+            vector<int>indegrees(26);
+            for(auto&it : adj){
+                for(auto&c : it.second){
+                    indegrees[c-'a']++;
+                }
+            }
+            queue<char>q;
+            for(int i = 0; i<indegrees.size(); i++){
+                if(indegrees[i]==0 && validChars.count(i+'a')) q.push(i+'a');
+            }
+            set<char>added;
+            while(q.size()){
+                char front = q.front();
+                q.pop();
+                res+= front;
+                for(char& a : adj[front]){
+                    indegrees[a-'a']--;
+                    if(indegrees[a-'a']==0 && added.count(a)==0){
+                         q.push(a);
+                         added.insert(a);
+                    }
+                }
+            }
+        if(res.size()!=validChars.size()) return "";
+        return res;
+    }
+};
