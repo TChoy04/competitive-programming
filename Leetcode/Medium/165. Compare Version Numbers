@@ -1,0 +1,28 @@
+class Solution {
+public:
+        vector<int> splitVersion(const string& version) {
+        vector<int> res;
+        int num = 0;
+        for (int i = 0; i < version.size(); i++) {
+            if (version[i] == '.') {
+                res.push_back(num);
+                num = 0;
+            } else {
+                num = num * 10 + (version[i] - '0');
+            }
+        }
+        res.push_back(num); 
+        return res;
+    }
+    int compareVersion(string version1, string version2) {
+        vector<int> v1 = splitVersion(version1);
+        vector<int> v2 = splitVersion(version2);
+        for(int i = 0; i<v1.size() || i<v2.size(); i++){
+            int a = i<v1.size() ? v1[i] : 0;
+            int b = i<v2.size() ? v2[i] : 0;
+            if(a>b) return 1;
+            if(a<b) return -1;
+        }
+        return 0;
+    }
+};
