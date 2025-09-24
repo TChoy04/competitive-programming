@@ -1,0 +1,48 @@
+//edge case hell
+class Solution {
+public:
+/*
+4/9
+
+40%9
+4
+400 333
+4 div 67 
+400 div 67
+65
+*/
+    string fractionToDecimal(int n, int d) {
+        long long numerator = (long long)n, denominator = (long long)d;
+        if(numerator==0 || denominator==0) return "0";
+        string res = to_string(abs((long long)numerator) / abs((long long)denominator));
+       
+        
+        if(numerator<0 && denominator<0){
+            numerator = -numerator;
+            denominator = -denominator;
+        }
+        else if(numerator<0 || denominator<0){
+            if(numerator<0) numerator = -numerator;
+            if(denominator<0) denominator = -denominator;
+            res.insert(res.begin(),'-');
+        }
+        int remainder = numerator % denominator;
+        map<int,int>seen;
+        if(remainder==0) return res;
+        res+='.';
+        numerator = remainder*10;
+        while(true){
+            res+= to_string(numerator/denominator);
+            long long remainder = numerator%denominator;
+            numerator = remainder*10;
+            if(remainder==0) break;
+            if(seen.count(remainder)!=0){
+                res.insert(res.begin()+seen[remainder],'(');
+                res+=')';
+                break;
+            }
+            seen[remainder] = res.size();
+        }
+        return res;
+    }
+};
