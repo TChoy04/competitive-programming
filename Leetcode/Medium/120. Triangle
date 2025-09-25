@@ -1,0 +1,25 @@
+//kind of a gross looking solution lol
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        vector<vector<int>>res = triangle;
+        for(auto&it : res){
+            for(auto&it2 : it) it2 = INT_MAX/2;
+        }
+        res[0][0] = triangle[0][0];
+        for(int i = 0; i<triangle.size()-1; i++){
+            for(int j = 0; j<triangle[i].size(); j++){
+                res[i+1][j] = min(triangle[i+1][j]+res[i][j],res[i+1][j]);
+                if(j+1<triangle[i+1].size()){
+                    res[i+1][j+1] = min(triangle[i+1][j+1]+res[i][j],res[i+1][j+1]);
+                }
+            }
+        }
+        int n = res.size();
+        int ans = res[n-1][0];
+        for(int&i : res[n-1]){
+            ans = min(i,ans);
+        }
+        return ans;
+    }
+};
