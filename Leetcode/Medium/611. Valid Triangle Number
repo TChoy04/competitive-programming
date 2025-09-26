@@ -1,0 +1,28 @@
+class Solution {
+public:
+/*
+a + b > c for valid triangle 
+b > c - a 
+2 2 3 4 
+2     4 
+*/
+    int triangleNumber(vector<int>& nums) {
+        int res = 0;
+        sort(nums.begin(),nums.end());
+        
+        for(int c = nums.size()-1; c>=2; c--){
+            int a = 0;
+            int b = c-1;
+            while(a<b){
+                int leftSide = nums[a]+nums[b];
+                if(leftSide>nums[c]){
+                    res+= b-a;
+                    b--;
+                }else{
+                    a++;
+                }
+            }
+        }
+        return res;
+    }
+};
