@@ -1,0 +1,58 @@
+class Solution {
+public:
+    //what a horrid solution T.T
+    set<char>vowels = {'a','e','i','o','u'};
+    map<int,char>posToNonVowels(string s){
+        map<int,char>res;
+        for(int i = 0; i<s.size(); i++){
+            if(vowels.count(tolower(s[i]))==0){
+                res[i] = tolower(s[i]);
+            }
+        }
+        return res;
+    }
+    vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
+        //handle capitlization start
+        set<string>words;
+        vector<string>res;
+        map<string,int>lowerWords;
+        set<string>seen;
+        //capitilization end
+        //vowels
+        map<map<int,char>,int>mappedNonVowels;
+        for(int i = 0; i<wordlist.size(); i++){
+            string s  = wordlist[i];
+            words.insert(s);
+            string temp;
+            for(char c : s) temp+= tolower(c);
+            if(seen.count(temp)==0){
+                lowerWords[temp] = i;
+            }
+            seen.insert(temp);
+            map<int,char>nonVowels = posToNonVowels(s);
+            if(mappedNonVowels.count(nonVowels)==0){
+                mappedNonVowels[nonVowels] = i;
+            }
+        }
+        for(string query : queries){
+            if(words.count(query)){
+                res.push_back(query);
+                continue;
+            }
+            string tempLower;
+            for(char c : query) tempLower+= tolower(c);
+            if(lowerWords.count(tempLower)){
+                res.push_back(wordlist[lowerWords[tempLower]]);
+                continue;
+            }
+            map<int,char>nonVowels = posToNonVowels(query);
+            if(mappedNonVowels.count(nonVowels)){
+                int idx = mappedNonVowels[nonVowels];
+                res.push_back(wordlist[idx]);
+                continue;
+            }
+            res.push_back("");
+        }
+        return res;
+    }
+};
