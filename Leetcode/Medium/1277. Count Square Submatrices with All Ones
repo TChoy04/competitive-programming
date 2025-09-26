@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int countSquares(vector<vector<int>>& matrix) {
+        int res = 0;
+        for(int i = 1; i<matrix.size(); i++){
+            for(int j = 1; j<matrix[0].size(); j++){
+                int above = 0;
+                int left = 0;
+                int corner = 0;
+                if(matrix[i][j]>0){
+                    above = matrix[i-1][j];
+                    left = matrix[i][j-1];
+                    corner = matrix[i-1][j-1];
+                    int consol = min(above,left);
+                    consol = min(consol,corner);
+                    matrix[i][j]+= consol;
+                }
+            }
+        }
+        for(vector<int>&i : matrix){
+            for(int&j : i) res+= j;
+        }
+        return res;
+    }
+};
