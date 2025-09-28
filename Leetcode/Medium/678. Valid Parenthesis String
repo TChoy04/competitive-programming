@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int left = 0, right = 0, wild = 0;
+        for(char& c : s){
+            if(c=='(') left++;
+            if(c==')'){
+                if(left) left--;
+                else wild--;
+                if(wild<0) return false;
+            }
+            if(c=='*') wild++;
+        }
+        if(wild<left) return false;
+        left = 0, right = 0, wild = 0;
+        for(int i = s.size()-1; i>=0; i--){
+            char c = s[i];
+            if(c=='('){
+                if(right) right--;
+                else wild--;
+                if(wild<0) return false;
+            }
+            if(c==')'){
+                right++;
+            }
+            if(c=='*') wild++;
+        }
+        return wild>=right;
+    }
+};
